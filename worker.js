@@ -10,9 +10,9 @@ const ANTHROPIC_URL = 'https://api.anthropic.com';
 
 // Allowed origins — add your real domain once it's live
 const ALLOWED_ORIGINS = [
-  'https://your-site.pages.dev',       // your Cloudflare Pages preview URL
-  'https://ontariofamilyguide.ca',     // your custom domain (update this)
-  'http://localhost:3000',             // local dev
+  'https://aware-family.pages.dev',
+  'https://aware.family',
+  'http://localhost:3000',
 ];
 
 export default {

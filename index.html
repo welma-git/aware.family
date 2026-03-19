@@ -1281,7 +1281,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 //   Leave ANTHROPIC_API_KEY blank — the Worker injects it.
 // ─────────────────────────────────────────────
 const ANTHROPIC_API_KEY = '';          // ← paste your key here for direct use
-const API_BASE = 'https://api.anthropic.com'; // ← or your Worker URL
+const API_BASE = 'https://awarefamily.square-cake-c6fc.workers.dev'; // ← or your Worker URL
 
 function apiHeaders(extra = {}) {
   const h = { 'Content-Type': 'application/json', 'anthropic-version': '2023-06-01', ...extra };

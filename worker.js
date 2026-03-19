@@ -23,15 +23,20 @@ export default {
       return new Response('Method not allowed', { status: 405 });
     }
 
-    // Forward anything to Anthropic
+    // Build forward headers — inject API key, pass through beta header
+    const forwardHeaders = {
+      'Content-Type': 'application/json',
+      'anthropic-version': '2023-06-01',
+      'x-api-key': env.ANTHROPIC_API_KEY,
+    };
+    const beta = request.headers.get('anthropic-beta');
+    if (beta) forwardHeaders['anthropic-beta'] = beta;
+
+    // Forward to Anthropic
     const url = new URL(request.url);
     const anthropicResp = await fetch(`${ANTHROPIC_URL}${url.pathname}`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'anthropic-version': '2023-06-01',
-        'x-api-key': env.ANTHROPIC_API_KEY,
-      },
+      headers: forwardHeaders,
       body: request.body,
     });
 
@@ -53,5 +58,6 @@ function corsHeaders(origin) {
     'Access-Control-Allow-Origin': origin,
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, anthropic-version, anthropic-beta, x-api-key',
+    'Access-Control-Expose-Headers': 'Content-Type',
   };
 }

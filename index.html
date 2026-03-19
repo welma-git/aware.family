@@ -1281,7 +1281,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 //   Leave ANTHROPIC_API_KEY blank — the Worker injects it.
 // ─────────────────────────────────────────────
 const ANTHROPIC_API_KEY = '';          // ← paste your key here for direct use
-const API_BASE = 'https://awarefamily.square-cake-c6fc.workers.dev'; // ← or your Worker URL
+const API_BASE = 'https://api.anthropic.com'; // ← or your Worker URL
 
 function apiHeaders(extra = {}) {
   const h = { 'Content-Type': 'application/json', 'anthropic-version': '2023-06-01', ...extra };
@@ -1663,6 +1663,23 @@ function updateSearchCounter() {
   }
 }
 
+function renderCachedResults(activities, city, keyword, dateFrom, dateTo) {
+  const btn = document.getElementById('searchBtn');
+  document.getElementById('errorToast').style.display = 'none';
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('loadingState').style.display = 'none';
+  document.getElementById('resultsGrid').innerHTML = activities.map((a,i) => renderCard(a,i)).join('');
+  document.getElementById('resultsArea').style.display = 'block';
+  const dateLabel = dateFrom||dateTo ? ` · ${dateFrom||''}${dateFrom&&dateTo?' → ':''}${dateTo||''}` : '';
+  const frCount = activities.filter(a=>a.isFrench).length;
+  const langLabel = state.lang==='fr' ? ' · Français' : state.lang==='en' ? ' · English' : frCount>0 ? ` · ${frCount} FR` : '';
+  document.getElementById('resultsLabel').textContent = `Cached results · ${city}${keyword?' · '+keyword:''}${dateLabel}${langLabel}`;
+  document.getElementById('resultsCount').textContent = activities.length + ' found';
+  document.getElementById('resultsCount').style.display = 'inline-flex';
+  btn.disabled = false;
+  if (state.view==='cal') renderCalendar();
+}
+
 async function runSearch() {
   const keyword = document.getElementById('keyword').value.trim();
   const dateFrom = document.getElementById('dateFrom').value;
@@ -1676,6 +1693,21 @@ async function runSearch() {
     et.style.display = 'block';
     return;
   }
+
+  // ── Cache check — serve instantly if same search within 30 min ──
+  const cacheKey = `af_cache_${state.city}_${state.category}_${state.age}_${state.lang}_${state.venue}_${state.freeOnly}_${dateFrom}_${dateTo}_${keyword}`;
+  try {
+    const cached = localStorage.getItem(cacheKey);
+    if (cached) {
+      const { ts, data } = JSON.parse(cached);
+      if (Date.now() - ts < 30 * 60 * 1000) { // 30 minutes
+        allActivities = data;
+        renderCachedResults(allActivities, state.city === 'all' ? 'Ontario' : state.city, keyword, dateFrom, dateTo);
+        return;
+      }
+    }
+  } catch(e) {}
+
 
   // Reset UI
   document.getElementById('errorToast').style.display = 'none';
@@ -1719,34 +1751,13 @@ async function runSearch() {
 
   const freeCtx = state.freeOnly ? ' Free or no-cost activities only.' : '';
 
-  const prompt = `Today is ${today}. You are a family activity researcher for Ontario, Canada.
-Search the web and find 14-20 current, upcoming kid-friendly activities in ${city}.
-Look for: ${cat}. Age focus: ${age}.${kw}${dateCtx}${langCtx}${venueCtx}${freeCtx}
-Search these sources:
-- toronto.ca/explore-enjoy/festivals-events/festivals-events-calendar (Toronto city events)
-- eventbrite.ca/d/canada--toronto/kids (Eventbrite kids Toronto)
-- toronto.ca/parks-recreation (Toronto Recreation programs)
-- vaughan.ca/recreation (Vaughan Recreation)
-- ticketmaster.ca (family/kids events Ontario)
-- wychwoodtheatre.ca (Wychwood Barns events)
-- tso.ca/family (Toronto Symphony Orchestra family concerts)
-- mcmichael.com (McMichael Canadian Art Collection)
-- centrefranco.org (Centre francophone du Grand Toronto)
-- theatrefrancais.com (Théâtre français de Toronto)
-- Alliance française Toronto (alliancefrancaise.ca or similar)
-- macca1987.com (MACCA events)
-- afry.ca or AFRY Ontario youth programs
-- nacca.ca or NACCA Ontario Indigenous programs
-- adinkrafarm.com (Adinkra Farm events)
-- Apple picking, pumpkin picking, corn mazes, and fall harvest events at Ontario farms — search: "apple picking Ontario 2026", "pumpkin patch Ontario 2026", "u-pick farm Ontario", "corn maze Ontario family", including farms like Chudleigh's, Andrews' Scenic Acres, Rounds Ranch, Pingle's Farm Market, Downey's Farm, Springridge Farm, Reesor's Farm Market
-- Spring/summer farm and outdoor seasonal events in Ontario
-- Local Black-led and Caribbean-Caribbean community organizations running kids programs in Toronto and GTA
-- NACCA (National Aboriginal Capital Corporations Association) or local Indigenous youth programs Ontario
-IMPORTANT: Only include activities currently active or starting in the future. Today is ${today} — exclude anything already finished.
-Summarise findings as a plain list with: name, organizer, dates, location, cost, website, ages, indoor/outdoor.`;
+  const prompt = `Today is ${today}. Find 12-15 current, upcoming kid-friendly activities in ${city}.
+Categories: ${cat}. Ages: ${age}.${kw}${dateCtx}${langCtx}${venueCtx}${freeCtx}
+Search: toronto.ca festivals calendar, eventbrite.ca kids Toronto, toronto.ca/parks-recreation, vaughan.ca/recreation, ticketmaster.ca family events, tso.ca/family, mcmichael.com, centrefranco.org, theatrefrancais.com, Alliance française Toronto, macca1987.com, adinkrafarm.com, Ontario farm/seasonal events.
+Only include activities active or starting after ${today}. List each with: name, organizer, dates, location, cost, website, ages, indoor or outdoor.`;
 
-  const formatPrompt = `Convert this activity list to a JSON array. Output ONLY the raw JSON array — no prose, no markdown, nothing else. Start your response with [ and end with ].
-Each object: name, category (Event/Program/Camp/Extracurricular/Experience/Festival), organizer, description (2-3 sentences), location, schedule, startDate (YYYY-MM-DD or null), endDate (YYYY-MM-DD or null), ageRange, cost, website, venue (indoor/outdoor/both), isFrench (true/false)
+  const formatPrompt = `Convert to a JSON array. Output ONLY [ ... ] — no prose, no markdown.
+Fields: name, category (Event/Program/Camp/Extracurricular/Experience/Festival), organizer, description (2 sentences), location, schedule, startDate (YYYY-MM-DD or null), endDate (YYYY-MM-DD or null), ageRange, cost, website, venue (indoor/outdoor/both), isFrench (true/false)
 
 Activities:
 `;
@@ -1758,7 +1769,7 @@ Activities:
       headers: apiHeaders({ 'anthropic-beta': 'web-search-2025-03-05' }),
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
-        max_tokens: 5000,
+        max_tokens: 3000,
         tools: [{type:'web_search_20250305', name:'web_search'}],
         messages: [{role:'user', content: prompt}]
       })
@@ -1779,8 +1790,8 @@ Activities:
       method: 'POST',
       headers: apiHeaders(),
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 5000,
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 3000,
         stream: true,
         messages: [
           {role:'user',    content: prompt},
@@ -1884,6 +1895,11 @@ Activities:
     document.getElementById('resultsCount').textContent = allActivities.length + ' found';
     document.getElementById('resultsCount').style.display = 'inline-flex';
     if (state.view==='cal') renderCalendar();
+
+    // Save to cache
+    try {
+      localStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), data: allActivities }));
+    } catch(e) {}
 
   } catch(err) {
     clearInterval(loadTimer);

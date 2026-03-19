@@ -1292,13 +1292,10 @@ function apiHeaders(extra = {}) {
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 const LOAD_MSGS = [
-  'Checking Toronto & Vaughan city programs...',
-  'Searching Eventbrite, Ticketmaster & TSO...',
-  'Scanning francophone organizations & events...',
-  'Looking up farms, orchards & seasonal events...',
-  'Checking MACCA, AFRY, NACCA & community orgs...',
-  'Searching McMichael, Wychwood & arts venues...',
-  'Pulling it all together...'
+  'Checking Toronto city events calendar…',
+  'Searching Eventbrite for kids events…',
+  'Scanning Kids Out and About Toronto…',
+  'Building your results…'
 ];
 
 const state = { category:'all', city:'all', age:'all', view:'grid', lang:'all', venue:'all', freeOnly:false };
@@ -1619,7 +1616,7 @@ Create it as an all-day event. Confirm when done.` }]
 }
 
 // ── Daily search limit ──
-const DAILY_LIMIT = 5;
+const DAILY_LIMIT = 3;
 const LS_KEY = 'af_searches';
 
 function getSearchRecord() {
@@ -1700,7 +1697,7 @@ async function runSearch() {
     const cached = localStorage.getItem(cacheKey);
     if (cached) {
       const { ts, data } = JSON.parse(cached);
-      if (Date.now() - ts < 30 * 60 * 1000) { // 30 minutes
+      if (Date.now() - ts < 6 * 60 * 60 * 1000) { // 6 hours
         allActivities = data;
         renderCachedResults(allActivities, state.city === 'all' ? 'Ontario' : state.city, keyword, dateFrom, dateTo);
         return;
@@ -1751,9 +1748,12 @@ async function runSearch() {
 
   const freeCtx = state.freeOnly ? ' Free or no-cost activities only.' : '';
 
-  const prompt = `Today is ${today}. Find 12-15 current, upcoming kid-friendly activities in ${city}.
+  const prompt = `Today is ${today}. Find 8-10 current, upcoming kid-friendly activities in ${city}.
 Categories: ${cat}. Ages: ${age}.${kw}${dateCtx}${langCtx}${venueCtx}${freeCtx}
-Search: toronto.ca festivals calendar, eventbrite.ca kids Toronto, toronto.ca/parks-recreation, vaughan.ca/recreation, ticketmaster.ca family events, tso.ca/family, mcmichael.com, centrefranco.org, theatrefrancais.com, Alliance française Toronto, macca1987.com, adinkrafarm.com, Ontario farm/seasonal events.
+Search ONLY these three sources:
+1. eventbrite.ca/d/canada--toronto/kids
+2. toronto.ca/explore-enjoy/festivals-events/festivals-events-calendar/
+3. toronto.kidsoutandabout.com
 Only include activities active or starting after ${today}. List each with: name, organizer, dates, location, cost, website, ages, indoor or outdoor.`;
 
   const formatPrompt = `Convert to a JSON array. Output ONLY [ ... ] — no prose, no markdown.
@@ -1770,7 +1770,7 @@ Activities:
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 3000,
-        tools: [{type:'web_search_20250305', name:'web_search'}],
+        tools: [{type:'web_search_20250305', name:'web_search', max_uses: 3}],
         messages: [{role:'user', content: prompt}]
       })
     });

@@ -1853,22 +1853,28 @@ function setPhase(n) {
 }
 
 function parseActivities(text) {
-  // Strategy 1: find a JSON array between [ and ]
   const attempt = (str) => {
     try { const r = JSON.parse(str); if (Array.isArray(r) && r.length) return r; } catch(e){}
     return null;
   };
-  // Strip markdown fences first
-  let cleaned = text.replace(/```json\s*/gi,'').replace(/```\s*/g,'').trim();
-  // Try full cleaned text
-  let r = attempt(cleaned);
-  if (r) return r;
-  // Try greedy array extraction
-  const m = cleaned.match(/\[[\s\S]*\]/);
-  if (m) { r = attempt(m[0]); if (r) return r; }
-  // Try last [ to last ]
-  const start = cleaned.lastIndexOf('['), end = cleaned.lastIndexOf(']');
-  if (start !== -1 && end > start) { r = attempt(cleaned.slice(start, end+1)); if (r) return r; }
+  // Strip all markdown fences
+  let cleaned = text.replace(/```json\s*/gi, '```').replace(/```\s*/g, ' ').trim();
+  // If duplicated, take only text up to the second opening bracket at depth 0
+  // Find the FIRST complete [...] array only
+  let depth = 0, inStr = false, esc = false, start = -1, end = -1;
+  for (let i = 0; i < cleaned.length; i++) {
+    const ch = cleaned[i];
+    if (esc) { esc = false; continue; }
+    if (ch === '\\' && inStr) { esc = true; continue; }
+    if (ch === '"') { inStr = !inStr; continue; }
+    if (inStr) continue;
+    if (ch === '[') { if (depth === 0) start = i; depth++; }
+    if (ch === ']') { depth--; if (depth === 0 && start !== -1) { end = i; break; } }
+  }
+  if (start !== -1 && end !== -1) {
+    const r = attempt(cleaned.slice(start, end + 1));
+    if (r) return r;
+  }
   return null;
 }
 

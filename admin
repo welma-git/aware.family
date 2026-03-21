@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aware Family — Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; font-weight: 300; background: #1E1C18; color: #F7F3EC; min-height: 100vh; }
+
+/* Login */
+#loginScreen {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 100vh; padding: 2rem;
+}
+.login-box {
+  background: #2A2720; border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 12px; padding: 2.5rem; width: 100%; max-width: 380px;
+  text-align: center;
+}
+.login-box h1 { font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: #C9A84C; margin-bottom: 0.5rem; }
+.login-box p { font-size: 13px; color: #6B6558; margin-bottom: 2rem; }
+.login-input {
+  width: 100%; font-family: 'DM Sans', sans-serif; font-size: 14px;
+  padding: 10px 14px; background: #1E1C18; border: 1.5px solid rgba(201,168,76,0.2);
+  border-radius: 8px; color: #F7F3EC; outline: none; margin-bottom: 1rem;
+  transition: border-color 0.15s;
+}
+.login-input:focus { border-color: #C9A84C; }
+.login-btn {
+  width: 100%; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+  padding: 10px; background: #C9A84C; color: #0F0E0C; border: none;
+  border-radius: 8px; cursor: pointer; transition: background 0.15s;
+}
+.login-btn:hover { background: #E8C97A; }
+.login-error { font-size: 12px; color: #D85A30; margin-top: 0.75rem; }
+
+/* Main admin UI */
+#adminScreen { display: none; }
+.top-bar {
+  background: #2A2720; border-bottom: 1px solid rgba(201,168,76,0.15);
+  padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+}
+.top-bar h1 { font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: #C9A84C; }
+.top-meta { font-family: 'DM Mono', monospace; font-size: 11px; color: #6B6558; }
+.top-actions { display: flex; gap: 0.5rem; }
+.btn {
+  font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500;
+  padding: 7px 16px; border-radius: 100px; cursor: pointer; border: none;
+  transition: all 0.15s;
+}
+.btn-gold { background: #C9A84C; color: #0F0E0C; }
+.btn-gold:hover { background: #E8C97A; }
+.btn-outline { background: transparent; color: #6B6558; border: 1px solid rgba(247,243,236,0.12); }
+.btn-outline:hover { color: #F7F3EC; border-color: rgba(247,243,236,0.3); }
+.btn-danger { background: rgba(216,90,48,0.15); color: #F4967A; border: 1px solid rgba(216,90,48,0.3); }
+.btn-danger:hover { background: rgba(216,90,48,0.25); }
+
+.filter-bar {
+  padding: 0.85rem 2rem; background: #1E1C18; border-bottom: 1px solid rgba(201,168,76,0.08);
+  display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;
+}
+.search-input {
+  flex: 1; min-width: 200px; font-family: 'DM Sans', sans-serif; font-size: 13px;
+  padding: 7px 13px; background: #2A2720; border: 1.5px solid rgba(201,168,76,0.15);
+  border-radius: 100px; color: #F7F3EC; outline: none;
+}
+.search-input:focus { border-color: #C9A84C; }
+.filter-select {
+  font-family: 'DM Sans', sans-serif; font-size: 12px;
+  padding: 7px 12px; background: #2A2720; border: 1.5px solid rgba(201,168,76,0.15);
+  border-radius: 100px; color: #F7F3EC; outline: none; cursor: pointer;
+}
+.pill {
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.06em;
+  padding: 5px 12px; border-radius: 100px; cursor: pointer; border: 1.5px solid transparent;
+  transition: all 0.15s;
+}
+.pill-active { background: rgba(216,90,48,0.15); color: #F4967A; border-color: rgba(216,90,48,0.3); }
+.pill-inactive { background: rgba(201,168,76,0.08); color: #6B6558; border-color: rgba(201,168,76,0.15); }
+.pill-inactive:hover { color: #C9A84C; border-color: rgba(201,168,76,0.3); }
+
+.stats-bar {
+  padding: 0.6rem 2rem; background: #1E1C18; border-bottom: 1px solid rgba(201,168,76,0.08);
+  font-family: 'DM Mono', monospace; font-size: 11px; color: #6B6558; display: flex; gap: 1.5rem;
+}
+.stat-num { color: #C9A84C; font-weight: 500; }
+
+.events-list { padding: 1.5rem 2rem; max-width: 1100px; margin: 0 auto; }
+.event-row {
+  background: #2A2720; border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 10px; padding: 1rem 1.25rem;
+  margin-bottom: 0.6rem; display: flex; align-items: flex-start;
+  gap: 1rem; transition: border-color 0.15s;
+}
+.event-row:hover { border-color: rgba(201,168,76,0.2); }
+.event-row.is-blocked {
+  background: rgba(216,90,48,0.06); border-color: rgba(216,90,48,0.2);
+  opacity: 0.7;
+}
+.event-body { flex: 1; min-width: 0; }
+.event-name { font-weight: 500; font-size: 14px; color: #F7F3EC; margin-bottom: 0.25rem; }
+.event-meta {
+  font-family: 'DM Mono', monospace; font-size: 10.5px; color: #6B6558;
+  display: flex; flex-wrap: wrap; gap: 0.75rem;
+}
+.event-meta a { color: #6B6558; text-decoration: none; }
+.event-meta a:hover { color: #C9A84C; }
+.badge {
+  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.06em;
+  text-transform: uppercase; padding: 2px 7px; border-radius: 100px;
+  background: rgba(201,168,76,0.1); color: #C9A84C; flex-shrink: 0; align-self: flex-start;
+  margin-top: 2px;
+}
+.block-btn {
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.04em;
+  padding: 5px 12px; border-radius: 100px; cursor: pointer; flex-shrink: 0;
+  transition: all 0.15s; white-space: nowrap; border: 1.5px solid;
+}
+.block-btn.unblocked {
+  background: transparent; color: #6B6558; border-color: rgba(247,243,236,0.1);
+}
+.block-btn.unblocked:hover { background: rgba(216,90,48,0.12); color: #F4967A; border-color: rgba(216,90,48,0.3); }
+.block-btn.blocked {
+  background: rgba(216,90,48,0.15); color: #F4967A; border-color: rgba(216,90,48,0.3);
+}
+.block-btn.blocked:hover { background: rgba(29,158,117,0.12); color: #5DD4AA; border-color: rgba(29,158,117,0.3); }
+
+.empty { text-align: center; padding: 4rem 2rem; color: #6B6558; }
+.toast {
+  position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  background: #2A2720; border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 8px; padding: 0.6rem 1.25rem;
+  font-family: 'DM Mono', monospace; font-size: 12px; color: #C9A84C;
+  z-index: 999; opacity: 0; transition: opacity 0.3s; pointer-events: none;
+}
+.toast.show { opacity: 1; }
+.loading { text-align: center; padding: 4rem 2rem; font-family: 'DM Mono', monospace; font-size: 12px; color: #6B6558; }
+</style>
+</head>
+<body>
+
+<!-- Login -->
+<div id="loginScreen">
+  <div class="login-box">
+    <h1>Aware Family</h1>
+    <p>Admin access only</p>
+    <input type="password" class="login-input" id="passwordInput" placeholder="Admin password" />
+    <button class="login-btn" onclick="login()">Sign in</button>
+    <div class="login-error" id="loginError"></div>
+  </div>
+</div>
+
+<!-- Admin UI -->
+<div id="adminScreen">
+  <div class="top-bar">
+    <div>
+      <div class="top-bar h1">Aware Family Admin</div>
+      <div class="top-meta" id="topMeta">Loading…</div>
+    </div>
+    <div class="top-actions">
+      <button class="btn btn-outline" onclick="triggerRefresh()">↻ Refresh events</button>
+      <button class="btn btn-outline" onclick="logout()">Sign out</button>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <input type="text" class="search-input" id="searchInput" placeholder="Search by name, organizer, city…" oninput="renderList()" />
+    <select class="filter-select" id="categoryFilter" onchange="renderList()">
+      <option value="">All categories</option>
+      <option value="Event">Events</option>
+      <option value="Festival">Festivals</option>
+      <option value="Camp">Camps</option>
+      <option value="Program">Programs</option>
+      <option value="Extracurricular">Extracurriculars</option>
+      <option value="Experience">Experiences</option>
+    </select>
+    <button class="pill" id="blockedPill" onclick="toggleBlockedFilter()">Show blocked only</button>
+  </div>
+
+  <div class="stats-bar" id="statsBar">
+    <span><span class="stat-num" id="statTotal">0</span> total</span>
+    <span><span class="stat-num" id="statVisible">0</span> visible</span>
+    <span><span class="stat-num" id="statBlocked">0</span> blocked</span>
+    <span><span class="stat-num" id="statShowing">0</span> showing</span>
+  </div>
+
+  <div class="events-list" id="eventsList">
+    <div class="loading">Loading events…</div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const WORKER = 'https://awarefamily.square-cake-c6fc.workers.dev';
+let allEvents = [];
+let blocklist = new Set();
+let creds = '';
+let showBlockedOnly = false;
+
+async function login() {
+  const pass = document.getElementById('passwordInput').value.trim();
+  if (!pass) return;
+  creds = btoa('admin:' + pass);
+  try {
+    const resp = await fetch(`${WORKER}/admin/list`, { headers: { Authorization: 'Basic ' + creds } });
+    if (resp.status === 401) { document.getElementById('loginError').textContent = 'Wrong password'; return; }
+    if (!resp.ok) throw new Error('Server error');
+    const data = await resp.json();
+    allEvents = data.events || [];
+    blocklist = new Set(allEvents.filter(e => e.blocked).map(e => e._id));
+    document.getElementById('topMeta').textContent = `Updated ${new Date(data.updatedAt).toLocaleString('en-CA')} · ${data.count} events cached`;
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminScreen').style.display = 'block';
+    renderList();
+  } catch(e) { document.getElementById('loginError').textContent = 'Connection error — check Worker is deployed'; }
+}
+
+document.getElementById('passwordInput').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+
+function logout() {
+  creds = ''; allEvents = []; blocklist = new Set();
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('adminScreen').style.display = 'none';
+  document.getElementById('passwordInput').value = '';
+}
+
+function toggleBlockedFilter() {
+  showBlockedOnly = !showBlockedOnly;
+  const pill = document.getElementById('blockedPill');
+  pill.className = 'pill ' + (showBlockedOnly ? 'pill-active' : 'pill-inactive');
+  renderList();
+}
+
+function renderList() {
+  const kw = document.getElementById('searchInput').value.toLowerCase();
+  const cat = document.getElementById('categoryFilter').value.toLowerCase();
+
+  const filtered = allEvents.filter(e => {
+    if (showBlockedOnly && !blocklist.has(e._id)) return false;
+    if (cat && !(e.category || '').toLowerCase().includes(cat)) return false;
+    if (kw) {
+      const hay = [e.name, e.organizer, e.location, e.category].filter(Boolean).join(' ').toLowerCase();
+      if (!hay.includes(kw)) return false;
+    }
+    return true;
+  });
+
+  document.getElementById('statTotal').textContent = allEvents.length;
+  document.getElementById('statVisible').textContent = allEvents.length - blocklist.size;
+  document.getElementById('statBlocked').textContent = blocklist.size;
+  document.getElementById('statShowing').textContent = filtered.length;
+
+  const list = document.getElementById('eventsList');
+  if (!filtered.length) { list.innerHTML = '<div class="empty">No events match this filter.</div>'; return; }
+
+  list.innerHTML = filtered.map(e => {
+    const isBlocked = blocklist.has(e._id);
+    const websiteHtml = e.website
+      ? `<a href="${e.website}" target="_blank" title="${e.website}">↗ ${new URL(e.website.startsWith('http') ? e.website : 'https://' + e.website).hostname}</a>`
+      : '<span style="color:#4A4540">no link</span>';
+    return `<div class="event-row ${isBlocked ? 'is-blocked' : ''}">
+      <div class="badge">${e.category || '—'}</div>
+      <div class="event-body">
+        <div class="event-name">${escH(e.name)}</div>
+        <div class="event-meta">
+          <span>${escH(e.organizer || '—')}</span>
+          <span>${escH(e.location || '—')}</span>
+          <span>${e.startDate || 'no date'}</span>
+          ${websiteHtml}
+          ${isBlocked ? '<span style="color:#F4967A">● BLOCKED</span>' : ''}
+        </div>
+      </div>
+      <button class="block-btn ${isBlocked ? 'blocked' : 'unblocked'}" onclick="toggleBlock('${e._id}', this)">
+        ${isBlocked ? 'Unblock' : 'Block'}
+      </button>
+    </div>`;
+  }).join('');
+}
+
+async function toggleBlock(id, btn) {
+  const isBlocked = blocklist.has(id);
+  const endpoint = isBlocked ? '/admin/unblock' : '/admin/block';
+  btn.disabled = true;
+  try {
+    const resp = await fetch(`${WORKER}${endpoint}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Basic ' + creds },
+      body: JSON.stringify({ id }),
+    });
+    if (!resp.ok) throw new Error();
+    if (isBlocked) blocklist.delete(id); else blocklist.add(id);
+    // Update local allEvents blocked flag
+    const ev = allEvents.find(e => e._id === id);
+    if (ev) ev.blocked = !isBlocked;
+    showToast(isBlocked ? 'Event unblocked ✓' : 'Event blocked ✓');
+    renderList();
+  } catch { showToast('Failed — try again'); btn.disabled = false; }
+}
+
+async function triggerRefresh() {
+  showToast('Refreshing events — this takes 30s…');
+  try {
+    const resp = await fetch(`${WORKER}/refresh`, { headers: { Authorization: 'Basic ' + creds } });
+    const data = await resp.json();
+    showToast(`Done — ${data.count} events loaded ✓`);
+    // Reload list
+    const listResp = await fetch(`${WORKER}/admin/list`, { headers: { Authorization: 'Basic ' + creds } });
+    const listData = await listResp.json();
+    allEvents = listData.events || [];
+    blocklist = new Set(allEvents.filter(e => e.blocked).map(e => e._id));
+    document.getElementById('topMeta').textContent = `Updated ${new Date(listData.updatedAt).toLocaleString('en-CA')} · ${listData.count} events cached`;
+    renderList();
+  } catch { showToast('Refresh failed — check Worker logs'); }
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function escH(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+</script>
+</body>
+</html>

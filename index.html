@@ -1723,7 +1723,7 @@ async function runSearch() {
   const freeCtx = state.freeOnly ? ' Free or no-cost activities only.' : '';
 
 
-  const geminiPrompt = `Today is ${today}. Search the web and find 10-15 current upcoming kid-friendly activities in ${city}.
+  const geminiPrompt = `Today is ${today}. Search the web and find 6-8 current upcoming kid-friendly activities in ${city}.
 Categories: ${cat}. Ages: ${age}.${kw}${dateCtx}${langCtx}${venueCtx}${freeCtx}
 Prioritize results from these sources:
 - eventbrite.ca/d/canada--toronto/kids
@@ -1763,7 +1763,7 @@ Each object must have: name, category (Event/Program/Camp/Extracurricular/Experi
         tools: [{ google_search: {} }],
         generationConfig: {
           temperature: 0.1,
-          maxOutputTokens: 4000,
+          maxOutputTokens: 8192,
         }
       })
     });

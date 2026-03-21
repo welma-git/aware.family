@@ -586,11 +586,18 @@ main { max-width: 980px; margin: 0 auto; padding: 1.75rem 2rem; }
   padding: 2px 7px; border-radius: 100px;
 }
 .card-actions { display: flex; align-items: center; gap: 6px; }
-.card-link {
-  font-size: 11.5px; font-weight: 500; color: var(--gold-dim);
-  text-decoration: none; display: flex; align-items: center; gap: 3px; transition: color 0.15s;
+.card-link-btn {
+  font-size: 11.5px; font-weight: 500; font-family: 'DM Sans', sans-serif;
+  padding: 5px 12px; border-radius: 100px; min-height: 32px;
+  display: inline-flex; align-items: center;
+  background: var(--ink); color: var(--parchment);
+  border: 1.5px solid var(--ink); text-decoration: none;
+  cursor: pointer; transition: all 0.15s; white-space: nowrap;
 }
-.card-link:hover { color: var(--coral); }
+.card-link-btn:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.card-link-btn--dim { background: transparent; color: var(--smoke); border-color: var(--parchment-dark); }
+.card-link-btn--dim:hover { border-color: var(--smoke); color: var(--ink); }
+.card-link { display: none; } /* hide old card-link if any remnants */
 .gcal-mini-btn {
   font-size: 10.5px; font-weight: 500; font-family: 'DM Sans', sans-serif;
   padding: 3px 9px; border-radius: 100px;
@@ -783,8 +790,8 @@ main { max-width: 980px; margin: 0 auto; padding: 1.75rem 2rem; }
   /* Fix: card-footer border parchment on white = invisible */
   .card-footer { border-top-color: var(--parchment-dark); }
   /* Fix: card-link gold-dim on white = 4.55:1 (barely), on parchment = 3.81:1. Use smoke-dim for safety */
-  .card-link { color: var(--smoke-dim); }
-  .card-link:hover { color: var(--ink); }
+  .card-link-btn { background: var(--ink); color: var(--parchment); }
+  .card-link-btn:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
   /* Fix: meta-icon gold-dim at 0.7 opacity fails — remove opacity reduction */
   .meta-icon { color: var(--smoke-dim); opacity: 1; }
   /* Fix: gcal-mini-btn gold-dim at 10.5px is borderline — darken */
@@ -919,8 +926,8 @@ main { max-width: 980px; margin: 0 auto; padding: 1.75rem 2rem; }
   .age-tag { background: rgba(201,168,76,0.08); color: var(--parchment-dark); } /* was smoke on ink-mid */
   .cost-pill { color: var(--parchment-dark); }
   .meta-item { color: var(--parchment-dark); }
-  .card-link { color: var(--gold-light); }
-  .card-link:hover { color: var(--gold); }
+  .card-link-btn { background: var(--ink-soft); color: var(--parchment); border-color: rgba(247,243,236,0.15); }
+  .card-link-btn:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
   .gcal-mini-btn { color: var(--gold-light); border-color: rgba(201,168,76,0.3); }
   .share-btn { color: var(--parchment-dark); }
 
@@ -1606,8 +1613,11 @@ function renderCard(item, i) {
             <line x1="10.5" y1="3.8" x2="4.5" y2="7.2"/><line x1="4.5" y1="8.8" x2="10.5" y2="12.2"/>
           </svg>
         </button>
-        <button class="gcal-mini-btn" onclick="openPanel(${i})" style="min-height:32px;min-width:44px;">+ Cal</button>
-        ${item.website ? `<a class="card-link" href="${escH(tagUrl(item.website))}" target="_blank" onclick="event.stopPropagation()" style="min-height:32px;display:inline-flex;align-items:center;padding:0 8px;">Site ↗</a>` : ''}
+        <button class="gcal-mini-btn" onclick="openPanel(${i})" style="min-height:32px;" title="Add to calendar">+ Cal</button>
+        ${item.website
+          ? `<a class="card-link-btn" href="${escH(tagUrl(item.website))}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Details ↗</a>`
+          : `<button class="card-link-btn card-link-btn--dim" onclick="openPanel(${i})">Details</button>`
+        }
       </div>
     </div>
   </div>`;

@@ -1038,12 +1038,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </button>
       <div class="fd-panel" id="fd-cat-panel">
         <span class="fd-sublabel">Category</span>
-        <button class="fd-option active" data-key="category" data-val="all" onclick="setFilter('category','all','All','cat')">All types</button>
-        <button class="fd-option" data-key="category" data-val="events" onclick="setFilter('category','events','Events','cat')">Events & Festivals</button>
-        <button class="fd-option" data-key="category" data-val="camps" onclick="setFilter('category','camps','Camps','cat')">Camps</button>
-        <button class="fd-option" data-key="category" data-val="programs" onclick="setFilter('category','programs','Programs','cat')">City Programs</button>
-        <button class="fd-option" data-key="category" data-val="extracurriculars" onclick="setFilter('category','extracurriculars','Extracurriculars','cat')">Extracurriculars</button>
-        <button class="fd-option" data-key="category" data-val="experiences" onclick="setFilter('category','experiences','Experiences','cat')">Experiences & Places</button>
+        <button class="fd-option active" data-key="category" data-val="all" onclick=\"setFilter('category','all',this)\">All types</button>
+        <button class="fd-option" data-key="category" data-val="events" onclick=\"setFilter('category','events',this)\">Events & Festivals</button>
+        <button class="fd-option" data-key="category" data-val="camps" onclick=\"setFilter('category','camps',this)\">Camps</button>
+        <button class="fd-option" data-key="category" data-val="programs" onclick=\"setFilter('category','programs',this)\">City Programs</button>
+        <button class="fd-option" data-key="category" data-val="extracurriculars" onclick=\"setFilter('category','extracurriculars',this)\">Extracurriculars</button>
+        <button class="fd-option" data-key="category" data-val="experiences" onclick=\"setFilter('category','experiences',this)\">Experiences & Places</button>
       </div>
     </div>
 
@@ -1055,15 +1055,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </button>
       <div class="fd-panel" id="fd-city-panel">
         <span class="fd-sublabel">City / Region</span>
-        <button class="fd-option active" onclick="setFilter('city','all','Everywhere','city')">Everywhere</button>
-        <button class="fd-option" onclick="setFilter('city','Toronto','Toronto','city')">Toronto</button>
-        <button class="fd-option" onclick="setFilter('city','Vaughan','Vaughan','city')">Vaughan</button>
-        <button class="fd-option" onclick="setFilter('city','Mississauga','Mississauga','city')">Mississauga</button>
-        <button class="fd-option" onclick="setFilter('city','Markham','Markham','city')">Markham</button>
-        <button class="fd-option" onclick="setFilter('city','Richmond Hill','Richmond Hill','city')">Richmond Hill</button>
-        <button class="fd-option" onclick="setFilter('city','London','London','city')">London</button>
-        <button class="fd-option" onclick="setFilter('city','Durham Region','Durham','city')">Durham Region</button>
-        <button class="fd-option" onclick="setFilter('city','Barrie','Barrie','city')">Barrie</button>
+        <button class="fd-option active" onclick=\"setFilter('city','all',this)\">Everywhere</button>
+        <button class="fd-option" onclick=\"setFilter('city','Toronto',this)\">Toronto</button>
+        <button class="fd-option" onclick=\"setFilter('city','Vaughan',this)\">Vaughan</button>
+        <button class="fd-option" onclick=\"setFilter('city','Mississauga',this)\">Mississauga</button>
+        <button class="fd-option" onclick=\"setFilter('city','Markham',this)\">Markham</button>
+        <button class="fd-option" onclick=\"setFilter('city','Richmond Hill',this)\">Richmond Hill</button>
+        <button class="fd-option" onclick=\"setFilter('city','London',this)\">London</button>
+        <button class="fd-option" onclick=\"setFilter('city','Durham Region',this)\">Durham Region</button>
+        <button class="fd-option" onclick=\"setFilter('city','Barrie',this)\">Barrie</button>
       </div>
     </div>
 
@@ -1075,12 +1075,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </button>
       <div class="fd-panel" id="fd-age-panel">
         <span class="fd-sublabel">Age range</span>
-        <button class="fd-option active" onclick="setFilter('age','all','All ages','age')">All ages</button>
-        <button class="fd-option" onclick="setFilter('age','0-2','0–2 yrs','age')">0–2 yrs</button>
-        <button class="fd-option" onclick="setFilter('age','3-5','3–5 yrs','age')">3–5 yrs</button>
-        <button class="fd-option" onclick="setFilter('age','6-9','6–9 yrs','age')">6–9 yrs</button>
-        <button class="fd-option" onclick="setFilter('age','10-12','10–12 yrs','age')">10–12 yrs</button>
-        <button class="fd-option" onclick="setFilter('age','13+','13+ yrs','age')">13+ yrs</button>
+        <button class="fd-option active" onclick=\"setFilter('age','all',this)\">All ages</button>
+        <button class="fd-option" onclick=\"setFilter('age','0-2',this)\">0–2 yrs</button>
+        <button class="fd-option" onclick=\"setFilter('age','3-5',this)\">3–5 yrs</button>
+        <button class="fd-option" onclick=\"setFilter('age','6-9',this)\">6–9 yrs</button>
+        <button class="fd-option" onclick=\"setFilter('age','10-12',this)\">10–12 yrs</button>
+        <button class="fd-option" onclick=\"setFilter('age','13+',this)\">13+ yrs</button>
       </div>
     </div>
 
@@ -1092,9 +1092,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </button>
       <div class="fd-panel" id="fd-lang-panel">
         <span class="fd-sublabel">Language</span>
-        <button class="fd-option active" onclick="setFilter('lang','all','All','lang')">All</button>
-        <button class="fd-option" onclick="setFilter('lang','en','English','lang')">English</button>
-        <button class="fd-option" onclick="setFilter('lang','fr','Français','lang')">Français</button>
+        <button class="fd-option active" onclick=\"setFilter('lang','all',this)\">All</button>
+        <button class="fd-option" onclick=\"setFilter('lang','en',this)\">English</button>
+        <button class="fd-option" onclick=\"setFilter('lang','fr',this)\">Français</button>
       </div>
     </div>
 
@@ -1136,9 +1136,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </button>
       <div class="fd-panel" id="fd-venue-panel">
         <span class="fd-sublabel">Indoor / Outdoor</span>
-        <button class="fd-option active" onclick="setFilter('venue','all','Venue','venue')">Any venue</button>
-        <button class="fd-option" onclick="setFilter('venue','indoor','Indoors','venue')">Indoors</button>
-        <button class="fd-option" onclick="setFilter('venue','outdoor','Outdoors','venue')">Outdoors</button>
+        <button class="fd-option active" onclick=\"setFilter('venue','all',this)\">Any venue</button>
+        <button class="fd-option" onclick=\"setFilter('venue','indoor',this)\">Indoors</button>
+        <button class="fd-option" onclick=\"setFilter('venue','outdoor',this)\">Outdoors</button>
       </div>
     </div>
 
@@ -1162,15 +1162,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </button>
     </div>
 
-    <button class="search-btn" id="searchBtn" onclick="runSearch()">
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <circle cx="6.5" cy="6.5" r="4.5"/><line x1="10.5" y1="10.5" x2="14" y2="14"/>
-      </svg>
-      Find
-    </button>
+    </div>
   </div>
-  <div style="max-width:980px;margin:0.4rem auto 0;padding:0 0.25rem;">
-    <span id="searchCounter" style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.06em;color:var(--smoke);"></span>
+  <div style="max-width:980px;margin:0.4rem auto 0;padding:0 0.25rem;display:flex;align-items:center;justify-content:space-between;">
+    <span id="lastUpdated" style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.06em;color:var(--smoke);"></span>
   </div>
 </div>
 
@@ -1183,28 +1178,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="empty-state" id="emptyState">
     <div class="empty-icon">🗺️</div>
     <h2>Your cheatsheet awaits</h2>
-    <p>Set your filters and hit Find Activities to pull live results for your family.</p>
+    <p>Loading today's family events across Ontario — use the filters to narrow down by city, age, or category.</p>
   </div>
   <div class="loading-state" id="loadingState" style="display:none">
     <div class="loading-inner">
       <div class="loading-phases">
-        <div class="loading-phase" id="phase1">
+        <div class="loading-phase active-phase" id="phase1">
           <div class="phase-dot active"></div>
           <div class="phase-content">
-            <div class="phase-label">Searching the web</div>
-            <div class="phase-detail" id="loadingMsg">Scanning Toronto events calendar, Eventbrite, city programs…</div>
-          </div>
-        </div>
-        <div class="loading-connector" id="phaseConnector"></div>
-        <div class="loading-phase dimmed" id="phase2">
-          <div class="phase-dot"></div>
-          <div class="phase-content">
-            <div class="phase-label">Building your results</div>
-            <div class="phase-detail">Cards will appear as each result is ready</div>
+            <div class="phase-label">Loading events</div>
+            <div class="phase-detail" id="loadingMsg">Fetching today's family activities…</div>
           </div>
         </div>
       </div>
-      <p class="loading-note">Live web search takes 20–40 seconds — worth the wait.</p>
+      <p class="loading-note">Fresh events updated daily — results load instantly.</p>
     </div>
   </div>
   <div id="resultsArea" style="display:none">
@@ -1266,174 +1253,339 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script>
 // ─────────────────────────────────────────────
-// CONFIGURATION
-// For production: point API_BASE to your Cloudflare Worker URL.
-// The Worker holds your GOOGLE_API_KEY securely as an encrypted secret.
+// Aware Family — Client JS
+// Events are fetched once from the Worker KV cache.
+// All filtering happens client-side — no per-user API calls.
 // ─────────────────────────────────────────────
 const API_BASE = 'https://awarefamily.square-cake-c6fc.workers.dev';
-const GEMINI_MODEL = 'gemini-2.5-flash';
 
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-const LOAD_MSGS = [
-  'Searching for family events…',
-  'Checking Toronto events calendar…',
-  'Scanning Eventbrite & Ticketmaster…',
-  'Finding activities near you…',
-  'Almost ready…'
-];
 
 const state = { category:'all', city:'all', age:'all', view:'grid', lang:'all', venue:'all', freeOnly:false };
-let allActivities = [];
+let allActivities = [];   // full dataset from KV
+let filtered = [];        // currently displayed subset
 let currentPanelIdx = -1;
 let calY = new Date().getFullYear();
 let calM = new Date().getMonth();
 let loadTimer = null;
+let selectedIndices = new Set();
 
-const fdLabels = { category:'Category', city:'City', age:'Age', lang:'Language', venue:'Venue' };
+// ── Badge helpers ──
+function getBadge(cat) {
+  if (!cat) return 'default';
+  const c = cat.toLowerCase();
+  if (c.includes('event')||c.includes('festival')) return 'event';
+  if (c.includes('program')) return 'program';
+  if (c.includes('camp')) return 'camp';
+  if (c.includes('extra')) return 'extracurricular';
+  if (c.includes('exp')||c.includes('place')) return 'experience';
+  return 'default';
+}
+function dotColor(bt) {
+  const m = {'event':'#D85A30','program':'#185FA5','camp':'#1D9E75','extracurricular':'#534AB7','experience':'#C9A84C','default':'#6B6558'};
+  return m[bt]||m.default;
+}
+
+// ── Load events from Worker KV ──
+async function loadEvents() {
+  document.getElementById('loadingState').style.display = 'flex';
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('resultsArea').style.display = 'none';
+
+  // Animated loading message
+  const msgs = ['Loading family events\u2026', 'Fetching today\u2019s activities\u2026', 'Almost there\u2026'];
+  let li = 0;
+  loadTimer = setInterval(() => {
+    document.getElementById('loadingMsg').textContent = msgs[li++ % msgs.length];
+  }, 1800);
+
+  try {
+    const resp = await fetch(`${API_BASE}/events`);
+    if (!resp.ok) throw new Error('Could not load events');
+    const data = await resp.json();
+    allActivities = data.events || [];
+
+    // Show last updated
+    if (data.updatedAt) {
+      const d = new Date(data.updatedAt);
+      const label = d.toLocaleDateString('en-CA', { weekday:'short', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
+      const el = document.getElementById('lastUpdated');
+      if (el) el.textContent = `Updated ${label}`;
+    }
+
+    applyFilters();
+  } catch(err) {
+    document.getElementById('errorToast').innerHTML = `⚠ Could not load events — please refresh the page.`;
+    document.getElementById('errorToast').style.display = 'block';
+    document.getElementById('emptyState').style.display = 'block';
+  } finally {
+    clearInterval(loadTimer);
+    document.getElementById('loadingState').style.display = 'none';
+  }
+}
+
+// ── Client-side filtering ──
+function applyFilters() {
+  const keyword = (document.getElementById('keyword').value || '').toLowerCase().trim();
+  const dateFrom = document.getElementById('dateFrom').value;
+  const dateTo = document.getElementById('dateTo').value;
+  const todayStr = new Date().toISOString().split('T')[0];
+
+  filtered = allActivities.filter(item => {
+    // Category
+    if (state.category !== 'all') {
+      const cat = (item.category||'').toLowerCase();
+      const map = {
+        'events': ['event','festival'],
+        'camps': ['camp'],
+        'programs': ['program'],
+        'extracurriculars': ['extracurricular'],
+        'experiences': ['experience','place'],
+      };
+      const terms = map[state.category] || [state.category];
+      if (!terms.some(t => cat.includes(t))) return false;
+    }
+    // City — filter by location string
+    if (state.city !== 'all') {
+      const loc = (item.location||'').toLowerCase();
+      const cityMap = {
+        'toronto': 'toronto',
+        'vaughan': 'vaughan',
+        'mississauga': 'mississauga',
+        'markham': 'markham',
+        'richmond hill': 'richmond hill',
+        'london': 'london',
+        'durham': 'durham',
+        'barrie': 'barrie',
+      };
+      const term = cityMap[state.city] || state.city;
+      if (!loc.includes(term)) return false;
+    }
+    // Age
+    if (state.age !== 'all') {
+      const ar = (item.ageRange||'').toLowerCase();
+      if (ar && ar !== 'all ages') {
+        const ageMap = {'0-2':2,'3-5':5,'6-9':9,'10-12':12,'13+':13};
+        const maxAge = ageMap[state.age];
+        // simple check: if ageRange contains a number close to this range or says "all"
+        const nums = ar.match(/\d+/g)?.map(Number) || [];
+        if (nums.length && maxAge) {
+          const minInRange = Math.min(...nums);
+          const maxInRange = Math.max(...nums);
+          if (state.age === '13+') { if (maxInRange < 13 && !ar.includes('teen') && !ar.includes('13')) return false; }
+          else { if (minInRange > maxAge) return false; }
+        }
+      }
+    }
+    // Language
+    if (state.lang === 'fr' && !item.isFrench) return false;
+    if (state.lang === 'en' && item.isFrench) return false;
+    // Venue
+    if (state.venue !== 'all' && item.venue && item.venue !== 'both' && item.venue !== state.venue) return false;
+    // Free only
+    if (state.freeOnly) {
+      const cost = (item.cost||'').toLowerCase();
+      if (!cost.includes('free') && cost !== '$0' && cost !== '0') return false;
+    }
+    // Date range
+    if (dateFrom || dateTo) {
+      const sd = item.startDate, ed = item.endDate || item.startDate;
+      if (sd) {
+        if (dateFrom && ed && ed < dateFrom) return false;
+        if (dateTo && sd > dateTo) return false;
+      }
+    }
+    // Keyword — search name, description, organizer, location
+    if (keyword) {
+      const haystack = [item.name, item.description, item.organizer, item.location, item.schedule].filter(Boolean).join(' ').toLowerCase();
+      if (!haystack.includes(keyword)) return false;
+    }
+    // Exclude expired
+    const cutoff = item.endDate || item.startDate;
+    if (cutoff && cutoff < todayStr) return false;
+
+    return true;
+  });
+
+  renderResults();
+}
+
+function renderResults() {
+  const grid = document.getElementById('resultsGrid');
+  const area = document.getElementById('resultsArea');
+  const empty = document.getElementById('emptyState');
+  const count = document.getElementById('resultsCount');
+  const label = document.getElementById('resultsLabel');
+
+  selectedIndices.clear();
+  updateSelectionBar();
+
+  if (!filtered.length) {
+    area.style.display = 'none';
+    empty.style.display = 'block';
+    return;
+  }
+
+  empty.style.display = 'none';
+  area.style.display = 'block';
+  grid.innerHTML = filtered.map((item, i) => renderCard(item, i)).join('');
+  count.textContent = filtered.length + ' found';
+  count.style.display = 'inline-flex';
+
+  const keyword = document.getElementById('keyword').value.trim();
+  const cityLabel = state.city === 'all' ? 'Ontario' : state.city;
+  label.textContent = keyword
+    ? `Results for "${keyword}" · ${cityLabel}`
+    : `All activities · ${cityLabel}`;
+
+  if (state.view === 'cal') renderCalendar();
+}
+
+// ── Filter setters ──
+function setFilter(key, val, el) {
+  state[key] = val;
+  document.querySelectorAll(`.fd-option[data-filter="${key}"]`).forEach(o => o.classList.remove('active'));
+  if (el) el.classList.add('active');
+  applyFilters();
+}
 
 function toggleFree() {
   state.freeOnly = !state.freeOnly;
-  document.getElementById('freeToggle').classList.toggle('on', state.freeOnly);
-}
-
-function toggleFd(id) {
-  const isOpen = document.getElementById('fd-'+id+'-panel').classList.contains('open');
-  closeAllFd();
-  if (!isOpen) {
-    document.getElementById('fd-'+id+'-btn').classList.add('open');
-    document.getElementById('fd-'+id+'-panel').classList.add('open');
-  }
-}
-function closeAllFd() {
-  ['cat','city','age','lang','dates','venue'].forEach(id => {
-    document.getElementById('fd-'+id+'-btn').classList.remove('open');
-    document.getElementById('fd-'+id+'-panel').classList.remove('open');
-  });
-}
-document.addEventListener('click', e => {
-  if (!e.target.closest('.fd')) closeAllFd();
-});
-
-function setFilter(key, val, label, fdId) {
-  state[key] = val;
-  const btn = document.getElementById('fd-'+fdId+'-btn');
-  const isDefault = (val === 'all' || val === '');
-  if (isDefault) {
-    btn.classList.remove('has-value');
-    btn.innerHTML = fdLabels[key] + chevronSvg();
-  } else {
-    btn.classList.add('has-value');
-    btn.innerHTML = label + chevronSvg();
-  }
-  document.getElementById('fd-'+fdId+'-panel').querySelectorAll('.fd-option').forEach(o => {
-    o.classList.toggle('active', o.textContent.trim() === label || (isDefault && o.textContent.trim().startsWith('All')));
-  });
-  closeAllFd();
-}
-
-function chevronSvg() {
-  return `<svg class="fd-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 4 6 8 10 4"/></svg>`;
-}
-
-function setQuickDate(preset) {
-  const now = new Date();
-  const fmt = d => d.toISOString().split('T')[0];
-  let from, to;
-  if (preset==='today') { from=to=fmt(now); }
-  else if (preset==='weekend') {
-    const day=now.getDay(); const diff=day<=5?5-day:6;
-    const sat=new Date(now); sat.setDate(now.getDate()+diff);
-    const sun=new Date(sat); sun.setDate(sat.getDate()+1);
-    from=fmt(sat); to=fmt(sun);
-  } else if (preset==='week') {
-    const end=new Date(now); end.setDate(now.getDate()+6);
-    from=fmt(now); to=fmt(end);
-  } else if (preset==='month') {
-    const end=new Date(now); end.setDate(now.getDate()+30);
-    from=fmt(now); to=fmt(end);
-  }
-  document.getElementById('dateFrom').value=from;
-  document.getElementById('dateTo').value=to;
-  updateDateLabel();
-  closeAllFd();
-}
-
-function updateDateLabel() {
-  const from=document.getElementById('dateFrom').value;
-  const to=document.getElementById('dateTo').value;
-  const btn=document.getElementById('fd-dates-btn');
-  if (from||to) {
-    const short = d => d ? new Date(d+'T00:00:00').toLocaleDateString('en-CA',{month:'short',day:'numeric'}) : '?';
-    btn.classList.add('has-value');
-    btn.innerHTML = (from&&to&&from===to ? short(from) : (short(from)+' → '+short(to))) + chevronSvg();
-  } else {
-    btn.classList.remove('has-value');
-    btn.innerHTML = 'Dates' + chevronSvg();
-  }
-}
-
-function clearDates() {
-  document.getElementById('dateFrom').value='';
-  document.getElementById('dateTo').value='';
-  updateDateLabel();
-  closeAllFd();
+  const pill = document.getElementById('freeToggle');
+  pill.classList.toggle('on', state.freeOnly);
+  applyFilters();
 }
 
 function setView(v) {
   state.view = v;
-  document.getElementById('vGrid').classList.toggle('active', v==='grid');
-  document.getElementById('vCal').classList.toggle('active', v==='cal');
-  document.getElementById('gridView').style.display = v==='grid' ? 'block' : 'none';
-  document.getElementById('calView').style.display = v==='cal' ? 'block' : 'none';
-  if (v==='cal' && allActivities.length) renderCalendar();
+  document.querySelectorAll('.vbtn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.vbtn[data-view="'+v+'"]')?.classList.add('active');
+  const grid = document.getElementById('resultsGrid');
+  const cal = document.getElementById('calView');
+  if (v === 'cal') {
+    grid.style.display = 'none';
+    cal.style.display = 'block';
+    renderCalendar();
+  } else {
+    grid.style.display = 'grid';
+    cal.style.display = 'none';
+  }
 }
 
-function getBadge(cat) {
-  const c = (cat||'').toLowerCase();
-  if (c.includes('event')||c.includes('festival')) return 'event';
-  if (c.includes('program')) return 'program';
-  if (c.includes('camp')) return 'camp';
-  if (c.includes('extra')||c.includes('class')||c.includes('lesson')||c.includes('sport')||c.includes('club')) return 'extracurricular';
-  if (c.includes('experience')||c.includes('place')||c.includes('attraction')||c.includes('museum')) return 'experience';
-  return 'default';
+// ── Dropdown helpers ──
+function openFd(id) {
+  document.querySelectorAll('.fd-panel.open').forEach(p => {
+    if (p.id !== id+'Panel') { p.classList.remove('open'); p.previousElementSibling?.classList.remove('open'); }
+  });
+  const panel = document.getElementById(id+'Panel');
+  const btn = document.getElementById(id+'Btn');
+  const isOpen = panel.classList.contains('open');
+  panel.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
 }
-function dotColor(type) {
-  const m = {event:'var(--coral)',program:'var(--blue)',camp:'var(--teal)',extracurricular:'var(--purple)',experience:'var(--gold)'};
-  return m[type]||'var(--smoke)';
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.fd')) {
+    document.querySelectorAll('.fd-panel.open').forEach(p => {
+      p.classList.remove('open');
+      p.previousElementSibling?.classList.remove('open');
+    });
+  }
+});
+
+// Quick date presets
+function setDatePreset(preset) {
+  const today = new Date();
+  const fmt = d => d.toISOString().split('T')[0];
+  let from = '', to = '';
+  if (preset === 'today') { from = to = fmt(today); }
+  else if (preset === 'weekend') {
+    const day = today.getDay();
+    const sat = new Date(today); sat.setDate(today.getDate() + (6 - day) % 7);
+    const sun = new Date(sat); sun.setDate(sat.getDate() + 1);
+    from = fmt(day === 0 ? today : sat); to = fmt(sun);
+  } else if (preset === 'week') {
+    const end = new Date(today); end.setDate(today.getDate() + 7);
+    from = fmt(today); to = fmt(end);
+  } else if (preset === '30') {
+    const end = new Date(today); end.setDate(today.getDate() + 30);
+    from = fmt(today); to = fmt(end);
+  }
+  document.getElementById('dateFrom').value = from;
+  document.getElementById('dateTo').value = to;
+  document.querySelectorAll('.date-quick .fd-option').forEach(o => o.classList.remove('active'));
+  event?.target?.classList.add('active');
+  applyFilters();
+}
+
+function clearDates() {
+  document.getElementById('dateFrom').value = '';
+  document.getElementById('dateTo').value = '';
+  document.querySelectorAll('.date-quick .fd-option').forEach(o => o.classList.remove('active'));
+  applyFilters();
+}
+
+// Keyword search — live filter as user types
+let kwTimer;
+document.getElementById('keyword').addEventListener('input', () => {
+  clearTimeout(kwTimer);
+  kwTimer = setTimeout(applyFilters, 250);
+});
+
+// ── Render functions (unchanged) ──
+function normalizeCost(cost) {
+  if (!cost) return '';
+  const c = cost.toLowerCase().trim();
+  if (c === '' || c === '0' || c === '$0' || c.includes('free')) return 'Free';
+  // Extract first number
+  const nums = cost.match(/\d+(\.\d+)?/g);
+  if (nums) {
+    const amount = parseFloat(nums[0]);
+    if (amount === 0) return 'Free';
+    if (amount <= 15) return '$';
+    if (amount <= 40) return '$$';
+    if (amount <= 100) return '$$$';
+    return '$$$$';
+  }
+  // Has $ sign but no number
+  const dollarCount = (cost.match(/\$/g) || []).length;
+  if (dollarCount >= 1) return '$'.repeat(Math.min(dollarCount, 4));
+  return '$';
 }
 
 function renderCard(item, i) {
-  const delay = (i*0.05).toFixed(2);
+  const delay = (i * 0.03).toFixed(2);
   const bt = getBadge(item.category);
-  const isFree = item.cost && (item.cost.toLowerCase().includes('free') || item.cost.trim()==='$0');
-  const venueIcon = item.venue==='indoor' ? `<span class="venue-tag indoor">Indoors</span>` : item.venue==='outdoor' ? `<span class="venue-tag outdoor">Outdoors</span>` : '';
+  const isFree = item.cost && (item.cost.toLowerCase().includes('free') || item.cost.trim() === '$0');
+  const costDisplay = normalizeCost(item.cost);
+  const venueIcon = item.venue === 'indoor' ? `<span class="venue-tag indoor">Indoors</span>` : item.venue === 'outdoor' ? `<span class="venue-tag outdoor">Outdoors</span>` : '';
   const isSelected = selectedIndices.has(i);
-  return `<div class="card${isSelected?' selected':''}" style="animation-delay:${delay}s" data-idx="${i}">
+  return `<div class="card${isSelected ? ' selected' : ''}" style="animation-delay:${delay}s" data-idx="${i}">
     <button class="card-select" onclick="toggleSelect(${i},event)" title="Select for export">
       <svg class="card-select-check" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="white" stroke-width="2"><polyline points="2 5 4.5 7.5 8.5 2.5"/></svg>
       <svg class="card-select-ring" width="8" height="8" viewBox="0 0 8 8" fill="none"><circle cx="4" cy="4" r="3" stroke="currentColor" stroke-width="1.5" opacity="0.4"/></svg>
     </button>
     <div class="card-header">
-      <span class="category-badge badge-${bt}">${item.category||'Activity'}</span>
+      <span class="category-badge badge-${bt}">${item.category || 'Activity'}</span>
       <div style="display:flex;align-items:center;gap:5px;flex-shrink:0">
-        ${isFree?`<span class="free-tag">Free</span>`:(item.cost?`<span class="cost-pill">${escH(item.cost)}</span>`:'')}
+        ${costDisplay === 'Free' ? `<span class="free-tag">Free</span>` : costDisplay ? `<span class="cost-pill">${escH(costDisplay)}</span>` : ''}
         ${venueIcon}
       </div>
     </div>
     <div>
       <div class="card-name">${escH(item.name)}</div>
-      ${item.organizer?`<div class="card-org">${escH(item.organizer)}</div>`:''}
+      ${item.organizer ? `<div class="card-org">${escH(item.organizer)}</div>` : ''}
     </div>
     <div class="card-desc">${escH(item.description)}</div>
     <div class="card-meta">
-      ${item.location?`<div class="meta-item"><svg class="meta-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 1.5C5.5 1.5 3.5 3.5 3.5 6c0 3.5 4.5 8.5 4.5 8.5s4.5-5 4.5-8.5c0-2.5-2-4.5-4.5-4.5z"/><circle cx="8" cy="6" r="1.5"/></svg><span>${escH(item.location)}</span></div>`:''}
-      ${item.schedule?`<div class="meta-item"><svg class="meta-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="12" height="11" rx="1.5"/><line x1="2" y1="6.5" x2="14" y2="6.5"/><line x1="5.5" y1="1.5" x2="5.5" y2="4.5"/><line x1="10.5" y1="1.5" x2="10.5" y2="4.5"/></svg><span>${escH(item.schedule)}</span></div>`:''}
+      ${item.location ? `<div class="meta-item"><svg class="meta-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 1.5C5.5 1.5 3.5 3.5 3.5 6c0 3.5 4.5 8.5 4.5 8.5s4.5-5 4.5-8.5c0-2.5-2-4.5-4.5-4.5z"/><circle cx="8" cy="6" r="1.5"/></svg><span>${escH(item.location)}</span></div>` : ''}
+      ${item.schedule ? `<div class="meta-item"><svg class="meta-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="12" height="11" rx="1.5"/><line x1="2" y1="6.5" x2="14" y2="6.5"/><line x1="5.5" y1="1.5" x2="5.5" y2="4.5"/><line x1="10.5" y1="1.5" x2="10.5" y2="4.5"/></svg><span>${escH(item.schedule)}</span></div>` : ''}
     </div>
     <div class="card-footer">
-      <span class="age-tag">${escH(item.ageRange||'All ages')}</span>
+      <span class="age-tag">${escH(item.ageRange || 'All ages')}</span>
       <div class="card-actions">
-        ${item.isFrench?`<span class="lang-fr-tag">FR</span>`:''}
+        ${item.isFrench ? `<span class="lang-fr-tag">FR</span>` : ''}
         <button class="share-btn" onclick="shareActivity(${i})" title="Share this event">
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
             <circle cx="12" cy="3" r="1.5"/><circle cx="12" cy="13" r="1.5"/><circle cx="3" cy="8" r="1.5"/>
@@ -1441,7 +1593,7 @@ function renderCard(item, i) {
           </svg>
         </button>
         <button class="gcal-mini-btn" onclick="openPanel(${i})">+ Calendar</button>
-        ${item.website?`<a class="card-link" href="${escH(tagUrl(item.website))}" target="_blank">Site ↗</a>`:''}
+        ${item.website ? `<a class="card-link" href="${escH(tagUrl(item.website))}" target="_blank">Site ↗</a>` : ''}
       </div>
     </div>
   </div>`;
@@ -1451,457 +1603,109 @@ function renderCalendar() {
   document.getElementById('calTitle').textContent = MONTHS[calM] + ' ' + calY;
   const dow = document.getElementById('calDow');
   const days = document.getElementById('calDays');
-  dow.innerHTML = DOW.map(d=>`<div class="cal-dow">${d}</div>`).join('');
-
+  dow.innerHTML = DOW.map(d => `<div class="cal-dow">${d}</div>`).join('');
   const firstDay = new Date(calY, calM, 1).getDay();
-  const daysInMonth = new Date(calY, calM+1, 0).getDate();
+  const daysInMonth = new Date(calY, calM + 1, 0).getDate();
   const prevDays = new Date(calY, calM, 0).getDate();
-  const today = new Date(); today.setHours(0,0,0,0);
-
-  const scheduled = allActivities.filter(a => a.startDate);
-  const ongoing = allActivities.filter(a => !a.startDate);
-
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const scheduled = filtered.filter(a => a.startDate);
+  const ongoing = filtered.filter(a => !a.startDate);
   let cells = [];
-  for (let i=0; i<firstDay; i++) cells.push({day: prevDays-firstDay+1+i, other:true, d:new Date(calY,calM-1,prevDays-firstDay+1+i)});
-  for (let i=1; i<=daysInMonth; i++) cells.push({day:i, other:false, d:new Date(calY,calM,i)});
-  const rem = 42-cells.length;
-  for (let i=1; i<=rem; i++) cells.push({day:i, other:true, d:new Date(calY,calM+1,i)});
-
+  for (let i = 0; i < firstDay; i++) cells.push({ day: prevDays - firstDay + 1 + i, other: true, d: new Date(calY, calM - 1, prevDays - firstDay + 1 + i) });
+  for (let i = 1; i <= daysInMonth; i++) cells.push({ day: i, other: false, d: new Date(calY, calM, i) });
+  const rem = 42 - cells.length;
+  for (let i = 1; i <= rem; i++) cells.push({ day: i, other: true, d: new Date(calY, calM + 1, i) });
   days.innerHTML = cells.map(cell => {
-    const isToday = !cell.other && cell.d.getTime()===today.getTime();
+    const isToday = !cell.other && cell.d.getTime() === today.getTime();
     const evs = scheduled.filter(a => {
-      const sd = new Date(a.startDate+'T00:00:00'); sd.setHours(0,0,0,0);
-      const ed = a.endDate ? new Date(a.endDate+'T00:00:00') : new Date(sd);
-      ed.setHours(0,0,0,0);
+      const sd = new Date(a.startDate + 'T00:00:00'); sd.setHours(0, 0, 0, 0);
+      const ed = a.endDate ? new Date(a.endDate + 'T00:00:00') : new Date(sd); ed.setHours(0, 0, 0, 0);
       return cell.d >= sd && cell.d <= ed;
     });
-    const shown = evs.slice(0,2);
-    const more = evs.length-2;
-    return `<div class="cal-cell${cell.other?' other-month':''}${isToday?' today':''}">
+    const shown = evs.slice(0, 2); const more = evs.length - 2;
+    return `<div class="cal-cell${cell.other ? ' other-month' : ''}${isToday ? ' today' : ''}">
       <div class="cal-day-num">${cell.day}</div>
-      ${shown.map(a=>{
-        const idx=allActivities.indexOf(a);
-        return `<div class="cal-ev-chip chip-${getBadge(a.category)}" onclick="openPanel(${idx})" title="${escH(a.name)}">${escH(a.name)}</div>`;
-      }).join('')}
-      ${more>0?`<div class="cal-more">+${more} more</div>`:''}
+      ${shown.map(a => { const idx = filtered.indexOf(a); return `<div class="cal-ev-chip chip-${getBadge(a.category)}" onclick="openPanel(${idx})" title="${escH(a.name)}">${escH(a.name)}</div>`; }).join('')}
+      ${more > 0 ? `<div class="cal-more">+${more} more</div>` : ''}
     </div>`;
   }).join('');
-
   const onw = document.getElementById('calOngoing');
   if (ongoing.length) {
-    onw.style.display='block';
-    document.getElementById('ongoingGrid').innerHTML = ongoing.map(a=>{
-      const idx=allActivities.indexOf(a);
-      const bt=getBadge(a.category);
+    onw.style.display = 'block';
+    document.getElementById('ongoingGrid').innerHTML = ongoing.map(a => {
+      const idx = filtered.indexOf(a); const bt = getBadge(a.category);
       return `<div class="ongoing-item" onclick="openPanel(${idx})">
         <div class="ongoing-dot" style="background:${dotColor(bt)}"></div>
-        <div><div class="ongoing-name">${escH(a.name)}</div><div class="ongoing-sub">${escH(a.schedule||a.organizer||'')}</div></div>
+        <div><div class="ongoing-name">${escH(a.name)}</div><div class="ongoing-sub">${escH(a.schedule || a.organizer || '')}</div></div>
       </div>`;
     }).join('');
-  } else {
-    onw.style.display='none';
-  }
+  } else { onw.style.display = 'none'; }
 }
 
-function shiftMonth(d) {
-  calM += d;
-  if (calM>11){calM=0;calY++;}
-  if (calM<0){calM=11;calY--;}
-  renderCalendar();
-}
+function shiftMonth(d) { calM += d; if (calM > 11) { calM = 0; calY++; } if (calM < 0) { calM = 11; calY--; } renderCalendar(); }
 
 function openPanel(idx) {
-  const item = allActivities[idx];
-  if (!item) return;
+  const item = filtered[idx]; if (!item) return;
   currentPanelIdx = idx;
   const bt = getBadge(item.category);
   const badge = document.getElementById('panelBadge');
-  badge.className = 'panel-badge badge-'+bt;
-  badge.textContent = item.category||'Activity';
+  badge.className = 'panel-badge badge-' + bt; badge.textContent = item.category || 'Activity';
   document.getElementById('panelName').textContent = item.name;
-  document.getElementById('panelOrg').textContent = item.organizer||'';
+  document.getElementById('panelOrg').textContent = item.organizer || '';
   document.getElementById('panelDesc').textContent = item.description;
-
   const rows = [
-    item.venue && ['Venue', item.venue==='indoor' ? 'Indoors' : item.venue==='outdoor' ? 'Outdoors' : item.venue],
+    item.venue && ['Venue', item.venue === 'indoor' ? 'Indoors' : item.venue === 'outdoor' ? 'Outdoors' : item.venue],
     item.location && ['Location', item.location],
     item.schedule && ['Schedule', item.schedule],
-    item.startDate && ['Dates', item.startDate + (item.endDate&&item.endDate!==item.startDate?' → '+item.endDate:'')],
+    item.startDate && ['Dates', item.startDate + (item.endDate && item.endDate !== item.startDate ? ' → ' + item.endDate : '')],
     item.cost && ['Cost', item.cost],
     item.ageRange && ['Ages', item.ageRange],
   ].filter(Boolean);
-  document.getElementById('panelDetails').innerHTML = rows.map(([l,v])=>`<div class="panel-detail-row"><span class="pdr-label">${l}</span><span class="pdr-val">${escH(v)}</span></div>`).join('');
-
+  document.getElementById('panelDetails').innerHTML = rows.map(([l, v]) => `<div class="panel-detail-row"><span class="pdr-label">${l}</span><span class="pdr-val">${escH(v)}</span></div>`).join('');
   const ws = document.getElementById('panelWebsite');
-  ws.href = tagUrl(item.website) || '#';
-  ws.style.display = item.website ? 'block' : 'none';
-
+  ws.href = tagUrl(item.website) || '#'; ws.style.display = item.website ? 'block' : 'none';
   const btn = document.getElementById('panelGcalBtn');
-  btn.className = 'panel-gcal-btn';
-  btn.disabled = false;
-  btn.innerHTML = calIcon() + ' Add to Google Calendar';
+  btn.className = 'panel-gcal-btn'; btn.disabled = false; btn.innerHTML = calIcon() + ' Add to Google Calendar';
   document.getElementById('gcalStatus').className = 'gcal-status';
   document.getElementById('detailPanel').classList.add('open');
   document.getElementById('overlay').classList.add('show');
 }
 
-function closePanel() {
-  document.getElementById('detailPanel').classList.remove('open');
-  document.getElementById('overlay').classList.remove('show');
-}
+function closePanel() { document.getElementById('detailPanel').classList.remove('open'); document.getElementById('overlay').classList.remove('show'); }
 
-function calIcon() {
-  return `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="2.5" width="14" height="12" rx="1.5"/><line x1="1" y1="6" x2="15" y2="6"/><line x1="5" y1="1" x2="5" y2="4"/><line x1="11" y1="1" x2="11" y2="4"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="6" y1="11" x2="10" y2="11"/></svg>`;
-}
+function calIcon() { return `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="2.5" width="14" height="12" rx="1.5"/><line x1="1" y1="6" x2="15" y2="6"/><line x1="5" y1="1" x2="5" y2="4"/><line x1="11" y1="1" x2="11" y2="4"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="6" y1="11" x2="10" y2="11"/></svg>`; }
 
 async function addToGcal() {
   if (currentPanelIdx < 0) return;
-  const item = allActivities[currentPanelIdx];
-  const btn = document.getElementById('panelGcalBtn');
-  const status = document.getElementById('gcalStatus');
-
-  // Build Google Calendar URL directly — no API key needed
-  const fmt = d => d ? d.replace(/-/g,'') : new Date().toISOString().split('T')[0].replace(/-/g,'');
+  const item = filtered[currentPanelIdx];
+  const btn = document.getElementById('panelGcalBtn'); const status = document.getElementById('gcalStatus');
+  const fmt = d => d ? d.replace(/-/g, '') : new Date().toISOString().split('T')[0].replace(/-/g, '');
   const start = fmt(item.startDate);
   const endRaw = item.endDate || item.startDate;
-  // GCal end date is exclusive — add 1 day
-  const endDate = endRaw ? new Date(endRaw + 'T00:00:00') : new Date();
-  endDate.setDate(endDate.getDate() + 1);
-  const end = endDate.toISOString().split('T')[0].replace(/-/g,'');
+  const endDate = endRaw ? new Date(endRaw + 'T00:00:00') : new Date(); endDate.setDate(endDate.getDate() + 1);
+  const end = endDate.toISOString().split('T')[0].replace(/-/g, '');
   const desc = [item.description, item.organizer ? 'Organizer: ' + item.organizer : '', item.cost ? 'Cost: ' + item.cost : '', item.website || ''].filter(Boolean).join('\n');
-  const params = new URLSearchParams({
-    action: 'TEMPLATE',
-    text: item.name,
-    dates: `${start}/${end}`,
-    details: desc,
-    location: item.location || '',
-  });
-  const url = `https://calendar.google.com/calendar/render?${params.toString()}`;
-  window.open(url, '_blank');
-
+  const params = new URLSearchParams({ action: 'TEMPLATE', text: item.name, dates: `${start}/${end}`, details: desc, location: item.location || '' });
+  window.open(`https://calendar.google.com/calendar/render?${params.toString()}`, '_blank');
   btn.className = 'panel-gcal-btn added';
   btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="3 8 7 12 13 4"/></svg> Opening Calendar…`;
-  status.className = 'gcal-status success';
-  status.textContent = 'Google Calendar opened in a new tab.';
-  setTimeout(() => {
-    btn.className = 'panel-gcal-btn';
-    btn.innerHTML = calIcon() + ' Add to Google Calendar';
-  }, 3000);
+  status.className = 'gcal-status success'; status.textContent = 'Google Calendar opened in a new tab.';
+  setTimeout(() => { btn.className = 'panel-gcal-btn'; btn.innerHTML = calIcon() + ' Add to Google Calendar'; }, 3000);
 }
-
-// ── Daily search limit ──
-const DAILY_LIMIT = 3;
-const LS_KEY = 'af_searches';
-
-function getSearchRecord() {
-  try {
-    const raw = localStorage.getItem(LS_KEY);
-    if (!raw) return { date: '', count: 0 };
-    return JSON.parse(raw);
-  } catch { return { date: '', count: 0 }; }
-}
-
-function todayKey() {
-  return new Date().toISOString().split('T')[0];
-}
-
-function searchesUsedToday() {
-  const rec = getSearchRecord();
-  return rec.date === todayKey() ? rec.count : 0;
-}
-
-function incrementSearchCount() {
-  const today = todayKey();
-  const rec = getSearchRecord();
-  const count = rec.date === today ? rec.count + 1 : 1;
-  try { localStorage.setItem(LS_KEY, JSON.stringify({ date: today, count })); } catch {}
-  updateSearchCounter();
-}
-
-function updateSearchCounter() {
-  const used = searchesUsedToday();
-  const remaining = DAILY_LIMIT - used;
-  const el = document.getElementById('searchCounter');
-  if (!el) return;
-  if (remaining <= 0) {
-    el.textContent = 'Daily limit reached — come back tomorrow';
-    el.style.color = 'var(--coral)';
-    document.getElementById('searchBtn').disabled = true;
-  } else {
-    el.textContent = remaining + ' of ' + DAILY_LIMIT + ' searches remaining today';
-    el.style.color = 'var(--smoke)';
-    document.getElementById('searchBtn').disabled = false;
-  }
-}
-
-function renderCachedResults(activities, city, keyword, dateFrom, dateTo) {
-  const btn = document.getElementById('searchBtn');
-  document.getElementById('errorToast').style.display = 'none';
-  document.getElementById('emptyState').style.display = 'none';
-  document.getElementById('loadingState').style.display = 'none';
-  document.getElementById('resultsGrid').innerHTML = activities.map((a,i) => renderCard(a,i)).join('');
-  document.getElementById('resultsArea').style.display = 'block';
-  const dateLabel = dateFrom||dateTo ? ` · ${dateFrom||''}${dateFrom&&dateTo?' → ':''}${dateTo||''}` : '';
-  const frCount = activities.filter(a=>a.isFrench).length;
-  const langLabel = state.lang==='fr' ? ' · Français' : state.lang==='en' ? ' · English' : frCount>0 ? ` · ${frCount} FR` : '';
-  document.getElementById('resultsLabel').textContent = `Cached results · ${city}${keyword?' · '+keyword:''}${dateLabel}${langLabel}`;
-  document.getElementById('resultsCount').textContent = activities.length + ' found';
-  document.getElementById('resultsCount').style.display = 'inline-flex';
-  btn.disabled = false;
-  if (state.view==='cal') renderCalendar();
-}
-
-async function runSearch() {
-  const keyword = document.getElementById('keyword').value.trim();
-  const dateFrom = document.getElementById('dateFrom').value;
-  const dateTo = document.getElementById('dateTo').value;
-  const btn = document.getElementById('searchBtn');
-
-  // ── Daily limit gate ──
-  if (searchesUsedToday() >= DAILY_LIMIT) {
-    const et = document.getElementById('errorToast');
-    et.innerHTML = `You've used all ${DAILY_LIMIT} searches for today. Come back tomorrow for more! Results reset at midnight.`;
-    et.style.display = 'block';
-    return;
-  }
-
-  // ── Cache check — serve instantly if same search within 30 min ──
-  const cacheKey = `af_cache_${state.city}_${state.category}_${state.age}_${state.lang}_${state.venue}_${state.freeOnly}_${dateFrom}_${dateTo}_${keyword}`;
-  try {
-    const cached = localStorage.getItem(cacheKey);
-    if (cached) {
-      const { ts, data } = JSON.parse(cached);
-      if (Date.now() - ts < 6 * 60 * 60 * 1000) { // 6 hours
-        allActivities = data;
-        renderCachedResults(allActivities, state.city === 'all' ? 'Ontario' : state.city, keyword, dateFrom, dateTo);
-        return;
-      }
-    }
-  } catch(e) {}
-
-
-  // Reset UI
-  document.getElementById('errorToast').style.display = 'none';
-  document.getElementById('emptyState').style.display = 'none';
-  document.getElementById('loadingState').style.display = 'flex';
-  document.getElementById('resultsArea').style.display = 'none';
-  document.getElementById('resultsGrid').innerHTML = '';
-  document.getElementById('resultsCount').style.display = 'none';
-  btn.disabled = true;
-  allActivities = [];
-  selectedIndices.clear();
-  updateSelectionBar();
-
-  // Phase 1 active
-  setPhase(1);
-  if (loadTimer) clearInterval(loadTimer);
-  let li = 0;
-  loadTimer = setInterval(() => {
-    document.getElementById('loadingMsg').textContent = LOAD_MSGS[li % LOAD_MSGS.length];
-    li++;
-  }, 2000);
-
-  const city = state.city==='all' ? 'Toronto, Vaughan, and surrounding Ontario cities' : state.city;
-  const cat  = state.category==='all' ? 'events, city programs, camps, extracurricular classes, and family experiences' : state.category;
-  const age  = state.age==='all' ? 'all kids ages 0-16' : `kids aged ${state.age}`;
-  const kw   = keyword ? ` Keyword focus: "${keyword}".` : '';
-  const today = new Date().toLocaleDateString('en-CA',{year:'numeric',month:'long',day:'numeric'});
-
-  let dateCtx = '';
-  if (dateFrom && dateTo) dateCtx = ` Only include activities happening between ${dateFrom} and ${dateTo}.`;
-  else if (dateFrom) dateCtx = ` Only include activities on or after ${dateFrom}.`;
-  else if (dateTo) dateCtx = ` Only include activities on or before ${dateTo}.`;
-
-  let langCtx = state.lang==='fr'
-    ? ' IMPORTANT: Return ONLY French-language activities.'
-    : state.lang==='en' ? ' English-language activities only.'
-    : ' Include English and French. Mark French ones with "isFrench": true.';
-
-  let venueCtx = state.venue==='indoor' ? ' Indoor activities only (museums, arenas, theatres, studios, indoor play spaces).'
-    : state.venue==='outdoor' ? ' Outdoor activities only (parks, trails, festivals, outdoor sports, markets).' : '';
-
-  const freeCtx = state.freeOnly ? ' Free or no-cost activities only.' : '';
-
-
-  const geminiPrompt = `Today is ${today}. Search the web and find 6-8 current upcoming kid-friendly activities in ${city}.
-Categories: ${cat}. Ages: ${age}.${kw}${dateCtx}${langCtx}${venueCtx}${freeCtx}
-Prioritize results from these sources:
-- eventbrite.ca/d/canada--toronto/kids
-- toronto.ca/explore-enjoy/festivals-events/festivals-events-calendar/
-- toronto.kidsoutandabout.com
-- ticketmaster.ca (family and kids events Ontario)
-- toronto.ca/parks-recreation (Toronto Recreation programs)
-- vaughan.ca/recreation (Vaughan Recreation)
-- tso.ca/family (Toronto Symphony Orchestra family concerts)
-- mcmichael.com (McMichael Canadian Art Collection)
-- wychwoodtheatre.ca (Wychwood Barns events)
-- centrefranco.org (Centre francophone du Grand Toronto)
-- theatrefrancais.com (Théâtre français de Toronto)
-- Alliance française Toronto
-- macca1987.com (MACCA community events)
-- adinkrafarm.com (Adinkra Farm events)
-- Ontario farms: apple picking, pumpkin patches, corn mazes, u-pick, seasonal family events
-- Local Black-led and Caribbean community kids programs in Toronto and GTA
-- Indigenous youth programs Ontario
-Only include activities active or starting after ${today}.
-Return ONLY a valid JSON array — no prose, no markdown, no explanation. Start with [ and end with ].
-Each object must have: name, category (Event/Program/Camp/Extracurricular/Experience/Festival), organizer, description (2 sentences), location, schedule, startDate (YYYY-MM-DD or null), endDate (YYYY-MM-DD or null), ageRange, cost, website, venue (indoor/outdoor/both), isFrench (true/false)`;
-
-  try {
-    incrementSearchCount();
-    clearInterval(loadTimer);
-    setPhase(2);
-    document.getElementById('resultsArea').style.display = 'block';
-    document.getElementById('resultsLabel').textContent = `Searching for activities in ${city}${keyword?' · '+keyword:''}…`;
-
-    // ── Gemini API call with Google Search grounding ──
-    const resp = await fetch(`${API_BASE}/v1beta/models/${GEMINI_MODEL}:generateContent`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ role: 'user', parts: [{ text: geminiPrompt }] }],
-        tools: [{ google_search: {} }],
-        generationConfig: {
-          temperature: 0.1,
-          maxOutputTokens: 8192,
-        }
-      })
-    });
-
-    if (!resp.ok) {
-      const e = await resp.json();
-      throw new Error(e.error?.message || 'API error');
-    }
-
-    const data = await resp.json();
-    const parts = data.candidates?.[0]?.content?.parts || [];
-    // Take only the first text part — Gemini sometimes duplicates with citations
-    const rawText = parts.find(p => p.text && !p.thought)?.text || '';
-    if (!rawText.trim()) throw new Error('No results returned — please try again.');
-
-    const parsed = parseActivities(rawText);
-    if (!parsed || !parsed.length) throw new Error('Could not parse results — please try again.');
-
-    const todayStr = new Date().toISOString().split('T')[0];
-    parsed.forEach(item => {
-      const cutoff = item.endDate || item.startDate;
-      if (cutoff && cutoff < todayStr) return;
-      allActivities.push(item);
-      const cardEl = document.createElement('div');
-      cardEl.innerHTML = renderCard(item, allActivities.length - 1);
-      document.getElementById('resultsGrid').appendChild(cardEl.firstElementChild);
-    });
-
-    document.getElementById('loadingState').style.display = 'none';
-
-    if (!allActivities.length) {
-      document.getElementById('resultsArea').style.display = 'none';
-      document.getElementById('emptyState').style.display = 'block';
-      return;
-    }
-
-    calY = new Date().getFullYear(); calM = new Date().getMonth();
-    if (dateFrom) { const d = new Date(dateFrom); calY = d.getFullYear(); calM = d.getMonth(); }
-
-    const frCount = allActivities.filter(a => a.isFrench).length;
-    const dateLabel = dateFrom||dateTo ? ` · ${dateFrom||''}${dateFrom&&dateTo?' → ':''}${dateTo||''}` : '';
-    const langLabel = state.lang==='fr' ? ' · Français' : state.lang==='en' ? ' · English' : frCount>0 ? ` · ${frCount} FR` : '';
-    document.getElementById('resultsLabel').textContent = `Live results · ${city}${keyword?' · '+keyword:''}${dateLabel}${langLabel}`;
-    document.getElementById('resultsCount').textContent = allActivities.length + ' found';
-    document.getElementById('resultsCount').style.display = 'inline-flex';
-    if (state.view==='cal') renderCalendar();
-
-    // Save to cache
-    try {
-      localStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), data: allActivities }));
-    } catch(e) {}
-
-  } catch(err) {
-    clearInterval(loadTimer);
-    document.getElementById('loadingState').style.display = 'none';
-    document.getElementById('emptyState').style.display = 'block';
-    const et = document.getElementById('errorToast');
-    let msg = err.message || 'Something went wrong.';
-    if (msg.toLowerCase().includes('failed to fetch'))
-      msg = 'Network error — make sure you\'re using this inside Claude.ai, then try again.';
-    et.innerHTML = `⚠ ${escH(msg)} <button onclick="runSearch()" style="margin-left:10px;font-size:11px;padding:2px 10px;border-radius:100px;border:1px solid var(--coral);background:transparent;color:var(--coral);cursor:pointer;font-family:'DM Sans',sans-serif;">Retry</button>`;
-    et.style.display = 'block';
-  } finally {
-    clearInterval(loadTimer);
-    btn.disabled = false;
-  }
-}
-
-function setPhase(n) {
-  const p1dot = document.querySelector('#phase1 .phase-dot');
-  const p2dot = document.querySelector('#phase2 .phase-dot');
-  const connector = document.getElementById('phaseConnector');
-  const p2 = document.getElementById('phase2');
-  if (n === 1) {
-    document.getElementById('phase1').classList.add('active-phase');
-    p1dot.classList.add('active');
-    p2.classList.add('dimmed');
-  } else {
-    document.getElementById('phase1').classList.remove('active-phase');
-    p1dot.classList.remove('active');
-    p1dot.classList.add('done');
-    connector.classList.add('done');
-    p2.classList.remove('dimmed');
-    p2.classList.add('active-phase');
-    p2dot.classList.add('active');
-  }
-}
-
-function parseActivities(text) {
-  const attempt = (str) => {
-    try { const r = JSON.parse(str); if (Array.isArray(r) && r.length) return r; } catch(e){}
-    return null;
-  };
-  // Strip all markdown fences
-  let cleaned = text.replace(/```json\s*/gi, '```').replace(/```\s*/g, ' ').trim();
-  // If duplicated, take only text up to the second opening bracket at depth 0
-  // Find the FIRST complete [...] array only
-  let depth = 0, inStr = false, esc = false, start = -1, end = -1;
-  for (let i = 0; i < cleaned.length; i++) {
-    const ch = cleaned[i];
-    if (esc) { esc = false; continue; }
-    if (ch === '\\' && inStr) { esc = true; continue; }
-    if (ch === '"') { inStr = !inStr; continue; }
-    if (inStr) continue;
-    if (ch === '[') { if (depth === 0) start = i; depth++; }
-    if (ch === ']') { depth--; if (depth === 0 && start !== -1) { end = i; break; } }
-  }
-  if (start !== -1 && end !== -1) {
-    const r = attempt(cleaned.slice(start, end + 1));
-    if (r) return r;
-  }
-  return null;
-}
-
-// ── Selection & export ──
-const selectedIndices = new Set();
 
 function toggleSelect(idx, e) {
   e.stopPropagation();
-  if (selectedIndices.has(idx)) {
-    selectedIndices.delete(idx);
-  } else {
-    selectedIndices.add(idx);
-  }
-  // Update card UI
-  const cards = document.querySelectorAll('.card[data-idx]');
-  cards.forEach(card => {
-    const i = parseInt(card.dataset.idx);
-    card.classList.toggle('selected', selectedIndices.has(i));
+  if (selectedIndices.has(idx)) selectedIndices.delete(idx); else selectedIndices.add(idx);
+  document.querySelectorAll('.card[data-idx]').forEach(card => {
+    card.classList.toggle('selected', selectedIndices.has(parseInt(card.dataset.idx)));
   });
   updateSelectionBar();
 }
 
 function updateSelectionBar() {
-  const bar = document.getElementById('selectionBar');
   const n = selectedIndices.size;
-  document.getElementById('selCount').textContent = n + (n===1?' event selected':' events selected');
-  bar.classList.toggle('visible', n > 0);
+  document.getElementById('selCount').textContent = n + (n === 1 ? ' event selected' : ' events selected');
+  document.getElementById('selectionBar').classList.toggle('visible', n > 0);
 }
 
 function clearSelection() {
@@ -1910,33 +1714,19 @@ function clearSelection() {
   updateSelectionBar();
 }
 
-function toIcalDate(str) {
-  return str ? str.replace(/-/g,'') : new Date().toISOString().split('T')[0].replace(/-/g,'');
-}
+function toIcalDate(str) { return str ? str.replace(/-/g, '') : new Date().toISOString().split('T')[0].replace(/-/g, ''); }
 
 function generateIcal(items) {
-  const lines = [
-    'BEGIN:VCALENDAR','VERSION:2.0',
-    'PRODID:-//Aware Family//aware.family//EN',
-    'CALSCALE:GREGORIAN','METHOD:PUBLISH',
-  ];
+  const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Aware Family//aware.family//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH'];
   items.forEach(item => {
     const uid = Date.now().toString(36) + Math.random().toString(36).slice(2) + '@aware.family';
     const start = toIcalDate(item.startDate);
-    // iCal DTEND is exclusive so add 1 day
     let end = item.endDate ? item.endDate : item.startDate;
-    if (end) { const d=new Date(end+'T00:00:00'); d.setDate(d.getDate()+1); end=d.toISOString().split('T')[0].replace(/-/g,''); }
-    else { end = start; }
-    lines.push('BEGIN:VEVENT');
-    lines.push('UID:'+uid);
-    lines.push('DTSTAMP:'+new Date().toISOString().replace(/[-:.]/g,'').slice(0,15)+'Z');
-    lines.push('DTSTART;VALUE=DATE:'+start);
-    lines.push('DTEND;VALUE=DATE:'+end);
-    lines.push('SUMMARY:'+item.name.replace(/[,;\\]/g,'\\$&'));
-    if (item.location) lines.push('LOCATION:'+item.location.replace(/[,;\\]/g,'\\$&'));
-    const desc = [item.description, item.website ? 'More info: '+item.website : ''].filter(Boolean).join('\\n');
-    if (desc) lines.push('DESCRIPTION:'+desc);
-    if (item.website) lines.push('URL:'+item.website);
+    if (end) { const d = new Date(end + 'T00:00:00'); d.setDate(d.getDate() + 1); end = d.toISOString().split('T')[0].replace(/-/g, ''); } else { end = start; }
+    lines.push('BEGIN:VEVENT', 'UID:' + uid, 'DTSTAMP:' + new Date().toISOString().replace(/[-:.]/g, '').slice(0, 15) + 'Z', 'DTSTART;VALUE=DATE:' + start, 'DTEND;VALUE=DATE:' + end, 'SUMMARY:' + item.name.replace(/[,;\\]/g, '\\$&'));
+    if (item.location) lines.push('LOCATION:' + item.location.replace(/[,;\\]/g, '\\$&'));
+    const desc = [item.description, item.website ? 'More info: ' + item.website : ''].filter(Boolean).join('\\n');
+    if (desc) lines.push('DESCRIPTION:' + desc);
     lines.push('END:VEVENT');
   });
   lines.push('END:VCALENDAR');
@@ -1944,56 +1734,31 @@ function generateIcal(items) {
 }
 
 function exportIcal() {
-  const items = [...selectedIndices].map(i => allActivities[i]).filter(Boolean);
+  const selected = [...selectedIndices].map(i => filtered[i]).filter(Boolean);
+  const items = selected.length ? selected : filtered;
   if (!items.length) return;
-  const ical = generateIcal(items);
-  const blob = new Blob([ical], {type:'text/calendar;charset=utf-8'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = 'aware-family-events.ics';
-  document.body.appendChild(a); a.click();
-  document.body.removeChild(a); URL.revokeObjectURL(url);
+  const blob = new Blob([generateIcal(items)], { type: 'text/calendar' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'aware-family-events.ics'; a.click();
 }
 
-async function addSelectedToGcal() {
-  const items = [...selectedIndices].map(i => allActivities[i]).filter(Boolean);
-  if (!items.length) return;
-  // Open first item in panel for GCal add (batch not supported without backend)
-  openPanel([...selectedIndices][0]);
+function addSelectedToGcal() {
+  const selected = [...selectedIndices].map(i => filtered[i]).filter(Boolean);
+  if (!selected.length) return;
+  openPanel(selectedIndices.values().next().value);
 }
 
-// ── Share ──
 function shareActivity(idx) {
-  const item = allActivities[idx];
-  if (!item) return;
-  const url = item.website || 'https://aware.family';
-  const shareMsg = `I found this on aware.family, what do you think?\n\n${item.name}${item.location ? ' — '+item.location : ''}\n${url}`;
-
-  if (navigator.share) {
-    navigator.share({ title: item.name, text: shareMsg, url }).catch(()=>{});
-  } else {
-    navigator.clipboard.writeText(shareMsg).then(() => showShareToast('Link copied!')).catch(() => {
-      // fallback for non-secure contexts
-      const ta = document.createElement('textarea');
-      ta.value = shareMsg;
-      document.body.appendChild(ta); ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
-      showShareToast('Link copied!');
-    });
-  }
-}
-
-function showShareToast(msg) {
-  const t = document.getElementById('shareToast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2200);
+  const item = filtered[idx]; if (!item) return;
+  const url = item.website ? tagUrl(item.website) : 'https://aware.family';
+  const msg = `I found this on aware.family, what do you think? ${item.name} — ${item.location || 'Ontario'} ${url}`;
+  if (navigator.share) { navigator.share({ title: item.name, text: msg, url }).catch(() => {}); }
+  else { navigator.clipboard.writeText(msg).then(() => { const t = document.getElementById('shareToast'); t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2500); }).catch(() => {}); }
 }
 
 function tagUrl(url) {
   if (!url) return url;
   try {
-    // Ensure absolute URL — prepend https:// if missing
     const abs = /^https?:\/\//i.test(url) ? url : 'https://' + url;
     const u = new URL(abs);
     u.searchParams.set('utm_source', 'aware.family');
@@ -2005,11 +1770,16 @@ function tagUrl(url) {
 
 function escH(s) {
   if (!s) return '';
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-document.getElementById('keyword').addEventListener('keydown', e => { if(e.key==='Enter') runSearch(); });
-updateSearchCounter();
+// ── Boot ──
+document.addEventListener('DOMContentLoaded', () => {
+  loadEvents();
+  if (!localStorage.getItem('af_cookie_ok')) {
+    document.getElementById('cookieNotice').style.display = 'flex';
+  }
+});
 </script>
 
 <footer style="background:var(--ink-soft);border-top:1px solid var(--rule);padding:2rem 2rem 1.75rem;">

@@ -1271,7 +1271,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 // The Worker holds your GOOGLE_API_KEY securely as an encrypted secret.
 // ─────────────────────────────────────────────
 const API_BASE = 'https://awarefamily.square-cake-c6fc.workers.dev';
-const GEMINI_MODEL = 'gemini-2.0-flash';
+const GEMINI_MODEL = 'gemini-2.5-flash';
 
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
@@ -1723,9 +1723,26 @@ async function runSearch() {
   const freeCtx = state.freeOnly ? ' Free or no-cost activities only.' : '';
 
 
-  const geminiPrompt = `Today is ${today}. Search the web and find 8-10 current upcoming kid-friendly activities in ${city}.
+  const geminiPrompt = `Today is ${today}. Search the web and find 10-15 current upcoming kid-friendly activities in ${city}.
 Categories: ${cat}. Ages: ${age}.${kw}${dateCtx}${langCtx}${venueCtx}${freeCtx}
-Search these sites: eventbrite.ca/d/canada--toronto/kids, toronto.ca/explore-enjoy/festivals-events/festivals-events-calendar/, toronto.kidsoutandabout.com, ticketmaster.ca family kids Ontario.
+Prioritize results from these sources:
+- eventbrite.ca/d/canada--toronto/kids
+- toronto.ca/explore-enjoy/festivals-events/festivals-events-calendar/
+- toronto.kidsoutandabout.com
+- ticketmaster.ca (family and kids events Ontario)
+- toronto.ca/parks-recreation (Toronto Recreation programs)
+- vaughan.ca/recreation (Vaughan Recreation)
+- tso.ca/family (Toronto Symphony Orchestra family concerts)
+- mcmichael.com (McMichael Canadian Art Collection)
+- wychwoodtheatre.ca (Wychwood Barns events)
+- centrefranco.org (Centre francophone du Grand Toronto)
+- theatrefrancais.com (Théâtre français de Toronto)
+- Alliance française Toronto
+- macca1987.com (MACCA community events)
+- adinkrafarm.com (Adinkra Farm events)
+- Ontario farms: apple picking, pumpkin patches, corn mazes, u-pick, seasonal family events
+- Local Black-led and Caribbean community kids programs in Toronto and GTA
+- Indigenous youth programs Ontario
 Only include activities active or starting after ${today}.
 Return ONLY a valid JSON array — no prose, no markdown, no explanation. Start with [ and end with ].
 Each object must have: name, category (Event/Program/Camp/Extracurricular/Experience/Festival), organizer, description (2 sentences), location, schedule, startDate (YYYY-MM-DD or null), endDate (YYYY-MM-DD or null), ageRange, cost, website, venue (indoor/outdoor/both), isFrench (true/false)`;

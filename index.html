@@ -1022,7 +1022,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="header-eyebrow">Ontario · Kids &amp; Family</div>
     <h1><span class="h1-plain">Aware families</span><br><span class="h1-plain">have </span><span class="h1-gold">more fun.</span></h1>
-    <p class="header-sub">Find camps, classes, and things to do with kids across Ontario — all in one simple search.</p>
+    <p class="header-sub">Find camps, classes, and things to do with kids across Ontario — updated daily, next 60 days.</p>
   </div>
 </header>
 
@@ -1032,85 +1032,85 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- Category -->
     <div class="fd" id="fd-cat">
-      <button class="fd-btn" id="fd-cat-btn" onclick="toggleFd('cat')">
+      <button class="fd-btn" id="fd-cat-btn" onclick="openFd('cat')">
         Category
         <svg class="fd-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 4 6 8 10 4"/></svg>
       </button>
       <div class="fd-panel" id="fd-cat-panel">
         <span class="fd-sublabel">Category</span>
-        <button class="fd-option active" data-key="category" data-val="all" onclick=\"setFilter('category','all',this)\">All types</button>
-        <button class="fd-option" data-key="category" data-val="events" onclick=\"setFilter('category','events',this)\">Events & Festivals</button>
-        <button class="fd-option" data-key="category" data-val="camps" onclick=\"setFilter('category','camps',this)\">Camps</button>
-        <button class="fd-option" data-key="category" data-val="programs" onclick=\"setFilter('category','programs',this)\">City Programs</button>
-        <button class="fd-option" data-key="category" data-val="extracurriculars" onclick=\"setFilter('category','extracurriculars',this)\">Extracurriculars</button>
-        <button class="fd-option" data-key="category" data-val="experiences" onclick=\"setFilter('category','experiences',this)\">Experiences & Places</button>
+        <button class="fd-option active" data-key="category" data-val="all" onclick="setFilter('category','all',this)">All types</button>
+        <button class="fd-option" data-key="category" data-val="events" onclick="setFilter('category','events',this)">Events & Festivals</button>
+        <button class="fd-option" data-key="category" data-val="camps" onclick="setFilter('category','camps',this)">Camps</button>
+        <button class="fd-option" data-key="category" data-val="programs" onclick="setFilter('category','programs',this)">City Programs</button>
+        <button class="fd-option" data-key="category" data-val="extracurriculars" onclick="setFilter('category','extracurriculars',this)">Extracurriculars</button>
+        <button class="fd-option" data-key="category" data-val="experiences" onclick="setFilter('category','experiences',this)">Experiences & Places</button>
       </div>
     </div>
 
     <!-- City -->
     <div class="fd" id="fd-city">
-      <button class="fd-btn" id="fd-city-btn" onclick="toggleFd('city')">
+      <button class="fd-btn" id="fd-city-btn" onclick="openFd('city')">
         City
         <svg class="fd-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 4 6 8 10 4"/></svg>
       </button>
       <div class="fd-panel" id="fd-city-panel">
         <span class="fd-sublabel">City / Region</span>
-        <button class="fd-option active" onclick=\"setFilter('city','all',this)\">Everywhere</button>
-        <button class="fd-option" onclick=\"setFilter('city','Toronto',this)\">Toronto</button>
-        <button class="fd-option" onclick=\"setFilter('city','Vaughan',this)\">Vaughan</button>
-        <button class="fd-option" onclick=\"setFilter('city','Mississauga',this)\">Mississauga</button>
-        <button class="fd-option" onclick=\"setFilter('city','Markham',this)\">Markham</button>
-        <button class="fd-option" onclick=\"setFilter('city','Richmond Hill',this)\">Richmond Hill</button>
-        <button class="fd-option" onclick=\"setFilter('city','London',this)\">London</button>
-        <button class="fd-option" onclick=\"setFilter('city','Durham Region',this)\">Durham Region</button>
-        <button class="fd-option" onclick=\"setFilter('city','Barrie',this)\">Barrie</button>
+        <button class="fd-option active" onclick="setFilter('city','all',this)">Everywhere</button>
+        <button class="fd-option" onclick="setFilter('city','Toronto',this)">Toronto</button>
+        <button class="fd-option" onclick="setFilter('city','Vaughan',this)">Vaughan</button>
+        <button class="fd-option" onclick="setFilter('city','Mississauga',this)">Mississauga</button>
+        <button class="fd-option" onclick="setFilter('city','Markham',this)">Markham</button>
+        <button class="fd-option" onclick="setFilter('city','Richmond Hill',this)">Richmond Hill</button>
+        <button class="fd-option" onclick="setFilter('city','London',this)">London</button>
+        <button class="fd-option" onclick="setFilter('city','Durham Region',this)">Durham Region</button>
+        <button class="fd-option" onclick="setFilter('city','Barrie',this)">Barrie</button>
       </div>
     </div>
 
     <!-- Age -->
     <div class="fd" id="fd-age">
-      <button class="fd-btn" id="fd-age-btn" onclick="toggleFd('age')">
+      <button class="fd-btn" id="fd-age-btn" onclick="openFd('age')">
         Age
         <svg class="fd-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 4 6 8 10 4"/></svg>
       </button>
       <div class="fd-panel" id="fd-age-panel">
         <span class="fd-sublabel">Age range</span>
-        <button class="fd-option active" onclick=\"setFilter('age','all',this)\">All ages</button>
-        <button class="fd-option" onclick=\"setFilter('age','0-2',this)\">0–2 yrs</button>
-        <button class="fd-option" onclick=\"setFilter('age','3-5',this)\">3–5 yrs</button>
-        <button class="fd-option" onclick=\"setFilter('age','6-9',this)\">6–9 yrs</button>
-        <button class="fd-option" onclick=\"setFilter('age','10-12',this)\">10–12 yrs</button>
-        <button class="fd-option" onclick=\"setFilter('age','13+',this)\">13+ yrs</button>
+        <button class="fd-option active" onclick="setFilter('age','all',this)">All ages</button>
+        <button class="fd-option" onclick="setFilter('age','0-2',this)">0–2 yrs</button>
+        <button class="fd-option" onclick="setFilter('age','3-5',this)">3–5 yrs</button>
+        <button class="fd-option" onclick="setFilter('age','6-9',this)">6–9 yrs</button>
+        <button class="fd-option" onclick="setFilter('age','10-12',this)">10–12 yrs</button>
+        <button class="fd-option" onclick="setFilter('age','13+',this)">13+ yrs</button>
       </div>
     </div>
 
     <!-- Language -->
     <div class="fd" id="fd-lang">
-      <button class="fd-btn" id="fd-lang-btn" onclick="toggleFd('lang')">
+      <button class="fd-btn" id="fd-lang-btn" onclick="openFd('lang')">
         Language
         <svg class="fd-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 4 6 8 10 4"/></svg>
       </button>
       <div class="fd-panel" id="fd-lang-panel">
         <span class="fd-sublabel">Language</span>
-        <button class="fd-option active" onclick=\"setFilter('lang','all',this)\">All</button>
-        <button class="fd-option" onclick=\"setFilter('lang','en',this)\">English</button>
-        <button class="fd-option" onclick=\"setFilter('lang','fr',this)\">Français</button>
+        <button class="fd-option active" onclick="setFilter('lang','all',this)">All</button>
+        <button class="fd-option" onclick="setFilter('lang','en',this)">English</button>
+        <button class="fd-option" onclick="setFilter('lang','fr',this)">Français</button>
       </div>
     </div>
 
     <!-- Dates -->
     <div class="fd" id="fd-dates">
-      <button class="fd-btn" id="fd-dates-btn" onclick="toggleFd('dates')">
+      <button class="fd-btn" id="fd-dates-btn" onclick="openFd('dates')">
         Dates
         <svg class="fd-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 4 6 8 10 4"/></svg>
       </button>
       <div class="fd-panel right" id="fd-dates-panel" style="min-width:220px">
         <span class="fd-sublabel">Quick</span>
         <div class="date-quick">
-          <button class="fd-option" onclick="setQuickDate('today')">Today</button>
-          <button class="fd-option" onclick="setQuickDate('weekend')">This weekend</button>
-          <button class="fd-option" onclick="setQuickDate('week')">This week</button>
-          <button class="fd-option" onclick="setQuickDate('month')">Next 30 days</button>
+          <button class="fd-option" onclick="setDatePreset('today')">Today</button>
+          <button class="fd-option" onclick="setDatePreset('weekend')">This weekend</button>
+          <button class="fd-option" onclick="setDatePreset('week')">This week</button>
+          <button class="fd-option" onclick="setDatePreset('month')">Next 30 days</button>
         </div>
         <div class="fd-sep"></div>
         <span class="fd-sublabel">Custom range</span>
@@ -1130,15 +1130,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- Venue -->
     <div class="fd" id="fd-venue">
-      <button class="fd-btn" id="fd-venue-btn" onclick="toggleFd('venue')">
+      <button class="fd-btn" id="fd-venue-btn" onclick="openFd('venue')">
         Venue
         <svg class="fd-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 4 6 8 10 4"/></svg>
       </button>
       <div class="fd-panel" id="fd-venue-panel">
         <span class="fd-sublabel">Indoor / Outdoor</span>
-        <button class="fd-option active" onclick=\"setFilter('venue','all',this)\">Any venue</button>
-        <button class="fd-option" onclick=\"setFilter('venue','indoor',this)\">Indoors</button>
-        <button class="fd-option" onclick=\"setFilter('venue','outdoor',this)\">Outdoors</button>
+        <button class="fd-option active" onclick="setFilter('venue','all',this)">Any venue</button>
+        <button class="fd-option" onclick="setFilter('venue','indoor',this)">Indoors</button>
+        <button class="fd-option" onclick="setFilter('venue','outdoor',this)">Outdoors</button>
       </div>
     </div>
 
@@ -1178,7 +1178,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="empty-state" id="emptyState">
     <div class="empty-icon">🗺️</div>
     <h2>Your cheatsheet awaits</h2>
-    <p>Loading today's family events across Ontario — use the filters to narrow down by city, age, or category.</p>
+    <p>Loading family events and activities across Ontario for the next 60 days — use the filters to narrow by city, age, or category.</p>
   </div>
   <div class="loading-state" id="loadingState" style="display:none">
     <div class="loading-inner">
@@ -1401,9 +1401,16 @@ function applyFilters() {
       const haystack = [item.name, item.description, item.organizer, item.location, item.schedule].filter(Boolean).join(' ').toLowerCase();
       if (!haystack.includes(keyword)) return false;
     }
-    // Exclude expired
-    const cutoff = item.endDate || item.startDate;
-    if (cutoff && cutoff < todayStr) return false;
+    // Exclude expired and beyond 60 days
+    const cutoff60 = new Date();
+    cutoff60.setDate(cutoff60.getDate() + 60);
+    const cutoff60Str = cutoff60.toISOString().split('T')[0];
+    const startD = item.startDate;
+    const endD = item.endDate;
+    if (startD && startD > cutoff60Str) return false;
+    if (endD && endD < todayStr) return false;
+    if (!startD && !endD) return true; // recurring — always show
+    if (startD && startD < todayStr && !endD) return false; // started but no end date = expired
 
     return true;
   });
@@ -1417,6 +1424,13 @@ function renderResults() {
   const empty = document.getElementById('emptyState');
   const count = document.getElementById('resultsCount');
   const label = document.getElementById('resultsLabel');
+
+  // Sort by soonest start date first, no date goes to end
+  filtered.sort((a, b) => {
+    const da = a.startDate || '9999-12-31';
+    const db = b.startDate || '9999-12-31';
+    return da.localeCompare(db);
+  });
 
   selectedIndices.clear();
   updateSelectionBar();
@@ -1567,7 +1581,10 @@ function renderCard(item, i) {
       <svg class="card-select-ring" width="8" height="8" viewBox="0 0 8 8" fill="none"><circle cx="4" cy="4" r="3" stroke="currentColor" stroke-width="1.5" opacity="0.4"/></svg>
     </button>
     <div class="card-header">
-      <span class="category-badge badge-${bt}">${item.category || 'Activity'}</span>
+      <div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap;flex:1;min-width:0">
+        <span class="category-badge badge-${bt}">${item.category || 'Activity'}</span>
+        ${item.isFrench ? `<span class="lang-fr-tag">FR</span>` : ''}
+      </div>
       <div style="display:flex;align-items:center;gap:5px;flex-shrink:0">
         ${costDisplay === 'Free' ? `<span class="free-tag">Free</span>` : costDisplay ? `<span class="cost-pill">${escH(costDisplay)}</span>` : ''}
         ${venueIcon}

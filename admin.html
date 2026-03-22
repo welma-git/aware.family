@@ -4,190 +4,240 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aware Family — Admin</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'DM Sans', sans-serif; font-weight: 300; background: #1E1C18; color: #F7F3EC; min-height: 100vh; }
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --gold:#C9A84C;--gold-light:#E8C97A;--ink:#0F0E0C;--ink-soft:#1E1C18;--ink-mid:#2A2720;
+  --parchment:#F7F3EC;--smoke:#6B6558;--smoke-dim:#4A4540;--coral:#D85A30;--teal:#1D9E75;
+  --rule:rgba(201,168,76,0.12);
+}
+body{font-family:'DM Sans',sans-serif;font-weight:300;background:var(--ink);color:var(--parchment);min-height:100vh;}
 
-/* Login */
-#loginScreen {
-  display: flex; align-items: center; justify-content: center;
-  min-height: 100vh; padding: 2rem;
-}
-.login-box {
-  background: #2A2720; border: 1px solid rgba(201,168,76,0.2);
-  border-radius: 12px; padding: 2.5rem; width: 100%; max-width: 380px;
-  text-align: center;
-}
-.login-box h1 { font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: #C9A84C; margin-bottom: 0.5rem; }
-.login-box p { font-size: 13px; color: #6B6558; margin-bottom: 2rem; }
-.login-input {
-  width: 100%; font-family: 'DM Sans', sans-serif; font-size: 14px;
-  padding: 10px 14px; background: #1E1C18; border: 1.5px solid rgba(201,168,76,0.2);
-  border-radius: 8px; color: #F7F3EC; outline: none; margin-bottom: 1rem;
-  transition: border-color 0.15s;
-}
-.login-input:focus { border-color: #C9A84C; }
-.login-btn {
-  width: 100%; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
-  padding: 10px; background: #C9A84C; color: #0F0E0C; border: none;
-  border-radius: 8px; cursor: pointer; transition: background 0.15s;
-}
-.login-btn:hover { background: #E8C97A; }
-.login-error { font-size: 12px; color: #D85A30; margin-top: 0.75rem; }
+/* ── Login ── */
+#loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:2rem;}
+.login-box{background:var(--ink-mid);border:1px solid var(--rule);border-radius:12px;padding:2.5rem;width:100%;max-width:360px;text-align:center;}
+.login-logo{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--gold);margin-bottom:0.25rem;}
+.login-sub{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--smoke);margin-bottom:2rem;}
+.field{width:100%;font-family:'DM Sans',sans-serif;font-size:14px;padding:10px 14px;background:var(--ink-soft);border:1.5px solid rgba(201,168,76,0.15);border-radius:8px;color:var(--parchment);outline:none;margin-bottom:1rem;transition:border-color 0.15s;}
+.field:focus{border-color:var(--gold);}
+.btn-gold{width:100%;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:10px;background:var(--gold);color:var(--ink);border:none;border-radius:8px;cursor:pointer;transition:background 0.15s;}
+.btn-gold:hover{background:var(--gold-light);}
+.login-error{font-size:12px;color:var(--coral);margin-top:0.75rem;}
 
-/* Main admin UI */
-#adminScreen { display: none; }
-.top-bar {
-  background: #2A2720; border-bottom: 1px solid rgba(201,168,76,0.15);
-  padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
-}
-.top-bar h1 { font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: #C9A84C; }
-.top-meta { font-family: 'DM Mono', monospace; font-size: 11px; color: #6B6558; }
-.top-actions { display: flex; gap: 0.5rem; }
-.btn {
-  font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500;
-  padding: 7px 16px; border-radius: 100px; cursor: pointer; border: none;
-  transition: all 0.15s;
-}
-.btn-gold { background: #C9A84C; color: #0F0E0C; }
-.btn-gold:hover { background: #E8C97A; }
-.btn-outline { background: transparent; color: #6B6558; border: 1px solid rgba(247,243,236,0.12); }
-.btn-outline:hover { color: #F7F3EC; border-color: rgba(247,243,236,0.3); }
-.btn-danger { background: rgba(216,90,48,0.15); color: #F4967A; border: 1px solid rgba(216,90,48,0.3); }
-.btn-danger:hover { background: rgba(216,90,48,0.25); }
+/* ── Layout ── */
+#adminScreen{display:none;}
+.topbar{background:var(--ink-mid);border-bottom:1px solid var(--rule);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;position:sticky;top:0;z-index:100;}
+.topbar-left{display:flex;align-items:center;gap:1rem;}
+.topbar-title{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);}
+.topbar-meta{font-family:'DM Mono',monospace;font-size:10px;color:var(--smoke);}
+.topbar-right{display:flex;gap:0.5rem;flex-wrap:wrap;}
 
-.filter-bar {
-  padding: 0.85rem 2rem; background: #1E1C18; border-bottom: 1px solid rgba(201,168,76,0.08);
-  display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;
-}
-.search-input {
-  flex: 1; min-width: 200px; font-family: 'DM Sans', sans-serif; font-size: 13px;
-  padding: 7px 13px; background: #2A2720; border: 1.5px solid rgba(201,168,76,0.15);
-  border-radius: 100px; color: #F7F3EC; outline: none;
-}
-.search-input:focus { border-color: #C9A84C; }
-.filter-select {
-  font-family: 'DM Sans', sans-serif; font-size: 12px;
-  padding: 7px 12px; background: #2A2720; border: 1.5px solid rgba(201,168,76,0.15);
-  border-radius: 100px; color: #F7F3EC; outline: none; cursor: pointer;
-}
-.pill {
-  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.06em;
-  padding: 5px 12px; border-radius: 100px; cursor: pointer; border: 1.5px solid transparent;
-  transition: all 0.15s;
-}
-.pill-active { background: rgba(216,90,48,0.15); color: #F4967A; border-color: rgba(216,90,48,0.3); }
-.pill-inactive { background: rgba(201,168,76,0.08); color: #6B6558; border-color: rgba(201,168,76,0.15); }
-.pill-inactive:hover { color: #C9A84C; border-color: rgba(201,168,76,0.3); }
+/* Buttons */
+.btn{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:7px 14px;border-radius:100px;cursor:pointer;transition:all 0.15s;border:none;white-space:nowrap;}
+.btn-primary{background:var(--gold);color:var(--ink);}
+.btn-primary:hover{background:var(--gold-light);}
+.btn-ghost{background:transparent;color:var(--smoke);border:1px solid rgba(247,243,236,0.12);}
+.btn-ghost:hover{color:var(--parchment);border-color:rgba(247,243,236,0.3);}
+.btn-danger{background:rgba(216,90,48,0.12);color:#F4967A;border:1px solid rgba(216,90,48,0.25);}
+.btn-danger:hover{background:rgba(216,90,48,0.22);}
+.btn-success{background:rgba(29,158,117,0.12);color:#5DD4AA;border:1px solid rgba(29,158,117,0.25);}
+.btn-success:hover{background:rgba(29,158,117,0.22);}
+.btn-sm{padding:5px 10px;font-size:11px;}
+.btn:disabled{opacity:0.4;cursor:not-allowed;}
 
-.stats-bar {
-  padding: 0.6rem 2rem; background: #1E1C18; border-bottom: 1px solid rgba(201,168,76,0.08);
-  font-family: 'DM Mono', monospace; font-size: 11px; color: #6B6558; display: flex; gap: 1.5rem;
-}
-.stat-num { color: #C9A84C; font-weight: 500; }
+/* Filter bar */
+.filterbar{padding:0.75rem 1.5rem;background:var(--ink-soft);border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;}
+.search-field{flex:1;min-width:180px;font-family:'DM Sans',sans-serif;font-size:13px;padding:7px 13px;background:var(--ink-mid);border:1.5px solid rgba(201,168,76,0.15);border-radius:100px;color:var(--parchment);outline:none;}
+.search-field:focus{border-color:var(--gold);}
+.sel{font-family:'DM Sans',sans-serif;font-size:12px;padding:7px 12px;background:var(--ink-mid);border:1.5px solid rgba(201,168,76,0.15);border-radius:100px;color:var(--parchment);outline:none;cursor:pointer;}
+.pill{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.06em;padding:5px 12px;border-radius:100px;cursor:pointer;transition:all 0.15s;}
+.pill-off{background:transparent;color:var(--smoke);border:1.5px solid rgba(247,243,236,0.1);}
+.pill-off:hover{color:var(--parchment);border-color:rgba(247,243,236,0.3);}
+.pill-on{background:rgba(216,90,48,0.12);color:#F4967A;border:1.5px solid rgba(216,90,48,0.3);}
+.pill-manual{background:rgba(201,168,76,0.1);color:var(--gold);border:1.5px solid rgba(201,168,76,0.25);}
+.pill-manual-on{background:rgba(201,168,76,0.2);color:var(--gold-light);border:1.5px solid rgba(201,168,76,0.5);}
 
-.events-list { padding: 1.5rem 2rem; max-width: 1100px; margin: 0 auto; }
-.event-row {
-  background: #2A2720; border: 1px solid rgba(201,168,76,0.1);
-  border-radius: 10px; padding: 1rem 1.25rem;
-  margin-bottom: 0.6rem; display: flex; align-items: flex-start;
-  gap: 1rem; transition: border-color 0.15s;
-}
-.event-row:hover { border-color: rgba(201,168,76,0.2); }
-.event-row.is-blocked {
-  background: rgba(216,90,48,0.06); border-color: rgba(216,90,48,0.2);
-  opacity: 0.7;
-}
-.event-body { flex: 1; min-width: 0; }
-.event-name { font-weight: 500; font-size: 14px; color: #F7F3EC; margin-bottom: 0.25rem; }
-.event-meta {
-  font-family: 'DM Mono', monospace; font-size: 10.5px; color: #6B6558;
-  display: flex; flex-wrap: wrap; gap: 0.75rem;
-}
-.event-meta a { color: #6B6558; text-decoration: none; }
-.event-meta a:hover { color: #C9A84C; }
-.badge {
-  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.06em;
-  text-transform: uppercase; padding: 2px 7px; border-radius: 100px;
-  background: rgba(201,168,76,0.1); color: #C9A84C; flex-shrink: 0; align-self: flex-start;
-  margin-top: 2px;
-}
-.block-btn {
-  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.04em;
-  padding: 5px 12px; border-radius: 100px; cursor: pointer; flex-shrink: 0;
-  transition: all 0.15s; white-space: nowrap; border: 1.5px solid;
-}
-.block-btn.unblocked {
-  background: transparent; color: #6B6558; border-color: rgba(247,243,236,0.1);
-}
-.block-btn.unblocked:hover { background: rgba(216,90,48,0.12); color: #F4967A; border-color: rgba(216,90,48,0.3); }
-.block-btn.blocked {
-  background: rgba(216,90,48,0.15); color: #F4967A; border-color: rgba(216,90,48,0.3);
-}
-.block-btn.blocked:hover { background: rgba(29,158,117,0.12); color: #5DD4AA; border-color: rgba(29,158,117,0.3); }
+/* Stats */
+.statsbar{padding:0.5rem 1.5rem;background:var(--ink);border-bottom:1px solid var(--rule);font-family:'DM Mono',monospace;font-size:10.5px;color:var(--smoke);display:flex;gap:1.5rem;}
+.stat-n{color:var(--gold);font-weight:500;}
 
-.empty { text-align: center; padding: 4rem 2rem; color: #6B6558; }
-.toast {
-  position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
-  background: #2A2720; border: 1px solid rgba(201,168,76,0.2);
-  border-radius: 8px; padding: 0.6rem 1.25rem;
-  font-family: 'DM Mono', monospace; font-size: 12px; color: #C9A84C;
-  z-index: 999; opacity: 0; transition: opacity 0.3s; pointer-events: none;
-}
-.toast.show { opacity: 1; }
-.loading { text-align: center; padding: 4rem 2rem; font-family: 'DM Mono', monospace; font-size: 12px; color: #6B6558; }
+/* Event list */
+.events-list{padding:1.25rem 1.5rem;max-width:1100px;margin:0 auto;}
+.event-row{background:var(--ink-mid);border:1px solid rgba(201,168,76,0.1);border-radius:10px;padding:0.85rem 1rem;margin-bottom:0.5rem;display:flex;align-items:flex-start;gap:0.75rem;transition:border-color 0.15s;}
+.event-row:hover{border-color:rgba(201,168,76,0.2);}
+.event-row.is-blocked{background:rgba(216,90,48,0.05);border-color:rgba(216,90,48,0.2);opacity:0.65;}
+.event-row.is-manual{border-color:rgba(201,168,76,0.3);}
+.event-body{flex:1;min-width:0;}
+.event-name{font-weight:500;font-size:13.5px;color:var(--parchment);margin-bottom:3px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.event-meta{font-family:'DM Mono',monospace;font-size:10px;color:var(--smoke);display:flex;flex-wrap:wrap;gap:0.6rem;align-items:center;}
+.event-meta a{color:var(--smoke);text-decoration:none;}
+.event-meta a:hover{color:var(--gold);}
+.no-link{color:rgba(216,90,48,0.7);font-size:9.5px;}
+.badge{font-family:'DM Mono',monospace;font-size:8.5px;letter-spacing:0.06em;text-transform:uppercase;padding:2px 6px;border-radius:100px;background:rgba(201,168,76,0.1);color:var(--gold);flex-shrink:0;}
+.badge-manual{background:rgba(201,168,76,0.2);color:var(--gold-light);}
+.row-actions{display:flex;gap:0.4rem;flex-shrink:0;align-items:flex-start;padding-top:2px;}
+
+/* Edit drawer */
+.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:200;opacity:0;pointer-events:none;transition:opacity 0.25s;}
+.drawer-overlay.open{opacity:1;pointer-events:all;}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:480px;max-width:95vw;background:var(--ink-mid);border-left:1px solid var(--rule);z-index:201;display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.3s cubic-bezier(0.2,0,0,1);}
+.drawer.open{transform:translateX(0);}
+.drawer-header{padding:1.25rem 1.5rem;border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;}
+.drawer-title{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);}
+.drawer-body{flex:1;overflow-y:auto;padding:1.5rem;}
+.drawer-footer{padding:1rem 1.5rem;border-top:1px solid var(--rule);display:flex;gap:0.5rem;justify-content:flex-end;}
+.form-row{margin-bottom:1rem;}
+.form-label{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--smoke);margin-bottom:0.4rem;display:block;}
+.form-input,.form-select,.form-textarea{width:100%;font-family:'DM Sans',sans-serif;font-size:13px;padding:9px 12px;background:var(--ink-soft);border:1.5px solid rgba(201,168,76,0.15);border-radius:8px;color:var(--parchment);outline:none;transition:border-color 0.15s;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--gold);}
+.form-textarea{resize:vertical;min-height:80px;line-height:1.5;}
+.form-select option{background:var(--ink-mid);}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;}
+.form-hint{font-size:11px;color:var(--smoke-dim);margin-top:0.3rem;}
+
+/* Toast */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:var(--ink-mid);border:1px solid var(--rule);border-radius:8px;padding:0.6rem 1.25rem;font-family:'DM Mono',monospace;font-size:12px;color:var(--gold);z-index:999;opacity:0;transition:opacity 0.3s;pointer-events:none;white-space:nowrap;}
+.toast.show{opacity:1;}
+.empty{text-align:center;padding:4rem 2rem;color:var(--smoke);}
+.loading{text-align:center;padding:4rem 2rem;font-family:'DM Mono',monospace;font-size:11px;color:var(--smoke);}
 </style>
 </head>
 <body>
 
-<!-- Login -->
 <div id="loginScreen">
   <div class="login-box">
-    <h1>Aware Family</h1>
-    <p>Admin access only</p>
-    <input type="password" class="login-input" id="passwordInput" placeholder="Admin password" />
-    <button class="login-btn" onclick="login()">Sign in</button>
+    <div class="login-logo">Aware Family</div>
+    <div class="login-sub">Admin Dashboard</div>
+    <input type="password" class="field" id="passwordInput" placeholder="Password" />
+    <button class="btn-gold" onclick="login()">Sign in</button>
     <div class="login-error" id="loginError"></div>
   </div>
 </div>
 
-<!-- Admin UI -->
 <div id="adminScreen">
-  <div class="top-bar">
-    <div>
-      <div class="top-bar h1">Aware Family Admin</div>
-      <div class="top-meta" id="topMeta">Loading…</div>
+  <div class="topbar">
+    <div class="topbar-left">
+      <div>
+        <div class="topbar-title">Aware Family Admin</div>
+        <div class="topbar-meta" id="topMeta">Loading…</div>
+      </div>
     </div>
-    <div class="top-actions">
-      <button class="btn btn-outline" onclick="triggerRefresh()">↻ Refresh events</button>
-      <button class="btn btn-outline" onclick="logout()">Sign out</button>
+    <div class="topbar-right">
+      <button class="btn btn-primary" onclick="openAdd()">+ Add event</button>
+      <button class="btn btn-ghost" onclick="triggerRefresh()">↻ Refresh</button>
+      <button class="btn btn-ghost" onclick="logout()">Sign out</button>
     </div>
   </div>
 
-  <div class="filter-bar">
-    <input type="text" class="search-input" id="searchInput" placeholder="Search by name, organizer, city…" oninput="renderList()" />
-    <select class="filter-select" id="categoryFilter" onchange="renderList()">
+  <div class="filterbar">
+    <input type="text" class="search-field" id="searchInput" placeholder="Search name, organizer, city…" oninput="renderList()" />
+    <select class="sel" id="categoryFilter" onchange="renderList()">
       <option value="">All categories</option>
-      <option value="Event">Events</option>
-      <option value="Festival">Festivals</option>
-      <option value="Camp">Camps</option>
-      <option value="Program">Programs</option>
-      <option value="Extracurricular">Extracurriculars</option>
-      <option value="Experience">Experiences</option>
+      <option>Event</option><option>Festival</option><option>Camp</option>
+      <option>Program</option><option>Extracurricular</option><option>Experience</option>
     </select>
-    <button class="pill" id="blockedPill" onclick="toggleBlockedFilter()">Show blocked only</button>
+    <button class="pill pill-off" id="blockedPill" onclick="toggleFilter('blocked')">Blocked</button>
+    <button class="pill pill-off" id="noLinkPill" onclick="toggleFilter('noLink')">No link</button>
+    <button class="pill pill-off" id="manualPill" onclick="toggleFilter('manual')">Manual</button>
   </div>
 
-  <div class="stats-bar" id="statsBar">
-    <span><span class="stat-num" id="statTotal">0</span> total</span>
-    <span><span class="stat-num" id="statVisible">0</span> visible</span>
-    <span><span class="stat-num" id="statBlocked">0</span> blocked</span>
-    <span><span class="stat-num" id="statShowing">0</span> showing</span>
+  <div class="statsbar">
+    <span><span class="stat-n" id="statTotal">0</span> total</span>
+    <span><span class="stat-n" id="statVisible">0</span> visible</span>
+    <span><span class="stat-n" id="statBlocked">0</span> blocked</span>
+    <span><span class="stat-n" id="statNoLink">0</span> no link</span>
+    <span><span class="stat-n" id="statManual">0</span> manual</span>
+    <span><span class="stat-n" id="statShowing">0</span> showing</span>
   </div>
 
   <div class="events-list" id="eventsList">
     <div class="loading">Loading events…</div>
+  </div>
+</div>
+
+<!-- Edit / Add Drawer -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-header">
+    <span class="drawer-title" id="drawerTitle">Edit Event</span>
+    <button class="btn btn-ghost btn-sm" onclick="closeDrawer()">✕</button>
+  </div>
+  <div class="drawer-body">
+    <input type="hidden" id="editId" />
+    <div class="form-row">
+      <label class="form-label">Event name *</label>
+      <input type="text" class="form-input" id="fName" placeholder="e.g. Spring Family Festival" />
+    </div>
+    <div class="form-row">
+      <label class="form-label">Category</label>
+      <select class="form-select" id="fCategory">
+        <option>Event</option><option>Festival</option><option>Camp</option>
+        <option>Program</option><option>Extracurricular</option><option>Experience</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label class="form-label">Organizer</label>
+      <input type="text" class="form-input" id="fOrganizer" placeholder="e.g. City of Toronto" />
+    </div>
+    <div class="form-row">
+      <label class="form-label">Description</label>
+      <textarea class="form-textarea" id="fDescription" placeholder="2–3 sentences about the event…"></textarea>
+    </div>
+    <div class="form-row">
+      <label class="form-label">Location</label>
+      <input type="text" class="form-input" id="fLocation" placeholder="e.g. 123 Main St, Toronto, ON" />
+    </div>
+    <div class="form-row">
+      <label class="form-label">Schedule / Timing</label>
+      <input type="text" class="form-input" id="fSchedule" placeholder="e.g. Saturdays 10am–2pm" />
+    </div>
+    <div class="form-row-2">
+      <div class="form-row">
+        <label class="form-label">Start date</label>
+        <input type="date" class="form-input" id="fStartDate" />
+      </div>
+      <div class="form-row">
+        <label class="form-label">End date</label>
+        <input type="date" class="form-input" id="fEndDate" />
+      </div>
+    </div>
+    <div class="form-row-2">
+      <div class="form-row">
+        <label class="form-label">Age range</label>
+        <input type="text" class="form-input" id="fAgeRange" placeholder="e.g. 3–12 years" />
+      </div>
+      <div class="form-row">
+        <label class="form-label">Cost</label>
+        <input type="text" class="form-input" id="fCost" placeholder="e.g. Free or $15" />
+      </div>
+    </div>
+    <div class="form-row">
+      <label class="form-label">Website URL</label>
+      <input type="url" class="form-input" id="fWebsite" placeholder="https://…" />
+      <div class="form-hint">Full URL including https://</div>
+    </div>
+    <div class="form-row-2">
+      <div class="form-row">
+        <label class="form-label">Venue</label>
+        <select class="form-select" id="fVenue">
+          <option value="both">Both / Unknown</option>
+          <option value="indoor">Indoors</option>
+          <option value="outdoor">Outdoors</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label class="form-label">French language?</label>
+        <select class="form-select" id="fIsFrench">
+          <option value="false">No</option>
+          <option value="true">Yes — FR</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="drawer-footer">
+    <button class="btn btn-ghost" onclick="closeDrawer()">Cancel</button>
+    <button class="btn btn-primary" id="saveBtn" onclick="saveEvent()">Save changes</button>
   </div>
 </div>
 
@@ -198,8 +248,10 @@ const WORKER = 'https://awarefamily.square-cake-c6fc.workers.dev';
 let allEvents = [];
 let blocklist = new Set();
 let creds = '';
-let showBlockedOnly = false;
+let filters = { blocked: false, noLink: false, manual: false };
+let editingId = null;
 
+// ── Login ──
 async function login() {
   const pass = document.getElementById('passwordInput').value.trim();
   if (!pass) return;
@@ -207,19 +259,19 @@ async function login() {
   try {
     const resp = await fetch(`${WORKER}/admin/list`, { headers: { Authorization: 'Basic ' + creds } });
     if (resp.status === 401) { document.getElementById('loginError').textContent = 'Wrong password'; return; }
-    if (!resp.ok) throw new Error('Server error');
+    if (!resp.ok) throw new Error();
     const data = await resp.json();
     allEvents = data.events || [];
     blocklist = new Set(allEvents.filter(e => e.blocked).map(e => e._id));
-    document.getElementById('topMeta').textContent = `Updated ${new Date(data.updatedAt).toLocaleString('en-CA')} · ${data.count} events cached`;
+    document.getElementById('topMeta').textContent = data.updatedAt
+      ? `Updated ${new Date(data.updatedAt).toLocaleString('en-CA')} · ${data.count} events`
+      : `${data.count} events cached`;
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('adminScreen').style.display = 'block';
     renderList();
-  } catch(e) { document.getElementById('loginError').textContent = 'Connection error — check Worker is deployed'; }
+  } catch { document.getElementById('loginError').textContent = 'Connection error'; }
 }
-
 document.getElementById('passwordInput').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
-
 function logout() {
   creds = ''; allEvents = []; blocklist = new Set();
   document.getElementById('loginScreen').style.display = 'flex';
@@ -227,99 +279,214 @@ function logout() {
   document.getElementById('passwordInput').value = '';
 }
 
-function toggleBlockedFilter() {
-  showBlockedOnly = !showBlockedOnly;
-  const pill = document.getElementById('blockedPill');
-  pill.className = 'pill ' + (showBlockedOnly ? 'pill-active' : 'pill-inactive');
+// ── Filters ──
+function toggleFilter(key) {
+  filters[key] = !filters[key];
+  const pill = document.getElementById(key + 'Pill');
+  if (key === 'blocked') pill.className = 'pill ' + (filters[key] ? 'pill-on' : 'pill-off');
+  else if (key === 'manual') pill.className = 'pill ' + (filters[key] ? 'pill-manual-on' : 'pill-manual');
+  else pill.className = 'pill ' + (filters[key] ? 'pill-on' : 'pill-off');
   renderList();
 }
 
+// ── Render list ──
 function renderList() {
   const kw = document.getElementById('searchInput').value.toLowerCase();
   const cat = document.getElementById('categoryFilter').value.toLowerCase();
 
-  const filtered = allEvents.filter(e => {
-    if (showBlockedOnly && !blocklist.has(e._id)) return false;
+  const shown = allEvents.filter(e => {
+    if (filters.blocked && !blocklist.has(e._id)) return false;
+    if (filters.noLink && e.website) return false;
+    if (filters.manual && !e._manual) return false;
     if (cat && !(e.category || '').toLowerCase().includes(cat)) return false;
     if (kw) {
-      const hay = [e.name, e.organizer, e.location, e.category].filter(Boolean).join(' ').toLowerCase();
+      const hay = [e.name, e.organizer, e.location, e.category, e.schedule].filter(Boolean).join(' ').toLowerCase();
       if (!hay.includes(kw)) return false;
     }
     return true;
   });
 
+  const noLinkCount = allEvents.filter(e => !e.website).length;
+  const manualCount = allEvents.filter(e => e._manual).length;
   document.getElementById('statTotal').textContent = allEvents.length;
   document.getElementById('statVisible').textContent = allEvents.length - blocklist.size;
   document.getElementById('statBlocked').textContent = blocklist.size;
-  document.getElementById('statShowing').textContent = filtered.length;
+  document.getElementById('statNoLink').textContent = noLinkCount;
+  document.getElementById('statManual').textContent = manualCount;
+  document.getElementById('statShowing').textContent = shown.length;
 
   const list = document.getElementById('eventsList');
-  if (!filtered.length) { list.innerHTML = '<div class="empty">No events match this filter.</div>'; return; }
+  if (!shown.length) { list.innerHTML = '<div class="empty">No events match.</div>'; return; }
 
-  list.innerHTML = filtered.map(e => {
+  list.innerHTML = shown.map(e => {
     const isBlocked = blocklist.has(e._id);
-    const websiteHtml = e.website
-      ? `<a href="${e.website}" target="_blank" title="${e.website}">↗ ${new URL(e.website.startsWith('http') ? e.website : 'https://' + e.website).hostname}</a>`
-      : '<span style="color:#4A4540">no link</span>';
-    return `<div class="event-row ${isBlocked ? 'is-blocked' : ''}">
-      <div class="badge">${e.category || '—'}</div>
+    const hasLink = !!e.website;
+    let linkHtml = hasLink
+      ? `<a href="${escH(e.website)}" target="_blank" title="${escH(e.website)}">${new URL(e.website.startsWith('http') ? e.website : 'https://' + e.website).hostname}</a>`
+      : `<span class="no-link">⚠ no link</span>`;
+    return `<div class="event-row${isBlocked ? ' is-blocked' : ''}${e._manual ? ' is-manual' : ''}">
+      <span class="badge${e._manual ? ' badge-manual' : ''}">${e.category || '—'}</span>
       <div class="event-body">
-        <div class="event-name">${escH(e.name)}</div>
+        <div class="event-name">
+          ${escH(e.name)}
+          ${isBlocked ? '<span style="font-family:DM Mono;font-size:9px;color:#F4967A;padding:2px 6px;background:rgba(216,90,48,0.12);border-radius:4px;">BLOCKED</span>' : ''}
+          ${e._manual ? '<span style="font-family:DM Mono;font-size:9px;color:var(--gold);padding:2px 6px;background:rgba(201,168,76,0.12);border-radius:4px;">MANUAL</span>' : ''}
+        </div>
         <div class="event-meta">
           <span>${escH(e.organizer || '—')}</span>
           <span>${escH(e.location || '—')}</span>
           <span>${e.startDate || 'no date'}</span>
-          ${websiteHtml}
-          ${isBlocked ? '<span style="color:#F4967A">● BLOCKED</span>' : ''}
+          ${linkHtml}
         </div>
       </div>
-      <button class="block-btn ${isBlocked ? 'blocked' : 'unblocked'}" onclick="toggleBlock('${e._id}', this)">
-        ${isBlocked ? 'Unblock' : 'Block'}
-      </button>
+      <div class="row-actions">
+        <button class="btn btn-ghost btn-sm" onclick="openEdit('${e._id}')">Edit</button>
+        <button class="btn btn-sm ${isBlocked ? 'btn-success' : 'btn-danger'}" onclick="toggleBlock('${e._id}', this)">
+          ${isBlocked ? 'Unblock' : 'Block'}
+        </button>
+      </div>
     </div>`;
   }).join('');
 }
 
+// ── Block/Unblock ──
 async function toggleBlock(id, btn) {
   const isBlocked = blocklist.has(id);
-  const endpoint = isBlocked ? '/admin/unblock' : '/admin/block';
   btn.disabled = true;
   try {
-    const resp = await fetch(`${WORKER}${endpoint}`, {
+    const resp = await fetch(`${WORKER}/admin/${isBlocked ? 'unblock' : 'block'}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: 'Basic ' + creds },
       body: JSON.stringify({ id }),
     });
     if (!resp.ok) throw new Error();
     if (isBlocked) blocklist.delete(id); else blocklist.add(id);
-    // Update local allEvents blocked flag
     const ev = allEvents.find(e => e._id === id);
     if (ev) ev.blocked = !isBlocked;
-    showToast(isBlocked ? 'Event unblocked ✓' : 'Event blocked ✓');
+    showToast(isBlocked ? 'Event unblocked' : 'Event blocked');
     renderList();
-  } catch { showToast('Failed — try again'); btn.disabled = false; }
+  } catch { showToast('Failed'); btn.disabled = false; }
 }
 
+// ── Edit drawer ──
+function openEdit(id) {
+  const e = allEvents.find(ev => ev._id === id);
+  if (!e) return;
+  editingId = id;
+  document.getElementById('drawerTitle').textContent = 'Edit Event';
+  document.getElementById('saveBtn').textContent = 'Save changes';
+  document.getElementById('editId').value = id;
+  document.getElementById('fName').value = e.name || '';
+  document.getElementById('fCategory').value = e.category || 'Event';
+  document.getElementById('fOrganizer').value = e.organizer || '';
+  document.getElementById('fDescription').value = e.description || '';
+  document.getElementById('fLocation').value = e.location || '';
+  document.getElementById('fSchedule').value = e.schedule || '';
+  document.getElementById('fStartDate').value = e.startDate || '';
+  document.getElementById('fEndDate').value = e.endDate || '';
+  document.getElementById('fAgeRange').value = e.ageRange || '';
+  document.getElementById('fCost').value = e.cost || '';
+  document.getElementById('fWebsite').value = e.website || '';
+  document.getElementById('fVenue').value = e.venue || 'both';
+  document.getElementById('fIsFrench').value = e.isFrench ? 'true' : 'false';
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('drawerOverlay').classList.add('open');
+}
+
+function openAdd() {
+  editingId = null;
+  document.getElementById('drawerTitle').textContent = 'Add Event';
+  document.getElementById('saveBtn').textContent = 'Add event';
+  ['fName','fOrganizer','fDescription','fLocation','fSchedule','fStartDate','fEndDate','fAgeRange','fCost','fWebsite'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('fCategory').value = 'Event';
+  document.getElementById('fVenue').value = 'both';
+  document.getElementById('fIsFrench').value = 'false';
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('drawerOverlay').classList.add('open');
+}
+
+function closeDrawer() {
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('drawerOverlay').classList.remove('open');
+}
+
+async function saveEvent() {
+  const name = document.getElementById('fName').value.trim();
+  if (!name) { showToast('Event name is required'); return; }
+  const btn = document.getElementById('saveBtn');
+  btn.disabled = true;
+
+  const event = {
+    name,
+    category: document.getElementById('fCategory').value,
+    organizer: document.getElementById('fOrganizer').value.trim(),
+    description: document.getElementById('fDescription').value.trim(),
+    location: document.getElementById('fLocation').value.trim(),
+    schedule: document.getElementById('fSchedule').value.trim(),
+    startDate: document.getElementById('fStartDate').value || null,
+    endDate: document.getElementById('fEndDate').value || null,
+    ageRange: document.getElementById('fAgeRange').value.trim(),
+    cost: document.getElementById('fCost').value.trim(),
+    website: document.getElementById('fWebsite').value.trim() || null,
+    venue: document.getElementById('fVenue').value,
+    isFrench: document.getElementById('fIsFrench').value === 'true',
+  };
+
+  try {
+    let resp, data;
+    if (editingId) {
+      resp = await fetch(`${WORKER}/admin/update`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: 'Basic ' + creds },
+        body: JSON.stringify({ id: editingId, event }),
+      });
+      data = await resp.json();
+      if (data.ok) {
+        const idx = allEvents.findIndex(e => e._id === editingId);
+        if (idx !== -1) allEvents[idx] = { ...allEvents[idx], ...event };
+        showToast('Event updated ✓');
+      }
+    } else {
+      resp = await fetch(`${WORKER}/admin/add`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: 'Basic ' + creds },
+        body: JSON.stringify({ event }),
+      });
+      data = await resp.json();
+      if (data.ok) {
+        allEvents.unshift({ ...event, _id: data.id, _manual: true });
+        showToast('Event added ✓');
+        document.getElementById('statTotal').textContent = allEvents.length;
+      }
+    }
+    closeDrawer();
+    renderList();
+  } catch { showToast('Save failed'); }
+  btn.disabled = false;
+}
+
+// ── Refresh ──
 async function triggerRefresh() {
-  showToast('Refreshing events — this takes 30s…');
+  showToast('Refreshing — takes ~30s…');
   try {
     const resp = await fetch(`${WORKER}/refresh`, { headers: { Authorization: 'Basic ' + creds } });
     const data = await resp.json();
-    showToast(`Done — ${data.count} events loaded ✓`);
-    // Reload list
+    if (data.ok === false) { showToast(data.message); return; }
+    showToast(`Done — ${data.count} events ✓`);
     const listResp = await fetch(`${WORKER}/admin/list`, { headers: { Authorization: 'Basic ' + creds } });
     const listData = await listResp.json();
     allEvents = listData.events || [];
     blocklist = new Set(allEvents.filter(e => e.blocked).map(e => e._id));
-    document.getElementById('topMeta').textContent = `Updated ${new Date(listData.updatedAt).toLocaleString('en-CA')} · ${listData.count} events cached`;
+    document.getElementById('topMeta').textContent = `Updated ${new Date(listData.updatedAt).toLocaleString('en-CA')} · ${listData.count} events`;
     renderList();
-  } catch { showToast('Refresh failed — check Worker logs'); }
+  } catch { showToast('Refresh failed'); }
 }
 
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
+  clearTimeout(t._tid);
+  t._tid = setTimeout(() => t.classList.remove('show'), 3000);
 }
 
 function escH(s) {

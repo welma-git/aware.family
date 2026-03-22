@@ -1669,16 +1669,21 @@ let kwTimer;
 // ── Render functions (unchanged) ──
 function advanceRecurringDate(item) {
   if (!item.startDate) return item;
-  const todayStr = new Date().toISOString().split('T')[0];
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+
+  // Use local date consistently — avoid timezone issues
+  const now = new Date();
+  const todayStr = [
+    now.getFullYear(),
+    String(now.getMonth() + 1).padStart(2, '0'),
+    String(now.getDate()).padStart(2, '0')
+  ].join('-');
+  const todayDow = now.getDay(); // 0=Sun … 6=Sat
 
   const allText = [item.schedule, item.description, item.name].filter(Boolean).join(' ').toLowerCase();
   const isRecurring = /every|weekly|each|ongoing|recurring|sundays?|mondays?|tuesdays?|wednesdays?|thursdays?|fridays?|saturdays?|daily|monthly|year.round|year round/i.test(allText);
 
   if (!isRecurring) return item;
 
-  // Find target day of week
   const dayNames = {
     sunday:0, sundays:0, monday:1, mondays:1, tuesday:2, tuesdays:2,
     wednesday:3, wednesdays:3, thursday:4, thursdays:4, friday:5, fridays:5, saturday:6, saturdays:6
@@ -1688,32 +1693,40 @@ function advanceRecurringDate(item) {
     if (allText.includes(word)) { targetDay = num; break; }
   }
 
-  // Advance if: startDate is in the past, OR startDate is today but today isn't the target day
-  const startIsToday = item.startDate === todayStr;
-  const todayIsTarget = targetDay !== null && today.getDay() === targetDay;
   const startIsPast = item.startDate < todayStr;
+  const startIsToday = item.startDate === todayStr;
+  const todayIsTarget = targetDay !== null && todayDow === targetDay;
 
-  if (!startIsPast && !(startIsToday && !todayIsTarget)) {
-    console.log('SKIP advance:', item.name, '| startDate:', item.startDate, '| startIsPast:', startIsPast, '| startIsToday:', startIsToday, '| todayIsTarget:', todayIsTarget);
-    return item;
-  }
-  console.log('ADVANCE:', item.name, '| from:', item.startDate, '| targetDay:', targetDay, '| today.getDay():', today.getDay());
+  // Only advance if startDate is past, or if it's today but today isn't the scheduled day
+  if (!startIsPast && !(startIsToday && !todayIsTarget)) return item;
 
-  let nextDate;
+  let nextDateStr;
   if (targetDay !== null) {
-    const next = new Date(today);
-    const diff = (targetDay - today.getDay() + 7) % 7;
-    // If today is the target day, show today; otherwise find next occurrence
-    next.setDate(today.getDate() + (diff === 0 ? 0 : diff));
-    nextDate = next;
+    const diff = (targetDay - todayDow + 7) % 7;
+    const next = new Date(now);
+    next.setDate(now.getDate() + (diff === 0 ? 0 : diff));
+    nextDateStr = [
+      next.getFullYear(),
+      String(next.getMonth() + 1).padStart(2, '0'),
+      String(next.getDate()).padStart(2, '0')
+    ].join('-');
   } else {
-    let d = new Date(item.startDate + 'T00:00:00');
-    while (d < today) d.setDate(d.getDate() + 7);
-    nextDate = d;
+    // Advance by weeks from startDate until on or after today
+    const parts = item.startDate.split('-').map(Number);
+    const d = new Date(parts[0], parts[1] - 1, parts[2]);
+    while (d.getFullYear() < now.getFullYear() ||
+           d.getMonth() < now.getMonth() ||
+           d.getDate() < now.getDate()) {
+      d.setDate(d.getDate() + 7);
+    }
+    nextDateStr = [
+      d.getFullYear(),
+      String(d.getMonth() + 1).padStart(2, '0'),
+      String(d.getDate()).padStart(2, '0')
+    ].join('-');
   }
 
-  const nextStr = nextDate.toISOString().split('T')[0];
-  return { ...item, startDate: nextStr, endDate: nextStr };
+  return { ...item, startDate: nextDateStr, endDate: nextDateStr };
 }
 
 function normalizeCost(cost) {

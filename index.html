@@ -1328,6 +1328,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       Add to Google Calendar
     </button>
     <a class="panel-website-link" id="panelWebsite" href="#" target="_blank">Visit website ↗</a>
+    <p class="panel-no-link" id="panelNoLink" style="display:none;font-size:11.5px;color:var(--smoke);line-height:1.6;margin-top:0.5rem;">
+      An event link is not available. <a id="panelGoogleSearch" href="#" target="_blank" style="color:var(--gold);text-decoration:none;">Search Google for this event ↗</a>
+    </p>
   </div>
 </div>
 
@@ -1665,39 +1668,41 @@ let kwTimer;
 
 // ── Render functions (unchanged) ──
 function advanceRecurringDate(item) {
-  // If startDate is in the past and schedule mentions a recurring pattern,
-  // advance startDate to the next upcoming occurrence
   if (!item.startDate) return item;
   const todayStr = new Date().toISOString().split('T')[0];
-  if (item.startDate >= todayStr) return item; // already current or future
+  if (item.startDate >= todayStr) return item;
 
-  const schedule = (item.schedule || '').toLowerCase();
+  const schedule = (item.schedule || item.description || '').toLowerCase();
   const isRecurring = /every|weekly|each|sundays?|mondays?|tuesdays?|wednesdays?|thursdays?|fridays?|saturdays?|daily|monthly/i.test(schedule);
   if (!isRecurring) return item;
 
-  // Find the day of week from the schedule
-  const days = { sunday:0, sundays:0, monday:1, mondays:1, tuesday:2, tuesdays:2,
+  const dayNames = { sunday:0, sundays:0, monday:1, mondays:1, tuesday:2, tuesdays:2,
     wednesday:3, wednesdays:3, thursday:4, thursdays:4, friday:5, fridays:5, saturday:6, saturdays:6 };
   let targetDay = null;
-  for (const [word, num] of Object.entries(days)) {
+  for (const [word, num] of Object.entries(dayNames)) {
     if (schedule.includes(word)) { targetDay = num; break; }
   }
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
+  let nextDate;
   if (targetDay !== null) {
-    // Advance to next occurrence of that day
     const next = new Date(today);
     const diff = (targetDay - today.getDay() + 7) % 7;
-    next.setDate(today.getDate() + (diff === 0 ? 7 : diff)); // if today is that day, show next week's
-    return { ...item, startDate: next.toISOString().split('T')[0] };
+    // If today matches the target day, use today; otherwise find next occurrence
+    next.setDate(today.getDate() + diff);
+    nextDate = next;
+  } else {
+    // Weekly — advance from startDate by 7 days until on or after today
+    let d = new Date(item.startDate + 'T00:00:00');
+    while (d < today) d.setDate(d.getDate() + 7);
+    nextDate = d;
   }
 
-  // Weekly but no specific day — advance by 7 days from startDate until future
-  let d = new Date(item.startDate + 'T00:00:00');
-  while (d < today) d.setDate(d.getDate() + 7);
-  return { ...item, startDate: d.toISOString().split('T')[0] };
+  const nextStr = nextDate.toISOString().split('T')[0];
+  // For recurring events, treat as single-day (remove endDate so it doesn't span)
+  return { ...item, startDate: nextStr, endDate: nextStr };
 }
 
 function normalizeCost(cost) {
@@ -1931,7 +1936,17 @@ function openPanel(idx) {
   ].filter(Boolean);
   document.getElementById('panelDetails').innerHTML = rows.map(([l, v]) => `<div class="panel-detail-row"><span class="pdr-label">${l}</span><span class="pdr-val">${escH(v)}</span></div>`).join('');
   const ws = document.getElementById('panelWebsite');
-  ws.href = tagUrl(item.website) || '#'; ws.style.display = item.website ? 'block' : 'none';
+  const noLink = document.getElementById('panelNoLink');
+  const googleSearch = document.getElementById('panelGoogleSearch');
+  if (item.website) {
+    ws.href = tagUrl(item.website);
+    ws.style.display = 'block';
+    noLink.style.display = 'none';
+  } else {
+    ws.style.display = 'none';
+    googleSearch.href = `https://www.google.com/search?q=${encodeURIComponent(item.name + ' ' + (item.location || 'Ontario'))}`;
+    noLink.style.display = 'block';
+  }
   const btn = document.getElementById('panelGcalBtn');
   btn.className = 'panel-gcal-btn'; btn.disabled = false; btn.innerHTML = calIcon() + ' Add to Google Calendar';
   document.getElementById('gcalStatus').className = 'gcal-status';

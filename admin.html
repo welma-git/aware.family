@@ -441,11 +441,10 @@ async function saveEvent() {
         body: JSON.stringify({ id: editingId, event }),
       });
       data = await resp.json();
-      if (data.ok) {
-        const idx = allEvents.findIndex(e => e._id === editingId);
-        if (idx !== -1) allEvents[idx] = { ...allEvents[idx], ...event };
-        showToast('Event updated ✓');
-      }
+      if (!data.ok) { showToast('Save failed: ' + (data.error || 'unknown error')); btn.disabled = false; return; }
+      const idx = allEvents.findIndex(e => e._id === editingId);
+      if (idx !== -1) allEvents[idx] = { ...allEvents[idx], ...event };
+      showToast('Event updated ✓');
     } else {
       resp = await fetch(`${WORKER}/admin/add`, {
         method: 'POST',
@@ -453,15 +452,13 @@ async function saveEvent() {
         body: JSON.stringify({ event }),
       });
       data = await resp.json();
-      if (data.ok) {
-        allEvents.unshift({ ...event, _id: data.id, _manual: true });
-        showToast('Event added ✓');
-        document.getElementById('statTotal').textContent = allEvents.length;
-      }
+      if (!data.ok) { showToast('Save failed: ' + (data.error || 'unknown error')); btn.disabled = false; return; }
+      allEvents.unshift({ ...event, _id: data.id, _manual: true });
+      showToast('Event added ✓');
     }
     closeDrawer();
     renderList();
-  } catch { showToast('Save failed'); }
+  } catch(err) { showToast('Save failed: ' + err.message); }
   btn.disabled = false;
 }
 

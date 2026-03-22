@@ -1312,6 +1312,13 @@ async function loadEvents() {
     const resp = await fetch(`${API_BASE}/events`);
     if (!resp.ok) throw new Error('Could not load events');
     const data = await resp.json();
+
+    if (data.empty || !data.events?.length) {
+      document.getElementById('emptyState').style.display = 'block';
+      document.getElementById('emptyState').querySelector('p').textContent = 'Events are being loaded — check back in a few minutes, or visit aware.family/admin.html to trigger a refresh.';
+      return;
+    }
+
     allActivities = data.events || [];
 
     // Show last updated

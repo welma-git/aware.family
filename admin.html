@@ -1693,7 +1693,11 @@ function advanceRecurringDate(item) {
   const todayIsTarget = targetDay !== null && today.getDay() === targetDay;
   const startIsPast = item.startDate < todayStr;
 
-  if (!startIsPast && !(startIsToday && !todayIsTarget)) return item;
+  if (!startIsPast && !(startIsToday && !todayIsTarget)) {
+    console.log('SKIP advance:', item.name, '| startDate:', item.startDate, '| startIsPast:', startIsPast, '| startIsToday:', startIsToday, '| todayIsTarget:', todayIsTarget);
+    return item;
+  }
+  console.log('ADVANCE:', item.name, '| from:', item.startDate, '| targetDay:', targetDay, '| today.getDay():', today.getDay());
 
   let nextDate;
   if (targetDay !== null) {

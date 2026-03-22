@@ -1670,18 +1670,15 @@ let kwTimer;
 function advanceRecurringDate(item) {
   if (!item.startDate) return item;
   const todayStr = new Date().toISOString().split('T')[0];
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
-  // If startDate is in the future, nothing to do
-  if (item.startDate >= todayStr) return item;
-
-  // If startDate is past but endDate is future — could be a multi-day event OR a recurring event
-  // Check all text fields for recurring indicators
   const allText = [item.schedule, item.description, item.name].filter(Boolean).join(' ').toLowerCase();
   const isRecurring = /every|weekly|each|ongoing|recurring|sundays?|mondays?|tuesdays?|wednesdays?|thursdays?|fridays?|saturdays?|daily|monthly|year.round|year round/i.test(allText);
 
-  if (!isRecurring) return item; // genuine multi-day event, leave as-is
+  if (!isRecurring) return item;
 
-  // Find target day of week from any text field
+  // Find target day of week
   const dayNames = {
     sunday:0, sundays:0, monday:1, mondays:1, tuesday:2, tuesdays:2,
     wednesday:3, wednesdays:3, thursday:4, thursdays:4, friday:5, fridays:5, saturday:6, saturdays:6
@@ -1691,24 +1688,27 @@ function advanceRecurringDate(item) {
     if (allText.includes(word)) { targetDay = num; break; }
   }
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  // Advance if: startDate is in the past, OR startDate is today but today isn't the target day
+  const startIsToday = item.startDate === todayStr;
+  const todayIsTarget = targetDay !== null && today.getDay() === targetDay;
+  const startIsPast = item.startDate < todayStr;
+
+  if (!startIsPast && !(startIsToday && !todayIsTarget)) return item;
 
   let nextDate;
   if (targetDay !== null) {
     const next = new Date(today);
     const diff = (targetDay - today.getDay() + 7) % 7;
-    next.setDate(today.getDate() + diff); // 0 = today if today is that day
+    // If today is the target day, show today; otherwise find next occurrence
+    next.setDate(today.getDate() + (diff === 0 ? 0 : diff));
     nextDate = next;
   } else {
-    // Weekly but no specific day — advance from startDate by 7 days until today or future
     let d = new Date(item.startDate + 'T00:00:00');
     while (d < today) d.setDate(d.getDate() + 7);
     nextDate = d;
   }
 
   const nextStr = nextDate.toISOString().split('T')[0];
-  // Treat as single-day occurrence — clear endDate so it doesn't bleed
   return { ...item, startDate: nextStr, endDate: nextStr };
 }
 

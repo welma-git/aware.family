@@ -1393,12 +1393,15 @@ function applyFilters() {
       const cost = (item.cost||'').toLowerCase();
       if (!cost.includes('free') && cost !== '$0' && cost !== '0') return false;
     }
-    // Date range
+    // Date range filter
     if (dateFrom || dateTo) {
-      const sd = item.startDate, ed = item.endDate || item.startDate;
-      if (sd) {
-        if (dateFrom && ed && ed < dateFrom) return false;
-        if (dateTo && sd > dateTo) return false;
+      const sd = item.startDate;
+      const ed = item.endDate || item.startDate; // treat single-day events as start=end
+      if (sd || ed) {
+        // Event must OVERLAP with the selected date range
+        // Overlap condition: event starts before range ends AND event ends after range starts
+        if (dateFrom && ed && ed < dateFrom) return false; // event ends before range starts
+        if (dateTo && sd && sd > dateTo) return false;     // event starts after range ends
       }
     }
     // Keyword — search name, description, organizer, location
@@ -1526,14 +1529,26 @@ document.addEventListener('click', e => {
 // Quick date presets
 function setDatePreset(preset) {
   const today = new Date();
+  today.setHours(0, 0, 0, 0);
   const fmt = d => d.toISOString().split('T')[0];
   let from = '', to = '';
-  if (preset === 'today') { from = to = fmt(today); }
-  else if (preset === 'weekend') {
-    const day = today.getDay();
-    const sat = new Date(today); sat.setDate(today.getDate() + (6 - day) % 7);
-    const sun = new Date(sat); sun.setDate(sat.getDate() + 1);
-    from = fmt(day === 0 ? today : sat); to = fmt(sun);
+  if (preset === 'today') {
+    from = to = fmt(today);
+  } else if (preset === 'weekend') {
+    const day = today.getDay(); // 0=Sun, 6=Sat
+    if (day === 0) {
+      // It's Sunday — show just today
+      from = to = fmt(today);
+    } else if (day === 6) {
+      // It's Saturday — show Sat + Sun
+      const sun = new Date(today); sun.setDate(today.getDate() + 1);
+      from = fmt(today); to = fmt(sun);
+    } else {
+      // Weekday — show coming Sat + Sun
+      const sat = new Date(today); sat.setDate(today.getDate() + (6 - day));
+      const sun = new Date(sat); sun.setDate(sat.getDate() + 1);
+      from = fmt(sat); to = fmt(sun);
+    }
   } else if (preset === 'week') {
     const end = new Date(today); end.setDate(today.getDate() + 7);
     from = fmt(today); to = fmt(end);

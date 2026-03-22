@@ -1319,7 +1319,7 @@ async function loadEvents() {
       return;
     }
 
-    allActivities = data.events || [];
+    allActivities = (data.events || []).map(advanceRecurringDate);
 
     // Show last updated
     if (data.updatedAt) {
@@ -1433,7 +1433,9 @@ function renderResults() {
   const count = document.getElementById('resultsCount');
   const label = document.getElementById('resultsLabel');
 
-  // Sort: single-day events first (by date), then multi-day ranges (by start date), then no-date events last
+  // Sort: single-day events first (by date), then multi-day ranges, then no-date last
+  // For already-started events, use today as the effective sort date
+  const todaySort = new Date().toISOString().split('T')[0];
   filtered.sort((a, b) => {
     const aIsSingle = a.startDate && (!a.endDate || a.endDate === a.startDate);
     const bIsSingle = b.startDate && (!b.endDate || b.endDate === b.startDate);
@@ -1448,9 +1450,9 @@ function renderResults() {
     if (aIsSingle && !bIsSingle) return -1;
     if (!aIsSingle && bIsSingle) return 1;
 
-    // Within same group, sort by start date ascending
-    const da = a.startDate || a.endDate || '9999-12-31';
-    const db = b.startDate || b.endDate || '9999-12-31';
+    // Use effective start date — if event already started, treat as today for sorting
+    const da = a.startDate && a.startDate < todaySort ? todaySort : (a.startDate || a.endDate || '9999-12-31');
+    const db = b.startDate && b.startDate < todaySort ? todaySort : (b.startDate || b.endDate || '9999-12-31');
     if (da < db) return -1;
     if (da > db) return 1;
     return (a.name || '').localeCompare(b.name || '');
@@ -1590,6 +1592,42 @@ function clearDates() {
 let kwTimer;
 
 // ── Render functions (unchanged) ──
+function advanceRecurringDate(item) {
+  // If startDate is in the past and schedule mentions a recurring pattern,
+  // advance startDate to the next upcoming occurrence
+  if (!item.startDate) return item;
+  const todayStr = new Date().toISOString().split('T')[0];
+  if (item.startDate >= todayStr) return item; // already current or future
+
+  const schedule = (item.schedule || '').toLowerCase();
+  const isRecurring = /every|weekly|each|sundays?|mondays?|tuesdays?|wednesdays?|thursdays?|fridays?|saturdays?|daily|monthly/i.test(schedule);
+  if (!isRecurring) return item;
+
+  // Find the day of week from the schedule
+  const days = { sunday:0, sundays:0, monday:1, mondays:1, tuesday:2, tuesdays:2,
+    wednesday:3, wednesdays:3, thursday:4, thursdays:4, friday:5, fridays:5, saturday:6, saturdays:6 };
+  let targetDay = null;
+  for (const [word, num] of Object.entries(days)) {
+    if (schedule.includes(word)) { targetDay = num; break; }
+  }
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  if (targetDay !== null) {
+    // Advance to next occurrence of that day
+    const next = new Date(today);
+    const diff = (targetDay - today.getDay() + 7) % 7;
+    next.setDate(today.getDate() + (diff === 0 ? 7 : diff)); // if today is that day, show next week's
+    return { ...item, startDate: next.toISOString().split('T')[0] };
+  }
+
+  // Weekly but no specific day — advance by 7 days from startDate until future
+  let d = new Date(item.startDate + 'T00:00:00');
+  while (d < today) d.setDate(d.getDate() + 7);
+  return { ...item, startDate: d.toISOString().split('T')[0] };
+}
+
 function normalizeCost(cost) {
   if (!cost) return '';
   const c = cost.toLowerCase().trim();

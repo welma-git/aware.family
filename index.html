@@ -1433,11 +1433,24 @@ function renderResults() {
   const count = document.getElementById('resultsCount');
   const label = document.getElementById('resultsLabel');
 
-  // Sort: soonest start date first, events with no date go to end, secondary sort by name
-  const today = new Date().toISOString().split('T')[0];
+  // Sort: single-day events first (by date), then multi-day ranges (by start date), then no-date events last
   filtered.sort((a, b) => {
-    const da = a.startDate || '9999-12-31';
-    const db = b.startDate || '9999-12-31';
+    const aIsSingle = a.startDate && (!a.endDate || a.endDate === a.startDate);
+    const bIsSingle = b.startDate && (!b.endDate || b.endDate === b.startDate);
+    const aNoDate = !a.startDate && !a.endDate;
+    const bNoDate = !b.startDate && !b.endDate;
+
+    // No-date recurring events always go last
+    if (aNoDate && !bNoDate) return 1;
+    if (!aNoDate && bNoDate) return -1;
+
+    // Single-day events before multi-day ranges
+    if (aIsSingle && !bIsSingle) return -1;
+    if (!aIsSingle && bIsSingle) return 1;
+
+    // Within same group, sort by start date ascending
+    const da = a.startDate || a.endDate || '9999-12-31';
+    const db = b.startDate || b.endDate || '9999-12-31';
     if (da < db) return -1;
     if (da > db) return 1;
     return (a.name || '').localeCompare(b.name || '');

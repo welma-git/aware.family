@@ -1433,11 +1433,14 @@ function renderResults() {
   const count = document.getElementById('resultsCount');
   const label = document.getElementById('resultsLabel');
 
-  // Sort by soonest start date first, no date goes to end
+  // Sort: soonest start date first, events with no date go to end, secondary sort by name
+  const today = new Date().toISOString().split('T')[0];
   filtered.sort((a, b) => {
     const da = a.startDate || '9999-12-31';
     const db = b.startDate || '9999-12-31';
-    return da.localeCompare(db);
+    if (da < db) return -1;
+    if (da > db) return 1;
+    return (a.name || '').localeCompare(b.name || '');
   });
 
   selectedIndices.clear();

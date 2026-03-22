@@ -662,6 +662,45 @@ main { max-width: 980px; margin: 0 auto; padding: 1.75rem 2rem; }
 .cal-more { font-size: 9px; color: var(--smoke); font-family: 'DM Mono', monospace; cursor: pointer; }
 .cal-more:hover { color: var(--gold-dim); }
 
+/* Day & Week Views */
+.day-event-row {
+  display: flex; align-items: flex-start; gap: 0.75rem;
+  padding: 0.75rem; border-radius: var(--radius-sm);
+  border: 1px solid var(--parchment-dark); margin-bottom: 0.5rem;
+  cursor: pointer; transition: border-color 0.15s, background 0.15s;
+  background: var(--white);
+}
+.day-event-row:hover { border-color: var(--gold); background: rgba(201,168,76,0.03); }
+.day-event-body { flex: 1; min-width: 0; }
+.day-event-name { font-weight: 500; font-size: 13.5px; color: var(--ink); line-height: 1.3; margin-bottom: 2px; }
+.day-event-meta { font-size: 11.5px; color: var(--smoke); }
+.day-empty { text-align: center; padding: 3rem 1rem; font-size: 13px; color: var(--smoke); }
+
+.week-col-header {
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--smoke); text-align: center;
+  padding: 0.6rem 4px; border-bottom: 1px solid var(--parchment-dark);
+  border-right: 1px solid var(--parchment-dark); background: var(--parchment);
+}
+.week-col-header.is-today { background: rgba(201,168,76,0.1); color: var(--gold-dim); font-weight: 500; }
+.week-col-header:last-child { border-right: none; }
+.week-col {
+  min-height: 120px; padding: 6px 4px;
+  border-right: 1px solid var(--parchment-dark);
+  border-bottom: 1px solid var(--parchment-dark);
+  vertical-align: top;
+}
+.week-col:last-child { border-right: none; }
+.week-col.is-today { background: rgba(201,168,76,0.03); }
+.week-chip {
+  font-size: 9.5px; padding: 3px 5px; border-radius: 4px;
+  margin-bottom: 3px; display: block; cursor: pointer;
+  transition: opacity 0.15s; font-weight: 500; line-height: 1.3;
+  word-break: break-word;
+}
+.week-chip:hover { opacity: 0.75; }
+.week-empty { font-size: 9px; color: var(--parchment-dark); text-align: center; padding: 8px 0; }
+
 .cal-ongoing {
   margin-top: 1.25rem; background: var(--white);
   border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.1rem 1.25rem;
@@ -942,8 +981,15 @@ main { max-width: 980px; margin: 0 auto; padding: 1.75rem 2rem; }
   .venue-tag.indoor { background: rgba(24,95,165,0.2); color: #7ABAEF; }
   .venue-tag.outdoor { background: rgba(29,158,117,0.18); color: #5DD4AA; }
 
-  /* ── Calendar ── */
-  .cal-wrap { background: var(--ink-soft); }
+  .day-event-row { background: var(--ink-soft); border-color: rgba(201,168,76,0.1); }
+  .day-event-row:hover { border-color: var(--gold); background: rgba(201,168,76,0.05); }
+  .day-event-name { color: var(--parchment); }
+  .day-event-meta { color: var(--parchment-dark); }
+  .week-col-header { background: var(--ink-mid); color: var(--parchment-dark); border-color: rgba(201,168,76,0.08); }
+  .week-col-header.is-today { background: rgba(201,168,76,0.1); color: var(--gold-light); }
+  .week-col { border-color: rgba(201,168,76,0.08); }
+  .week-col.is-today { background: rgba(201,168,76,0.04); }
+  .week-empty { color: var(--ink-mid); }
   .cal-nav { border-color: rgba(201,168,76,0.1); }
   .cal-title { color: var(--parchment); } /* was --ink = invisible */
   .cal-arrow { color: var(--parchment-dark); border-color: rgba(201,168,76,0.15); } /* was --ink-mid = invisible */
@@ -1154,19 +1200,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <button class="toggle-pill" id="freeToggle" onclick="toggleFree()">Free</button>
 
     <div class="view-toggle">
-      <button class="vbtn active" id="vGrid" onclick="setView('grid')">
+      <button class="vbtn active" data-view="grid" onclick="setView('grid')">
         <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
           <rect x="1" y="1" width="5" height="5" rx="1"/><rect x="8" y="1" width="5" height="5" rx="1"/>
           <rect x="1" y="8" width="5" height="5" rx="1"/><rect x="8" y="8" width="5" height="5" rx="1"/>
         </svg>Grid
       </button>
-      <button class="vbtn" id="vCal" onclick="setView('cal')">
+      <button class="vbtn" data-view="day" onclick="setView('day')">Day</button>
+      <button class="vbtn" data-view="week" onclick="setView('week')">Week</button>
+      <button class="vbtn" data-view="cal" onclick="setView('cal')">
         <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
           <rect x="1" y="2.5" width="12" height="10" rx="1.5"/>
           <line x1="1" y1="5.5" x2="13" y2="5.5"/>
           <line x1="4.5" y1="1" x2="4.5" y2="4"/>
           <line x1="9.5" y1="1" x2="9.5" y2="4"/>
-        </svg>Cal
+        </svg>Month
       </button>
     </div>
 
@@ -1209,6 +1257,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div id="gridView">
       <div id="resultsGrid" class="results-grid"></div>
+    </div>
+
+    <!-- Day View -->
+    <div id="dayView" style="display:none">
+      <div class="cal-wrap">
+        <div class="cal-nav">
+          <button class="cal-arrow" onclick="shiftDay(-1)">&#8592;</button>
+          <span class="cal-title" id="dayTitle"></span>
+          <button class="cal-arrow" onclick="shiftDay(1)">&#8594;</button>
+        </div>
+        <div id="dayEvents" style="padding:1rem;"></div>
+      </div>
+    </div>
+
+    <!-- Week View -->
+    <div id="weekView" style="display:none">
+      <div class="cal-wrap">
+        <div class="cal-nav">
+          <button class="cal-arrow" onclick="shiftWeek(-1)">&#8592;</button>
+          <span class="cal-title" id="weekTitle"></span>
+          <button class="cal-arrow" onclick="shiftWeek(1)">&#8594;</button>
+        </div>
+        <div id="weekGrid" style="display:grid;grid-template-columns:repeat(7,1fr);border-top:1px solid var(--parchment-dark);"></div>
+      </div>
     </div>
     <div id="calView" style="display:none">
       <div class="cal-wrap">
@@ -1276,6 +1348,8 @@ let filtered = [];        // currently displayed subset
 let currentPanelIdx = -1;
 let calY = new Date().getFullYear();
 let calM = new Date().getMonth();
+let calDayOffset = 0;  // days from today for day view
+let calWeekOffset = 0; // weeks from current week for week view
 let loadTimer = null;
 let selectedIndices = new Set();
 
@@ -1479,7 +1553,9 @@ function renderResults() {
     ? `Results for "${keyword}" · ${cityLabel}`
     : `All activities · ${cityLabel}`;
 
-  if (state.view === 'cal') renderCalendar();
+  if (state.view === 'cal')  renderCalendar();
+  if (state.view === 'day')  renderDay();
+  if (state.view === 'week') renderWeek();
 }
 
 // ── Filter setters ──
@@ -1505,18 +1581,14 @@ function toggleFree() {
 
 function setView(v) {
   state.view = v;
-  document.querySelectorAll('.vbtn').forEach(b => b.classList.remove('active'));
-  document.querySelector('.vbtn[data-view="'+v+'"]')?.classList.add('active');
-  const grid = document.getElementById('resultsGrid');
-  const cal = document.getElementById('calView');
-  if (v === 'cal') {
-    grid.style.display = 'none';
-    cal.style.display = 'block';
-    renderCalendar();
-  } else {
-    grid.style.display = 'grid';
-    cal.style.display = 'none';
-  }
+  document.querySelectorAll('.vbtn').forEach(b => b.classList.toggle('active', b.dataset.view === v));
+  document.getElementById('gridView').style.display  = v === 'grid'  ? 'block' : 'none';
+  document.getElementById('dayView').style.display   = v === 'day'   ? 'block' : 'none';
+  document.getElementById('weekView').style.display  = v === 'week'  ? 'block' : 'none';
+  document.getElementById('calView').style.display   = v === 'cal'   ? 'block' : 'none';
+  if (v === 'cal')  renderCalendar();
+  if (v === 'day')  renderDay();
+  if (v === 'week') renderWeek();
 }
 
 // ── Dropdown helpers ──
@@ -1743,6 +1815,102 @@ function renderCalendar() {
 }
 
 function shiftMonth(d) { calM += d; if (calM > 11) { calM = 0; calY++; } if (calM < 0) { calM = 11; calY--; } renderCalendar(); }
+
+function shiftDay(d) { calDayOffset += d; renderDay(); }
+function shiftWeek(d) { calWeekOffset += d; renderWeek(); }
+
+function renderDay() {
+  const d = new Date();
+  d.setHours(0, 0, 0, 0);
+  d.setDate(d.getDate() + calDayOffset);
+  const dateStr = d.toISOString().split('T')[0];
+  const todayStr = new Date().toISOString().split('T')[0];
+  const label = calDayOffset === 0 ? 'Today' : calDayOffset === 1 ? 'Tomorrow' : calDayOffset === -1 ? 'Yesterday'
+    : d.toLocaleDateString('en-CA', { weekday: 'long', month: 'long', day: 'numeric' });
+  document.getElementById('dayTitle').textContent = label;
+
+  const dayEvents = filtered.filter(e => {
+    if (!e.startDate) return false;
+    const sd = e.startDate, ed = e.endDate || e.startDate;
+    return sd <= dateStr && ed >= dateStr;
+  });
+
+  const container = document.getElementById('dayEvents');
+  if (!dayEvents.length) {
+    container.innerHTML = `<div class="day-empty">No events on this day.<br>Try the arrows to browse other days.</div>`;
+    return;
+  }
+  container.innerHTML = dayEvents.map((e, i) => {
+    const idx = filtered.indexOf(e);
+    const bt = getBadge(e.category);
+    const cost = normalizeCost(e.cost);
+    return `<div class="day-event-row" onclick="openPanel(${idx})">
+      <span class="category-badge badge-${bt}" style="flex-shrink:0;margin-top:2px">${e.category || 'Event'}</span>
+      <div class="day-event-body">
+        <div class="day-event-name">${escH(e.name)}</div>
+        <div class="day-event-meta">
+          ${e.organizer ? escH(e.organizer) + ' · ' : ''}${e.location ? escH(e.location) : ''}
+          ${e.schedule ? ' · ' + escH(e.schedule) : ''}
+        </div>
+      </div>
+      ${cost === 'Free' ? '<span class="free-tag" style="flex-shrink:0">Free</span>' : cost ? `<span class="cost-pill" style="flex-shrink:0">${escH(cost)}</span>` : ''}
+    </div>`;
+  }).join('');
+}
+
+function renderWeek() {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  // Start on Sunday of current week + offset
+  const sunday = new Date(today);
+  sunday.setDate(today.getDate() - today.getDay() + (calWeekOffset * 7));
+  const todayStr = today.toISOString().split('T')[0];
+
+  const days = [];
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(sunday);
+    d.setDate(sunday.getDate() + i);
+    days.push(d);
+  }
+
+  const start = days[0].toISOString().split('T')[0];
+  const end   = days[6].toISOString().split('T')[0];
+  const startLabel = days[0].toLocaleDateString('en-CA', { month: 'short', day: 'numeric' });
+  const endLabel   = days[6].toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' });
+  document.getElementById('weekTitle').textContent = `${startLabel} — ${endLabel}`;
+
+  const grid = document.getElementById('weekGrid');
+
+  // Headers row
+  const headers = days.map(d => {
+    const ds = d.toISOString().split('T')[0];
+    const isToday = ds === todayStr;
+    const label = d.toLocaleDateString('en-CA', { weekday: 'short' });
+    const num   = d.getDate();
+    return `<div class="week-col-header${isToday ? ' is-today' : ''}">${label}<br><strong>${num}</strong></div>`;
+  }).join('');
+
+  // Event columns
+  const cols = days.map(d => {
+    const ds = d.toISOString().split('T')[0];
+    const isToday = ds === todayStr;
+    const dayEvents = filtered.filter(e => {
+      if (!e.startDate) return false;
+      const sd = e.startDate, ed = e.endDate || e.startDate;
+      return sd <= ds && ed >= ds;
+    });
+    const chips = dayEvents.length
+      ? dayEvents.map(e => {
+          const idx = filtered.indexOf(e);
+          const bt = getBadge(e.category);
+          return `<div class="week-chip chip-${bt}" onclick="openPanel(${idx})">${escH(e.name)}</div>`;
+        }).join('')
+      : `<div class="week-empty">—</div>`;
+    return `<div class="week-col${isToday ? ' is-today' : ''}">${chips}</div>`;
+  }).join('');
+
+  grid.innerHTML = headers + cols;
+}
 
 function openPanel(idx) {
   const item = filtered[idx]; if (!item) return;

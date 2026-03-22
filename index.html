@@ -1669,40 +1669,64 @@ let kwTimer;
 // ── Render functions (unchanged) ──
 function advanceRecurringDate(item) {
   if (!item.startDate) return item;
-  const todayStr = new Date().toISOString().split('T')[0];
-  if (item.startDate >= todayStr) return item;
 
-  const schedule = (item.schedule || item.description || '').toLowerCase();
-  const isRecurring = /every|weekly|each|sundays?|mondays?|tuesdays?|wednesdays?|thursdays?|fridays?|saturdays?|daily|monthly/i.test(schedule);
+  // Use local date consistently — avoid timezone issues
+  const now = new Date();
+  const todayStr = [
+    now.getFullYear(),
+    String(now.getMonth() + 1).padStart(2, '0'),
+    String(now.getDate()).padStart(2, '0')
+  ].join('-');
+  const todayDow = now.getDay(); // 0=Sun … 6=Sat
+
+  const allText = [item.schedule, item.description, item.name].filter(Boolean).join(' ').toLowerCase();
+  const isRecurring = /every|weekly|each|ongoing|recurring|sundays?|mondays?|tuesdays?|wednesdays?|thursdays?|fridays?|saturdays?|daily|monthly|year.round|year round/i.test(allText);
+
   if (!isRecurring) return item;
 
-  const dayNames = { sunday:0, sundays:0, monday:1, mondays:1, tuesday:2, tuesdays:2,
-    wednesday:3, wednesdays:3, thursday:4, thursdays:4, friday:5, fridays:5, saturday:6, saturdays:6 };
+  const dayNames = {
+    sunday:0, sundays:0, monday:1, mondays:1, tuesday:2, tuesdays:2,
+    wednesday:3, wednesdays:3, thursday:4, thursdays:4, friday:5, fridays:5, saturday:6, saturdays:6
+  };
   let targetDay = null;
   for (const [word, num] of Object.entries(dayNames)) {
-    if (schedule.includes(word)) { targetDay = num; break; }
+    if (allText.includes(word)) { targetDay = num; break; }
   }
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  const startIsPast = item.startDate < todayStr;
+  const startIsToday = item.startDate === todayStr;
+  const todayIsTarget = targetDay !== null && todayDow === targetDay;
 
-  let nextDate;
+  // Only advance if startDate is past, or if it's today but today isn't the scheduled day
+  if (!startIsPast && !(startIsToday && !todayIsTarget)) return item;
+
+  let nextDateStr;
   if (targetDay !== null) {
-    const next = new Date(today);
-    const diff = (targetDay - today.getDay() + 7) % 7;
-    // If today matches the target day, use today; otherwise find next occurrence
-    next.setDate(today.getDate() + diff);
-    nextDate = next;
+    const diff = (targetDay - todayDow + 7) % 7;
+    const next = new Date(now);
+    next.setDate(now.getDate() + (diff === 0 ? 0 : diff));
+    nextDateStr = [
+      next.getFullYear(),
+      String(next.getMonth() + 1).padStart(2, '0'),
+      String(next.getDate()).padStart(2, '0')
+    ].join('-');
   } else {
-    // Weekly — advance from startDate by 7 days until on or after today
-    let d = new Date(item.startDate + 'T00:00:00');
-    while (d < today) d.setDate(d.getDate() + 7);
-    nextDate = d;
+    // Advance by weeks from startDate until on or after today
+    const parts = item.startDate.split('-').map(Number);
+    const d = new Date(parts[0], parts[1] - 1, parts[2]);
+    while (d.getFullYear() < now.getFullYear() ||
+           d.getMonth() < now.getMonth() ||
+           d.getDate() < now.getDate()) {
+      d.setDate(d.getDate() + 7);
+    }
+    nextDateStr = [
+      d.getFullYear(),
+      String(d.getMonth() + 1).padStart(2, '0'),
+      String(d.getDate()).padStart(2, '0')
+    ].join('-');
   }
 
-  const nextStr = nextDate.toISOString().split('T')[0];
-  // For recurring events, treat as single-day (remove endDate so it doesn't span)
-  return { ...item, startDate: nextStr, endDate: nextStr };
+  return { ...item, startDate: nextDateStr, endDate: nextDateStr };
 }
 
 function normalizeCost(cost) {

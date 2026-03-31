@@ -412,9 +412,10 @@ header h1 {
   display: flex; align-items: center; justify-content: center;
   opacity: 0; transition: opacity 0.15s, border-color 0.15s, background 0.15s;
   z-index: 2; flex-shrink: 0;
+  pointer-events: none; /* hidden by default — only enabled on hover/selected */
 }
-.card:hover .card-select { opacity: 1; }
-.card.selected .card-select { opacity: 1; background: var(--gold); border-color: var(--gold); }
+.card:hover .card-select { opacity: 1; pointer-events: all; }
+.card.selected .card-select { opacity: 1; pointer-events: all; background: var(--gold); border-color: var(--gold); }
 .card.selected { border: 2px solid var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.12); }
 .card-select-check { display: none; }
 .card.selected .card-select-check { display: block; }
@@ -1403,6 +1404,20 @@ async function loadEvents() {
 
     allActivities = (data.events || []).map(advanceRecurringDate);
 
+    // Client-side dedup — collapse variants like "Event — Location A" and "Event — Location B"
+    const seen = new Set();
+    allActivities = allActivities.filter(e => {
+      const baseName = (e.name || '').toLowerCase().trim()
+        .replace(/\s*[—–-]+\s*.+$/, '')
+        .replace(/\s+at\s+.+$/, '')
+        .replace(/\s*[:\|]\s*.+$/, '')
+        .trim();
+      const key = baseName + '|' + (e.startDate || '');
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+
     // Show last updated
     if (data.updatedAt) {
       const d = new Date(data.updatedAt);
@@ -1430,6 +1445,13 @@ function applyFilters() {
   const todayStr = new Date().toISOString().split('T')[0];
 
   filtered = allActivities.filter(item => {
+    // Exclude adult-only events
+    const desc = (item.description || '').toLowerCase();
+    const age = (item.ageRange || '').toLowerCase();
+    const name = (item.name || '').toLowerCase();
+    const adultOnly = /adults? only|adults? over \d+|seniors?|50\+|55\+|60\+|65\+|for adults|adult program|adult drop.?in/i;
+    if (adultOnly.test(desc) || adultOnly.test(age) || adultOnly.test(name)) return false;
+
     // Category
     if (state.category !== 'all') {
       const cat = (item.category||'').toLowerCase();

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>The aware.family coach — try it</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%233d348b'/%3E%3Ctext x='50' y='54' font-family='Georgia,serif' font-size='62' font-weight='700' fill='%23fffdf7' text-anchor='middle' dominant-baseline='central'%3Ea%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --indigo:#3d348b; --indigo-deep:#2a2363; --slate:#7678ed;
+    --amber:#f7b801; --orange:#f18701; --red:#f35b04;
+    --bg:#fbfaff; --bg-tint:#f0eefa; --ink:#1c1733; --ink-soft:#5b5478; --ink-faint:#8c86a8;
+    --card:#ffffff; --line:#e4e0f2;
+    --display:"Fraunces",Georgia,serif; --body:"Plus Jakarta Sans",system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{height:100%;}
+  body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;}
+  body.pre-chat{display:block;}
+
+  nav{background:var(--bg);border-bottom:1px solid var(--line);}
+  .nav-in{max-width:760px;margin:0 auto;padding:14px 22px;display:flex;justify-content:space-between;align-items:center;}
+  .brand{font-family:var(--display);font-weight:600;font-size:19px;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:8px;}
+  .brand .glyph{width:26px;height:26px;border-radius:7px;background:var(--indigo);color:#fff;display:grid;place-items:center;font-weight:700;font-size:15px;}
+  .budget{font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink-faint);}
+
+  main{flex:1;overflow-y:auto;} body.pre-chat main{flex:none;}
+  .chat{max-width:760px;margin:0 auto;padding:26px 22px 14px;display:flex;flex-direction:column;gap:18px;}
+
+  .intro{padding:14px 0 0;}
+  .intro .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--orange);margin-bottom:14px;}
+  .intro h1{font-family:var(--display);font-weight:600;font-size:clamp(28px,4.6vw,40px);line-height:1.06;letter-spacing:-0.02em;margin-bottom:14px;}
+  .intro h1 em{font-style:italic;color:var(--orange);}
+  .intro p{font-size:17px;color:var(--ink-soft);max-width:54ch;}
+
+  .msg{display:flex;gap:13px;align-items:flex-start;}
+  .who{font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding-top:5px;flex-shrink:0;width:58px;}
+  .msg.you .who{color:var(--ink-faint);} .msg.coach .who{color:var(--orange);}
+  .bubble{flex:1;}
+  .msg.coach .bubble{font-size:18px;line-height:1.5;}
+  .msg.coach .bubble strong{color:var(--indigo);font-weight:700;}
+  .msg.you .bubble{color:var(--ink-soft);}
+  .bubble p+p{margin-top:9px;}
+
+  .typing{display:inline-flex;gap:5px;padding-top:8px;}
+  .typing span{width:7px;height:7px;border-radius:50%;background:var(--orange);animation:bk 1.2s infinite;}
+  .typing span:nth-child(2){animation-delay:.2s;} .typing span:nth-child(3){animation-delay:.4s;}
+  @keyframes bk{0%,60%,100%{opacity:.3;transform:translateY(0);}30%{opacity:1;transform:translateY(-3px);}}
+  @media(prefers-reduced-motion:reduce){ .typing span{animation:none;opacity:.6;} }
+
+  footer{background:var(--bg);border-top:1px solid var(--line);}
+  body.pre-chat footer{border-top:none;}
+  .compose{max-width:760px;margin:0 auto;padding:14px 22px 10px;display:flex;gap:10px;align-items:flex-end;}
+  textarea{flex:1;font-family:var(--body);font-size:17px;color:var(--ink);background:#fff;border:2px solid var(--line);border-radius:14px;padding:13px 15px;resize:none;line-height:1.4;max-height:140px;}
+  textarea:focus{outline:none;border-color:var(--indigo);}
+  .send{font-family:var(--body);font-weight:700;font-size:15px;padding:13px 24px;background:var(--orange);color:#fff;border:none;border-radius:12px;cursor:pointer;box-shadow:0 3px 0 var(--red);transition:transform .12s;white-space:nowrap;}
+  .send:active:not(:disabled){transform:translateY(2px);box-shadow:0 1px 0 var(--red);}
+  .send:hover:not(:disabled){background:var(--orange);}
+  .send:disabled{opacity:0.45;cursor:not-allowed;}
+  .suggest{max-width:760px;margin:0 auto;padding:0 22px 18px;font-size:13px;color:var(--ink-faint);}
+  .suggest a{color:var(--indigo);font-weight:600;text-decoration:none;border-bottom:2px solid var(--orange);cursor:pointer;}
+  .suggest a:hover{color:var(--orange);}
+
+  .ended{max-width:760px;margin:0 auto;padding:0 22px 18px;}
+  .ended .box{background:var(--indigo);color:#fff;padding:24px 26px;border-radius:18px;}
+  .ended .box .k{font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#dfe6cf;display:block;margin-bottom:10px;}
+  .ended .box p{font-family:var(--display);font-size:19px;line-height:1.4;margin-bottom:16px;}
+  .ended .box a{display:inline-block;font-weight:600;font-size:14px;color:var(--indigo);background:#fff;padding:11px 20px;border-radius:999px;text-decoration:none;}
+
+  *:focus-visible{outline:3px solid var(--orange);outline-offset:2px;}
+</style>
+</head>
+<body class="pre-chat">
+  <nav>
+    <div class="nav-in">
+      <a href="https://aware.family" class="brand"><span class="glyph">a</span>aware.family coach</a>
+      <div class="budget">Live demo · <span id="remaining">3</span> sessions left</div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="chat" id="chat" role="log" aria-live="polite" aria-label="Conversation with the aware.family coach">
+      <div class="intro" id="intro">
+        <span class="tag">Try the coach · live</span>
+        <h1>What are you trying to do with your family — and <em>when?</em></h1>
+        <p>Tell me who's in the family, your city in Ontario, and the time you've got — today, the weekend, the summer. I'll ask one honest question about the energy in the house, then make the call. Real recommendation, not a list.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div id="endZone"></div>
+    <div class="compose" id="compose">
+      <textarea id="input" rows="1" placeholder="Tell me about your family…" aria-label="Tell me about your family and the time you have"></textarea>
+      <button class="send" id="send">Send</button>
+    </div>
+    <div class="suggest" id="suggest">
+      Not sure where to start?
+      <a data-seed="Two kids, 4 and 7, in Vaughan. We've got Saturday free but nobody slept well.">a low-energy Saturday</a>,
+      <a data-seed="Toronto, kids are 6 and 9, school's out for summer and I work from home. Help me not lose my mind.">surviving the summer</a>,
+      <a data-seed="18-month-old in Toronto, rainy day, we're going stir crazy.">a rainy day with a toddler</a>.
+    </div>
+  </footer>
+
+<script>
+  // ====== SET THIS to your deployed Worker URL ======
+  const WORKER_URL = "https://aware-family-coach-demo.square-cake-c6fc.workers.dev";
+  // ===================================================
+  const REPO_URL = "https://github.com/welma-git/aware-family-coach";
+
+  const MAX = 12;
+  let history = [], userTurns = 0, busy = false;
+
+  const chat=document.getElementById('chat'), intro=document.getElementById('intro'),
+        input=document.getElementById('input'), sendBtn=document.getElementById('send'),
+        remainingEl=document.getElementById('remaining'), endZone=document.getElementById('endZone'),
+        compose=document.getElementById('compose'), suggestEl=document.getElementById('suggest');
+
+  document.querySelectorAll('.suggest a').forEach(a=>{
+    a.addEventListener('click',(e)=>{ e.preventDefault(); input.value=a.dataset.seed; input.focus(); autosize(); });
+  });
+  function autosize(){ input.style.height='auto'; input.style.height=Math.min(input.scrollHeight,140)+'px'; }
+  input.addEventListener('input', autosize);
+  input.addEventListener('keydown', e=>{ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); send(); } });
+  sendBtn.addEventListener('click', send);
+
+  function updateBudget(){
+    const messagesLeft=Math.max(0,MAX-userTurns);
+    remainingEl.textContent=Math.min(3,Math.ceil(messagesLeft/4));
+  }
+
+  // light formatter: **bold**, paragraph + line breaks, HTML-escaped (safe)
+  function renderRich(container, text){
+    const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    let t=text.replace(/\s*\*\*(.+?):\*\*/g,'\n\n**$1:**').replace(/\n{3,}/g,'\n\n').trim();
+    t.split(/\n\n+/).forEach(par=>{
+      const p=document.createElement('p');
+      p.innerHTML=esc(par).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+      container.appendChild(p);
+    });
+  }
+  function addMsg(role,text){
+    if(intro) intro.remove();
+    if(suggestEl) suggestEl.style.display='none';
+    document.body.classList.remove('pre-chat');
+    const wrap=document.createElement('div'); wrap.className='msg '+(role==='user'?'you':'coach');
+    const who=document.createElement('div'); who.className='who'; who.textContent=role==='user'?'You':'Coach';
+    const bub=document.createElement('div'); bub.className='bubble'; renderRich(bub,text);
+    wrap.appendChild(who); wrap.appendChild(bub); chat.appendChild(wrap);
+    wrap.scrollIntoView({behavior:'smooth',block:'end'}); return bub;
+  }
+  function showTyping(){
+    const w=document.createElement('div'); w.className='msg coach'; w.id='typing';
+    w.innerHTML='<div class="who">Coach</div><div class="bubble"><div class="typing"><span></span><span></span><span></span></div></div>';
+    chat.appendChild(w); w.scrollIntoView({behavior:'smooth',block:'end'});
+  }
+  function clearTyping(){ const t=document.getElementById('typing'); if(t) t.remove(); }
+  function endDemo(message){
+    compose.style.display='none';
+    endZone.innerHTML='<div class="ended"><div class="box"><span class="k">End of demo</span><p>'+
+      (message||"That's the demo. The full coach goes the whole way — grab the folder and drop it into your own Claude project.")+
+      '</p><a href="'+REPO_URL+'" target="_blank">Get the folder →</a></div></div>';
+    endZone.scrollIntoView({behavior:'smooth',block:'end'});
+  }
+
+  async function send(){
+    if(busy) return;
+    const text=input.value.trim();
+    if(!text||userTurns>=MAX) return;
+    busy=true; sendBtn.disabled=true;
+    addMsg('user',text); history.push({role:'user',content:text}); userTurns++; updateBudget();
+    input.value=''; autosize(); showTyping();
+    try{
+      const r=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:history})});
+      const data=await r.json(); clearTyping();
+      if(data.capped){ endDemo(data.reply); return; }
+      if(data.error){ addMsg('assistant',"Something went wrong reaching the coach. Try again in a moment."); userTurns--; updateBudget(); busy=false; sendBtn.disabled=false; return; }
+      addMsg('assistant',data.reply); history.push({role:'assistant',content:data.reply});
+      if(userTurns>=MAX){ setTimeout(()=>endDemo(),600); } else { busy=false; sendBtn.disabled=false; input.focus(); }
+    }catch(e){ clearTyping(); addMsg('assistant',"Couldn't reach the coach just now — check the connection and try again."); userTurns--; updateBudget(); busy=false; sendBtn.disabled=false; }
+  }
+  updateBudget();
+</script>
+</body>
+</html>

@@ -3,14 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <title>Aware Family — Admin</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --gold:#C9A84C;--gold-light:#E8C97A;--ink:#0F0E0C;--ink-soft:#1E1C18;--ink-mid:#2A2720;
-  --parchment:#F7F3EC;--smoke:#6B6558;--smoke-dim:#4A4540;--coral:#D85A30;--teal:#1D9E75;
-  --rule:rgba(201,168,76,0.12);
+  --gold:#3d348b;--gold-light:#7678ed;--amber:#f7b801;--ink:#0F0E0C;--ink-soft:#1E1C18;--ink-mid:#2A2720;
+  --parchment:#fbfaff;--smoke:#6b6481;--smoke-dim:#4a445f;--coral:#D85A30;--teal:#1D9E75;
+  --rule:rgba(61,52,139,0.12);
 }
 body{font-family:'DM Sans',sans-serif;font-weight:300;background:var(--ink);color:var(--parchment);min-height:100vh;}
 
@@ -19,7 +20,7 @@ body{font-family:'DM Sans',sans-serif;font-weight:300;background:var(--ink);colo
 .login-box{background:var(--ink-mid);border:1px solid var(--rule);border-radius:12px;padding:2.5rem;width:100%;max-width:360px;text-align:center;}
 .login-logo{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--gold);margin-bottom:0.25rem;}
 .login-sub{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--smoke);margin-bottom:2rem;}
-.field{width:100%;font-family:'DM Sans',sans-serif;font-size:14px;padding:10px 14px;background:var(--ink-soft);border:1.5px solid rgba(201,168,76,0.15);border-radius:8px;color:var(--parchment);outline:none;margin-bottom:1rem;transition:border-color 0.15s;}
+.field{width:100%;font-family:'DM Sans',sans-serif;font-size:14px;padding:10px 14px;background:var(--ink-soft);border:1.5px solid rgba(61,52,139,0.15);border-radius:8px;color:var(--parchment);outline:none;margin-bottom:1rem;transition:border-color 0.15s;}
 .field:focus{border-color:var(--gold);}
 .btn-gold{width:100%;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:10px;background:var(--gold);color:var(--ink);border:none;border-radius:8px;cursor:pointer;transition:background 0.15s;}
 .btn-gold:hover{background:var(--gold-light);}
@@ -48,15 +49,15 @@ body{font-family:'DM Sans',sans-serif;font-weight:300;background:var(--ink);colo
 
 /* Filter bar */
 .filterbar{padding:0.75rem 1.5rem;background:var(--ink-soft);border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;}
-.search-field{flex:1;min-width:180px;font-family:'DM Sans',sans-serif;font-size:13px;padding:7px 13px;background:var(--ink-mid);border:1.5px solid rgba(201,168,76,0.15);border-radius:100px;color:var(--parchment);outline:none;}
+.search-field{flex:1;min-width:180px;font-family:'DM Sans',sans-serif;font-size:13px;padding:7px 13px;background:var(--ink-mid);border:1.5px solid rgba(61,52,139,0.15);border-radius:100px;color:var(--parchment);outline:none;}
 .search-field:focus{border-color:var(--gold);}
-.sel{font-family:'DM Sans',sans-serif;font-size:12px;padding:7px 12px;background:var(--ink-mid);border:1.5px solid rgba(201,168,76,0.15);border-radius:100px;color:var(--parchment);outline:none;cursor:pointer;}
+.sel{font-family:'DM Sans',sans-serif;font-size:12px;padding:7px 12px;background:var(--ink-mid);border:1.5px solid rgba(61,52,139,0.15);border-radius:100px;color:var(--parchment);outline:none;cursor:pointer;}
 .pill{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.06em;padding:5px 12px;border-radius:100px;cursor:pointer;transition:all 0.15s;}
 .pill-off{background:transparent;color:var(--smoke);border:1.5px solid rgba(247,243,236,0.1);}
 .pill-off:hover{color:var(--parchment);border-color:rgba(247,243,236,0.3);}
 .pill-on{background:rgba(216,90,48,0.12);color:#F4967A;border:1.5px solid rgba(216,90,48,0.3);}
-.pill-manual{background:rgba(201,168,76,0.1);color:var(--gold);border:1.5px solid rgba(201,168,76,0.25);}
-.pill-manual-on{background:rgba(201,168,76,0.2);color:var(--gold-light);border:1.5px solid rgba(201,168,76,0.5);}
+.pill-manual{background:rgba(61,52,139,0.1);color:var(--gold);border:1.5px solid rgba(61,52,139,0.25);}
+.pill-manual-on{background:rgba(61,52,139,0.2);color:var(--gold-light);border:1.5px solid rgba(61,52,139,0.5);}
 
 /* Stats */
 .statsbar{padding:0.5rem 1.5rem;background:var(--ink);border-bottom:1px solid var(--rule);font-family:'DM Mono',monospace;font-size:10.5px;color:var(--smoke);display:flex;gap:1.5rem;}
@@ -64,18 +65,18 @@ body{font-family:'DM Sans',sans-serif;font-weight:300;background:var(--ink);colo
 
 /* Event list */
 .events-list{padding:1.25rem 1.5rem;max-width:1100px;margin:0 auto;}
-.event-row{background:var(--ink-mid);border:1px solid rgba(201,168,76,0.1);border-radius:10px;padding:0.85rem 1rem;margin-bottom:0.5rem;display:flex;align-items:flex-start;gap:0.75rem;transition:border-color 0.15s;}
-.event-row:hover{border-color:rgba(201,168,76,0.2);}
+.event-row{background:var(--ink-mid);border:1px solid rgba(61,52,139,0.1);border-radius:10px;padding:0.85rem 1rem;margin-bottom:0.5rem;display:flex;align-items:flex-start;gap:0.75rem;transition:border-color 0.15s;}
+.event-row:hover{border-color:rgba(61,52,139,0.2);}
 .event-row.is-blocked{background:rgba(216,90,48,0.05);border-color:rgba(216,90,48,0.2);opacity:0.65;}
-.event-row.is-manual{border-color:rgba(201,168,76,0.3);}
+.event-row.is-manual{border-color:rgba(61,52,139,0.3);}
 .event-body{flex:1;min-width:0;}
 .event-name{font-weight:500;font-size:13.5px;color:var(--parchment);margin-bottom:3px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
 .event-meta{font-family:'DM Mono',monospace;font-size:10px;color:var(--smoke);display:flex;flex-wrap:wrap;gap:0.6rem;align-items:center;}
 .event-meta a{color:var(--smoke);text-decoration:none;}
 .event-meta a:hover{color:var(--gold);}
 .no-link{color:rgba(216,90,48,0.7);font-size:9.5px;}
-.badge{font-family:'DM Mono',monospace;font-size:8.5px;letter-spacing:0.06em;text-transform:uppercase;padding:2px 6px;border-radius:100px;background:rgba(201,168,76,0.1);color:var(--gold);flex-shrink:0;}
-.badge-manual{background:rgba(201,168,76,0.2);color:var(--gold-light);}
+.badge{font-family:'DM Mono',monospace;font-size:8.5px;letter-spacing:0.06em;text-transform:uppercase;padding:2px 6px;border-radius:100px;background:rgba(61,52,139,0.1);color:var(--gold);flex-shrink:0;}
+.badge-manual{background:rgba(61,52,139,0.2);color:var(--gold-light);}
 .row-actions{display:flex;gap:0.4rem;flex-shrink:0;align-items:flex-start;padding-top:2px;}
 
 /* Edit drawer */
@@ -89,7 +90,7 @@ body{font-family:'DM Sans',sans-serif;font-weight:300;background:var(--ink);colo
 .drawer-footer{padding:1rem 1.5rem;border-top:1px solid var(--rule);display:flex;gap:0.5rem;justify-content:flex-end;}
 .form-row{margin-bottom:1rem;}
 .form-label{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--smoke);margin-bottom:0.4rem;display:block;}
-.form-input,.form-select,.form-textarea{width:100%;font-family:'DM Sans',sans-serif;font-size:13px;padding:9px 12px;background:var(--ink-soft);border:1.5px solid rgba(201,168,76,0.15);border-radius:8px;color:var(--parchment);outline:none;transition:border-color 0.15s;}
+.form-input,.form-select,.form-textarea{width:100%;font-family:'DM Sans',sans-serif;font-size:13px;padding:9px 12px;background:var(--ink-soft);border:1.5px solid rgba(61,52,139,0.15);border-radius:8px;color:var(--parchment);outline:none;transition:border-color 0.15s;}
 .form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--gold);}
 .form-textarea{resize:vertical;min-height:80px;line-height:1.5;}
 .form-select option{background:var(--ink-mid);}
@@ -330,7 +331,7 @@ function renderList() {
         <div class="event-name">
           ${escH(e.name)}
           ${isBlocked ? '<span style="font-family:DM Mono;font-size:9px;color:#F4967A;padding:2px 6px;background:rgba(216,90,48,0.12);border-radius:4px;">BLOCKED</span>' : ''}
-          ${e._manual ? '<span style="font-family:DM Mono;font-size:9px;color:var(--gold);padding:2px 6px;background:rgba(201,168,76,0.12);border-radius:4px;">MANUAL</span>' : ''}
+          ${e._manual ? '<span style="font-family:DM Mono;font-size:9px;color:var(--gold);padding:2px 6px;background:rgba(61,52,139,0.12);border-radius:4px;">MANUAL</span>' : ''}
         </div>
         <div class="event-meta">
           <span>${escH(e.organizer || '—')}</span>

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light only">
 <title>The aware.family coach — try it</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%233d348b'/%3E%3Ctext x='50' y='54' font-family='Georgia,serif' font-size='62' font-weight='700' fill='%23fffdf7' text-anchor='middle' dominant-baseline='central'%3Ea%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%233d348b'/><g transform='translate(-13.73,-90.40) scale(0.78)'><path fill='%23ffffff' d='M88.61,216.63h-21.09c-12.83,0-23.28-10.44-23.28-23.28v-21.09c0-12.83,10.44-23.27,23.28-23.27h18.38c.65,0,1.17.52,1.17,1.17s-.52,1.17-1.17,1.17h-18.38c-11.54,0-20.93,9.39-20.93,20.93v21.09c0,11.54,9.39,20.93,20.93,20.93h21.09c11.54,0,20.92-9.39,20.92-20.93v-17.22c0-.65.52-1.17,1.17-1.17s1.17.52,1.17,1.17v17.22c0,12.83-10.44,23.28-23.27,23.28Z'/><circle fill='%23f7b801' cx='104.02' cy='158.47' r='15.09'/></g></svg>"><rect width='100' height='100' rx='22' fill='%233d348b'/><g transform='translate(2,-138) scale(0.86)'><path fill='%23ffffff' d='M88.61,216.63h-21.09c-12.83,0-23.28-10.44-23.28-23.28v-21.09c0-12.83,10.44-23.27,23.28-23.27h18.38c.65,0,1.17.52,1.17,1.17s-.52,1.17-1.17,1.17h-18.38c-11.54,0-20.93,9.39-20.93,20.93v21.09c0,11.54,9.39,20.93,20.93,20.93h21.09c11.54,0,20.92-9.39,20.92-20.93v-17.22c0-.65.52-1.17,1.17-1.17s1.17.52,1.17,1.17v17.22c0,12.83-10.44,23.28-23.27,23.28Z'/><circle fill='%23f7b801' cx='104.02' cy='158.47' r='15.09'/></g></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -24,8 +24,10 @@
 
   nav{background:var(--bg);border-bottom:1px solid var(--line);}
   .nav-in{max-width:760px;margin:0 auto;padding:14px 22px;display:flex;justify-content:space-between;align-items:center;}
-  .brand{font-family:var(--display);font-weight:600;font-size:19px;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:8px;}
-  .brand .glyph{width:26px;height:26px;border-radius:7px;background:var(--indigo);color:#fff;display:grid;place-items:center;font-weight:700;font-size:15px;}
+  .brand{font-family:var(--display);font-weight:600;font-size:19px;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:9px;}
+  .brand .mark{display:block;flex-shrink:0;}
+  .brand .wordmark{font-family:var(--display);font-weight:600;font-size:19px;color:var(--ink);}
+  .brand .coach-label{font-family:var(--body);font-weight:600;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--indigo);background:var(--bg-tint);padding:3px 8px;border-radius:6px;margin-left:8px;}
   .budget{font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink-faint);}
 
   main{flex:1;overflow-y:auto;} body.pre-chat main{flex:none;}
@@ -36,6 +38,30 @@
   .intro h1{font-family:var(--display);font-weight:600;font-size:clamp(28px,4.6vw,40px);line-height:1.06;letter-spacing:-0.02em;margin-bottom:14px;}
   .intro h1 em{font-style:italic;color:var(--orange);}
   .intro p{font-size:17px;color:var(--ink-soft);max-width:54ch;}
+
+  /* intake form */
+  .intake{margin-top:24px;max-width:540px;display:flex;flex-direction:column;gap:18px;}
+  .field{display:flex;flex-direction:column;gap:7px;}
+  .field label,.field .lbl{font-size:14px;font-weight:700;color:var(--ink);}
+  .field label span,.field .lbl span{font-weight:500;color:var(--ink-faint);font-size:13px;}
+  .field input{font-family:var(--body);font-size:16px;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:12px;padding:12px 14px;}
+  .field input:focus{outline:none;border-color:var(--indigo);}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{font-family:var(--body);font-size:14px;font-weight:600;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:999px;padding:9px 16px;cursor:pointer;transition:all .12s;}
+  .chip:hover{border-color:var(--indigo);}
+  .chip.sel{background:var(--indigo);color:#fff;border-color:var(--indigo);}
+
+  /* age range */
+  .age-range{display:flex;align-items:flex-end;gap:12px;}
+  .age-pick{display:flex;flex-direction:column;gap:5px;flex:1;}
+  .age-pick label{font-size:13px;font-weight:700;color:var(--ink-soft);}
+  .age-dash{font-size:14px;color:var(--ink-faint);padding-bottom:12px;}
+  .select{font-family:var(--body);font-size:15px;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:10px;padding:11px 12px;cursor:pointer;width:100%;}
+  .select:focus{outline:none;border-color:var(--indigo);}
+  .field .lbl .opt{font-weight:500;color:var(--ink-faint);font-size:13px;}
+  .intake-go{font-family:var(--body);font-weight:700;font-size:17px;background:var(--orange);color:#fff;border:none;border-radius:14px;padding:15px 28px;cursor:pointer;box-shadow:0 4px 0 var(--red);transition:transform .12s;align-self:flex-start;margin-top:4px;}
+  .intake-go:active{transform:translateY(3px);box-shadow:0 1px 0 var(--red);}
+  .intake-note{font-size:13px;color:var(--red);min-height:1em;margin:0;}
 
   .msg{display:flex;gap:13px;align-items:flex-start;}
   .who{font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding-top:5px;flex-shrink:0;width:58px;}
@@ -77,7 +103,13 @@
 <body class="pre-chat">
   <nav>
     <div class="nav-in">
-      <a href="https://aware.family" class="brand"><span class="glyph">a</span>aware.family coach</a>
+      <a href="https://aware.family" class="brand" aria-label="aware.family coach">
+        <svg class="mark" width="26" height="26" viewBox="40 140 80 82" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path fill="#3d348b" d="M88.61,216.63h-21.09c-12.83,0-23.28-10.44-23.28-23.28v-21.09c0-12.83,10.44-23.27,23.28-23.27h18.38c.65,0,1.17.52,1.17,1.17s-.52,1.17-1.17,1.17h-18.38c-11.54,0-20.93,9.39-20.93,20.93v21.09c0,11.54,9.39,20.93,20.93,20.93h21.09c11.54,0,20.92-9.39,20.92-20.93v-17.22c0-.65.52-1.17,1.17-1.17s1.17.52,1.17,1.17v17.22c0,12.83-10.44,23.28-23.27,23.28Z"/>
+          <circle fill="#7678ed" cx="104.02" cy="158.47" r="15.09"/>
+        </svg>
+        <span class="wordmark">aware.family</span><span class="coach-label">coach</span>
+      </a>
       <div class="budget">Live demo · <span id="remaining">3</span> sessions left</div>
     </div>
   </nav>
@@ -86,23 +118,82 @@
     <div class="chat" id="chat" role="log" aria-live="polite" aria-label="Conversation with the aware.family coach">
       <div class="intro" id="intro">
         <span class="tag">Try the coach · live</span>
-        <h1>What are you trying to do with your family — and <em>when?</em></h1>
-        <p>Tell me who's in the family, your city in Ontario, and the time you've got — today, the weekend, the summer. I'll ask one honest question about the energy in the house, then make the call. Real recommendation, not a list.</p>
+        <h1>Tell me about your family — I'll <em>help you figure it out.</em></h1>
+        <p>A few quick details, then one honest question about the energy in the house. You'll walk away with a real plan — one thing to do, one backup — not a list of forty.</p>
+
+        <form class="intake" id="intake" novalidate>
+          <div class="field">
+            <span class="lbl">How old are your kids? <span>one kid? set both the same</span></span>
+            <div class="age-range">
+              <div class="age-pick">
+                <label for="f-youngest">Youngest</label>
+                <select id="f-youngest" class="select"></select>
+              </div>
+              <span class="age-dash">to</span>
+              <div class="age-pick">
+                <label for="f-oldest">Oldest</label>
+                <select id="f-oldest" class="select"></select>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="f-city">Your city or town <span>in Ontario</span></label>
+            <select id="f-city" class="select">
+              <option value="">Choose a city…</option>
+              <option>Toronto</option><option>Vaughan</option><option>Mississauga</option>
+              <option>Markham</option><option>Richmond Hill</option><option>Newmarket</option>
+              <option>Durham Region</option><option>Whitby</option><option>Hamilton</option>
+              <option>Niagara</option><option>London</option><option>Barrie</option>
+              <option value="somewhere else in Ontario">Somewhere else in Ontario</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <span class="lbl">What does your crew love? <span class="opt">tap any · optional</span></span>
+            <div class="chips multi" id="f-interests" role="group" aria-label="Interests">
+              <button type="button" data-val="animals" class="chip">Animals</button>
+              <button type="button" data-val="water & splash pads" class="chip">Water</button>
+              <button type="button" data-val="arts & crafts" class="chip">Arts &amp; crafts</button>
+              <button type="button" data-val="science & building" class="chip">Science</button>
+              <button type="button" data-val="sports & active play" class="chip">Active play</button>
+              <button type="button" data-val="nature & outdoors" class="chip">Outdoors</button>
+              <button type="button" data-val="music & shows" class="chip">Music &amp; shows</button>
+              <button type="button" data-val="farms" class="chip">Farms</button>
+            </div>
+          </div>
+
+          <div class="field">
+            <span class="lbl">When?</span>
+            <div class="chips" id="f-when" role="group" aria-label="Time window">
+              <button type="button" data-val="today" class="chip">Today</button>
+              <button type="button" data-val="this weekend" class="chip">This weekend</button>
+              <button type="button" data-val="a school break" class="chip">A break</button>
+              <button type="button" data-val="the whole summer" class="chip">The summer</button>
+            </div>
+          </div>
+
+          <div class="field">
+            <span class="lbl">Budget</span>
+            <div class="chips" id="f-budget" role="group" aria-label="Budget comfort">
+              <button type="button" data-val="free only" class="chip">Free only</button>
+              <button type="button" data-val="low-cost is fine" class="chip">Low-cost is fine</button>
+              <button type="button" data-val="money's not the issue" class="chip">Money's no issue</button>
+            </div>
+          </div>
+
+          <button type="submit" class="intake-go" id="intake-go">Get a plan →</button>
+          <p class="intake-note" id="intake-note"></p>
+        </form>
       </div>
     </div>
   </main>
 
   <footer>
     <div id="endZone"></div>
-    <div class="compose" id="compose">
-      <textarea id="input" rows="1" placeholder="Tell me about your family…" aria-label="Tell me about your family and the time you have"></textarea>
+    <div class="compose" id="compose" style="display:none;">
+      <textarea id="input" rows="1" placeholder="Type your reply…" aria-label="Type your reply to the coach"></textarea>
       <button class="send" id="send">Send</button>
-    </div>
-    <div class="suggest" id="suggest">
-      Not sure where to start?
-      <a data-seed="Two kids, 4 and 7, in Vaughan. We've got Saturday free but nobody slept well.">a low-energy Saturday</a>,
-      <a data-seed="Toronto, kids are 6 and 9, school's out for summer and I work from home. Help me not lose my mind.">surviving the summer</a>,
-      <a data-seed="18-month-old in Toronto, rainy day, we're going stir crazy.">a rainy day with a toddler</a>.
     </div>
   </footer>
 
@@ -118,11 +209,73 @@
   const chat=document.getElementById('chat'), intro=document.getElementById('intro'),
         input=document.getElementById('input'), sendBtn=document.getElementById('send'),
         remainingEl=document.getElementById('remaining'), endZone=document.getElementById('endZone'),
-        compose=document.getElementById('compose'), suggestEl=document.getElementById('suggest');
+        compose=document.getElementById('compose');
 
-  document.querySelectorAll('.suggest a').forEach(a=>{
-    a.addEventListener('click',(e)=>{ e.preventDefault(); input.value=a.dataset.seed; input.focus(); autosize(); });
+  // ---- chip toggles: single-select groups (when, budget) ----
+  function wireChips(groupId){
+    const g=document.getElementById(groupId);
+    g.querySelectorAll('.chip').forEach(c=>{
+      c.addEventListener('click',()=>{
+        g.querySelectorAll('.chip').forEach(x=>x.classList.remove('sel'));
+        c.classList.add('sel');
+      });
+    });
+  }
+  wireChips('f-when'); wireChips('f-budget');
+
+  // ---- multi-select chips: interests ----
+  document.querySelectorAll('#f-interests .chip').forEach(c=>{
+    c.addEventListener('click',()=>c.classList.toggle('sel'));
   });
+
+  // ---- age-range dropdowns (youngest / oldest) ----
+  const ageOpts=['under 1','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17'];
+  function fillAges(sel){
+    sel.innerHTML='<option value="">age</option>'+ageOpts.map((a,i)=>'<option value="'+a+'" data-i="'+i+'">'+a+(a==='under 1'||isNaN(a)?'':' yrs')+'</option>').join('');
+  }
+  const youngest=document.getElementById('f-youngest'), oldest=document.getElementById('f-oldest');
+  fillAges(youngest); fillAges(oldest);
+  // keep oldest >= youngest: if youngest exceeds oldest, bump oldest to match
+  youngest.addEventListener('change',()=>{
+    if(oldest.value && ageOpts.indexOf(oldest.value)<ageOpts.indexOf(youngest.value)) oldest.value=youngest.value;
+  });
+  oldest.addEventListener('change',()=>{
+    if(youngest.value && ageOpts.indexOf(youngest.value)>ageOpts.indexOf(oldest.value)) youngest.value=oldest.value;
+  });
+
+  const intakeForm=document.getElementById('intake'), intakeNote=document.getElementById('intake-note');
+  intakeForm.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    const yng=youngest.value, old=oldest.value;
+    const city=document.getElementById('f-city').value;
+    const interests=[...document.querySelectorAll('#f-interests .chip.sel')].map(c=>c.dataset.val);
+    const when=(document.querySelector('#f-when .chip.sel')||{}).dataset?.val;
+    const budget=(document.querySelector('#f-budget .chip.sel')||{}).dataset?.val;
+
+    if(!yng||!old){ intakeNote.textContent="Set your kids' age range — it changes everything about the right day."; return; }
+    if(!city){ intakeNote.textContent="Pick your city so my picks are real and reachable."; return; }
+    intakeNote.textContent="";
+
+    // describe the age range naturally
+    let ageDesc;
+    if(yng===old) ageDesc = yng==='under 1' ? "a baby under 1" : ("one kid aged "+yng);
+    else ageDesc = "kids aged "+yng+" to "+old;
+
+    let msg="Here's my family: "+ageDesc+", in "+city+".";
+    if(interests.length) msg+=" We're into "+interests.join(', ')+".";
+    if(when) msg+=" Time window: "+when+".";
+    if(budget) msg+=" Budget: "+budget+".";
+    startConversation(msg);
+  });
+
+  function startConversation(profileMsg){
+    document.body.classList.remove('pre-chat');
+    if(intro) intro.remove();
+    compose.style.display='flex';
+    // record the profile and let the coach open with the energy question
+    sendStructured(profileMsg);
+  }
+
   function autosize(){ input.style.height='auto'; input.style.height=Math.min(input.scrollHeight,140)+'px'; }
   input.addEventListener('input', autosize);
   input.addEventListener('keydown', e=>{ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); send(); } });
@@ -145,7 +298,6 @@
   }
   function addMsg(role,text){
     if(intro) intro.remove();
-    if(suggestEl) suggestEl.style.display='none';
     document.body.classList.remove('pre-chat');
     const wrap=document.createElement('div'); wrap.className='msg '+(role==='user'?'you':'coach');
     const who=document.createElement('div'); who.className='who'; who.textContent=role==='user'?'You':'Coach';
@@ -165,6 +317,21 @@
       (message||"That's the demo. The full coach goes the whole way — grab the folder and drop it into your own Claude project.")+
       '</p><a href="'+REPO_URL+'" target="_blank">Get the folder →</a></div></div>';
     endZone.scrollIntoView({behavior:'smooth',block:'end'});
+  }
+
+  async function sendStructured(text){
+    if(busy) return;
+    busy=true; sendBtn.disabled=true;
+    addMsg('user',text); history.push({role:'user',content:text}); userTurns++; updateBudget();
+    showTyping();
+    try{
+      const r=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:history})});
+      const data=await r.json(); clearTyping();
+      if(data.capped){ endDemo(data.reply); return; }
+      if(data.error){ addMsg('assistant',"Something went wrong reaching the coach. Try again in a moment."); busy=false; sendBtn.disabled=false; return; }
+      addMsg('assistant',data.reply); history.push({role:'assistant',content:data.reply});
+      busy=false; sendBtn.disabled=false; input.focus();
+    }catch(e){ clearTyping(); addMsg('assistant',"Couldn't reach the coach just now — check the connection and try again."); busy=false; sendBtn.disabled=false; }
   }
 
   async function send(){

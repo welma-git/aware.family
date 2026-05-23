@@ -53,11 +53,11 @@
   </g>
 
   <!-- Headline -->
-  <text x="80" y="305" font-family="'Playfair Display',Georgia,serif" font-size="78" font-weight="900" fill="#fbfaff" letter-spacing="-1">Aware families</text>
-  <text x="80" y="395" font-family="'Playfair Display',Georgia,serif" font-size="78" font-weight="900" fill="#fbfaff" letter-spacing="-1">have <tspan fill="#f7b801" font-style="italic">more fun.</tspan></text>
+  <text x="80" y="305" font-family="Georgia,serif" font-size="78" font-weight="900" fill="#fbfaff" letter-spacing="-1">Aware families</text>
+  <text x="80" y="395" font-family="Georgia,serif" font-size="78" font-weight="900" fill="#fbfaff" letter-spacing="-1">have <tspan fill="#f7b801" font-style="italic">more fun.</tspan></text>
 
   <!-- Descriptor -->
-  <text x="80" y="460" font-family="'DM Sans',Arial,sans-serif" font-size="24" font-weight="300" fill="#9b96c8">Find camps, classes, events &amp; experiences across Ontario.</text>
+  <text x="80" y="460" font-family="system-ui,Arial,sans-serif" font-size="24" font-weight="400" fill="#9b96c8">Find camps, classes, events &amp; experiences across Ontario.</text>
 
   <!-- Bottom rule -->
   <line x1="80" y1="530" x2="1120" y2="530" stroke="#7678ed" stroke-opacity="0.25" stroke-width="1"/>

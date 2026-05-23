@@ -282,7 +282,7 @@ header h1 {
 }
 .header-hero-grid {
   display: grid;
-  grid-template-columns: 1fr 0.82fr;
+  grid-template-columns: 0.85fr 1fr;
   gap: 36px;
   align-items: start;
   padding-top: 1.25rem;
@@ -295,13 +295,55 @@ header h1 {
   box-shadow: var(--shadow-card);
 }
 .header-search-col .search-card {
-  max-width: none;
-  margin: 0;
-  box-shadow: 0 12px 36px rgba(0,0,0,0.22);
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
 }
+.header-search-col .keyword-input {
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.3);
+  color: #fff;
+}
+.header-search-col .keyword-input:focus { border-color: rgba(255,255,255,0.75); }
+.header-search-col .keyword-input::placeholder { color: rgba(255,255,255,0.38); }
+.header-search-col .fd-btn {
+  background: transparent;
+  border-color: rgba(255,255,255,0.28);
+  color: rgba(255,255,255,0.75);
+}
+.header-search-col .fd-btn:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.55);
+  color: #fff;
+}
+.header-search-col .fd-btn.open,
+.header-search-col .fd-btn.has-value {
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.6);
+  color: #fff;
+}
+.header-search-col .toggle-pill {
+  background: transparent;
+  border-color: rgba(255,255,255,0.28);
+  color: rgba(255,255,255,0.75);
+}
+.header-search-col .toggle-pill:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.55);
+  color: #fff;
+}
+.header-search-col .toggle-pill.on {
+  background: var(--amber);
+  border-color: var(--amber);
+  color: var(--ink);
+}
+.header-search-col .view-toggle { border-color: rgba(255,255,255,0.28); }
+.header-search-col .vbtn { color: rgba(255,255,255,0.65); }
+.header-search-col .vbtn + .vbtn { border-left-color: rgba(255,255,255,0.28); }
+.header-search-col .vbtn.active { background: rgba(255,255,255,0.18); color: #fff; }
 @media(max-width:860px) {
   .header-hero-grid { grid-template-columns: 1fr; gap: 18px; }
-  .header-text-col { order: -1; }
 }
 .filterbar {
   display: flex; align-items: center; gap: 0.45rem; flex-wrap: wrap;
@@ -862,6 +904,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a class="header-cta" href="/coach">Let the coach plan your day →</a>
     </div>
     <div class="header-hero-grid">
+      <div class="header-text-col">
+        <div class="header-eyebrow">Ontario · Kids &amp; Family</div>
+        <h1><span class="h1-plain">Aware families</span><br><span class="h1-plain">have </span><span class="h1-gold">more fun.</span></h1>
+        <p class="header-sub">Find camps, classes, events, and experiences for kids across Ontario — updated weekly.</p>
+      </div>
       <div class="header-search-col">
         <div class="search-card">
           <input type="text" class="keyword-input" id="keyword" placeholder="Search activities, interests..." aria-label="Search activities">
@@ -1007,11 +1054,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
         </div>
         <span id="lastUpdated" style="display:block;padding-top:0.4rem;font-family:ui-monospace,monospace;font-size:10px;letter-spacing:0.06em;color:rgba(255,255,255,0.4);"></span>
-      </div>
-      <div class="header-text-col">
-        <div class="header-eyebrow">Ontario · Kids &amp; Family</div>
-        <h1><span class="h1-plain">Aware families</span><br><span class="h1-plain">have </span><span class="h1-gold">more fun.</span></h1>
-        <p class="header-sub">Find camps, classes, events, and experiences for kids across Ontario — updated weekly.</p>
       </div>
     </div>
   </div>

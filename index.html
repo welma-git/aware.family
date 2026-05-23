@@ -240,18 +240,26 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
+  transition: padding 0.2s ease;
 }
-.header-inner { max-width: 980px; margin: 0 auto; }
+.header-inner {
+  max-width: 980px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.85fr 1fr;
+  column-gap: 36px;
+  align-items: start;
+}
 .header-top {
   display: flex; align-items: center; justify-content: space-between;
-  padding-bottom: 1.25rem; margin-bottom: 1.5rem;
+  grid-column: 1 / -1;
+  padding-bottom: 1.25rem; margin-bottom: 0;
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 .header-wordmark {
   display: flex; align-items: center; gap: 0;
   text-decoration: none;
 }
-.header-logo { display: block; height: 42px; width: auto; }
+.header-logo { display: block; height: 42px; width: auto; transition: height 0.2s ease; }
 .header-cta {
   font-family: var(--body); font-weight: 700; font-size: 14px;
   background: var(--orange); color: var(--ink);
@@ -262,10 +270,12 @@ header {
 .header-cta:hover { transform: translateY(-1px); }
 .header-cta:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--red); }
 .header-eyebrow {
-  font-family: ui-monospace,monospace; font-size: 10px;
-  letter-spacing: 0.18em; color: rgba(255,255,255,0.6);
-  text-transform: uppercase; margin-bottom: 0.9rem;
+  font-family: var(--body); font-weight: 700; font-size: 11px;
+  letter-spacing: 0.14em; color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  padding-top: 1.25rem; margin-bottom: 0.75rem;
   display: flex; align-items: center; gap: 0.75rem;
+  grid-column: 1 / -1;
 }
 .header-eyebrow::before { content: ''; width: 1.5rem; height: 1px; background: rgba(255,255,255,0.25); }
 header h1 {
@@ -280,14 +290,26 @@ header h1 {
   font-size: 17px; color: rgba(255,255,255,0.6);
   margin-top: 0.9rem; font-weight: 400; max-width: 38ch; line-height: 1.6;
 }
-.header-hero-grid {
-  display: grid;
-  grid-template-columns: 0.85fr 1fr;
-  gap: 36px;
-  align-items: start;
-  padding-top: 1.25rem;
-  padding-bottom: 0.25rem;
+/* ── Compact sticky header (on scroll) ── */
+header.compact { padding: 0.5rem 2rem; }
+header.compact .header-top { padding-bottom: 0.3rem; border-bottom: none; }
+header.compact .header-cta { display: none; }
+header.compact .header-logo { height: 28px; }
+header.compact .header-eyebrow,
+header.compact .header-text-col { display: none; }
+header.compact .header-search-col { grid-column: 1 / -1; }
+header.compact .header-search-col .search-card {
+  display: flex; align-items: center; gap: 0.6rem;
 }
+header.compact .header-search-col .keyword-input {
+  width: 180px; flex-shrink: 0; margin-bottom: 0; padding: 6px 12px;
+}
+header.compact .header-search-col .filterbar {
+  flex-wrap: nowrap; overflow-x: auto; flex: 1; scrollbar-width: none;
+}
+header.compact .header-search-col .filterbar::-webkit-scrollbar { display: none; }
+header.compact #lastUpdated { display: none; }
+/* ── Search form on dark header ── */
 .search-card {
   max-width: 980px; margin: 0 auto;
   background: var(--card); border: 1px solid var(--line);
@@ -353,7 +375,8 @@ header h1 {
 .header-search-col .vbtn + .vbtn { border-left-color: rgba(255,255,255,0.28); }
 .header-search-col .vbtn.active { background: rgba(255,255,255,0.18); color: #fff; }
 @media(max-width:860px) {
-  .header-hero-grid { grid-template-columns: 1fr; gap: 18px; }
+  .header-inner { grid-template-columns: 1fr; column-gap: 0; }
+  .header-eyebrow { padding-top: 1rem; }
 }
 .filterbar {
   display: flex; align-items: center; gap: 0.45rem; flex-wrap: wrap;
@@ -882,8 +905,10 @@ main { max-width: 980px; margin: 0 auto; padding: 1.75rem 2rem; }
 .venue-tag.outdoor { background: var(--teal-light); color: var(--teal); }
 
 @media (max-width: 640px) {
-  header { padding: 1rem 1.25rem; }
-  .search-card { padding: 10px 14px; }
+  header { padding: 0.75rem 1rem; }
+  .header-logo { height: 32px; }
+  .header-cta { font-size: 11px; padding: 7px 10px; }
+  header.compact .header-search-col .keyword-input { display: none; }
   main { padding: 1.25rem; }
   .results-grid { grid-template-columns: 1fr; }
   .cal-cell { min-height: 56px; padding: 3px; }
@@ -901,7 +926,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="site-topbar"></div>
 
-<header>
+<header id="site-header">
   <div class="header-inner">
     <div class="header-top">
       <a class="header-wordmark" href="https://aware.family" aria-label="Aware Family — home">
@@ -911,14 +936,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <text fill="#ffffff" font-family="'Fraunces',Georgia,serif" font-size="40" font-weight="700" transform="translate(127.79 197)">aware.family</text>
         </svg>
       </a>
-      <a class="header-cta" href="/coach">Let the coach plan your day →</a>
+      <a class="header-cta" href="/coach">Try the planning coach! →</a>
     </div>
-    <div class="header-hero-grid">
-      <div class="header-text-col">
-        <div class="header-eyebrow">Ontario · Kids &amp; Family</div>
-        <h1><span class="h1-plain">Aware families</span><br><span class="h1-plain">have </span><span class="h1-gold">more fun.</span></h1>
-        <p class="header-sub">Find camps, classes, events, and experiences for kids across Ontario — updated weekly.</p>
-      </div>
+    <div class="header-eyebrow">Ontario · Kids &amp; Family</div>
+    <div class="header-text-col">
+      <h1><span class="h1-plain">Aware families</span><br><span class="h1-plain">have </span><span class="h1-gold">more fun.</span></h1>
+      <p class="header-sub">Find camps, classes, events, and experiences for kids across Ontario — updated weekly.</p>
+    </div>
       <div class="header-search-col">
         <div class="search-card">
           <input type="text" class="keyword-input" id="keyword" placeholder="Search activities, interests..." aria-label="Search activities">
@@ -1065,7 +1089,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         <span id="lastUpdated" style="display:block;padding-top:0.4rem;font-family:ui-monospace,monospace;font-size:10px;letter-spacing:0.06em;color:rgba(255,255,255,0.4);"></span>
       </div>
-    </div>
   </div>
 </header>
 
@@ -1997,6 +2020,19 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('cookieNotice').style.display = 'flex';
   }
 });
+
+// Compact sticky header on scroll
+(function() {
+  const hdr = document.getElementById('site-header');
+  let compact = false;
+  window.addEventListener('scroll', function() {
+    const now = window.scrollY > 90;
+    if (now !== compact) {
+      compact = now;
+      hdr.classList.toggle('compact', compact);
+    }
+  }, { passive: true });
+})();
 </script>
 
 <footer style="background:var(--indigo-deep);border-top:1px solid rgba(255,255,255,0.08);padding:2rem 2rem 1.75rem;">

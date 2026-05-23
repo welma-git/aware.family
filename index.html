@@ -283,27 +283,6 @@ header h1 {
   padding: 0.85rem 2rem; position: sticky; top: 0; z-index: 100;
   box-shadow: 0 2px 12px rgba(28,23,51,0.06);
 }
-.coach-strip { background: var(--indigo); }
-.coach-strip-inner {
-  max-width: 980px; margin: 0 auto; padding: 10px 20px;
-  display: flex; align-items: center; gap: 14px;
-  text-decoration: none; justify-content: space-between; flex-wrap: wrap;
-}
-.coach-strip-pre {
-  font-family: var(--body); font-size: 11px; font-weight: 600;
-  letter-spacing: 0.06em; text-transform: uppercase;
-  color: rgba(255,255,255,0.6); flex-shrink: 0;
-}
-.coach-strip-cta {
-  font-family: var(--body); font-size: 15px;
-  font-weight: 700; color: #fff;
-  transition: color 0.15s;
-}
-.coach-strip-inner:hover .coach-strip-cta { color: var(--amber); }
-@media(max-width:640px) {
-  .coach-strip-pre { display: none; }
-  .coach-strip-cta { font-size: 14px; }
-}
 .filterbar {
   max-width: 980px; margin: 0 auto;
   display: flex; align-items: center; gap: 0.45rem; flex-wrap: wrap;
@@ -1015,13 +994,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div style="max-width:980px;margin:0.4rem auto 0;padding:0 0.25rem;display:flex;align-items:center;justify-content:space-between;">
     <span id="lastUpdated" style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:0.06em;color:var(--ink-faint);"></span>
   </div>
-</div>
-
-<div class="coach-strip">
-  <a class="coach-strip-inner" href="/coach">
-    <span class="coach-strip-pre">Not sure what to do?</span>
-    <span class="coach-strip-cta">Let the coach plan your day →</span>
-  </a>
 </div>
 
 <main>

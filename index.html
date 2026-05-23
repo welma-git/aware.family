@@ -251,7 +251,7 @@ header {
   display: flex; align-items: center; gap: 0;
   text-decoration: none;
 }
-.header-logo { display: block; height: 36px; width: auto; }
+.header-logo { display: block; height: 42px; width: auto; }
 .header-cta {
   font-family: var(--body); font-weight: 700; font-size: 14px;
   background: var(--orange); color: var(--ink);
@@ -270,15 +270,15 @@ header {
 .header-eyebrow::before { content: ''; width: 1.5rem; height: 1px; background: rgba(255,255,255,0.25); }
 header h1 {
   font-family: var(--display);
-  font-size: clamp(1.85rem, 3.5vw, 2.9rem);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
   font-weight: 600; line-height: 1.05;
   letter-spacing: -0.025em;
 }
 .h1-plain { color: #fff; font-style: normal; }
 .h1-gold  { color: var(--amber); font-style: italic; }
 .header-sub {
-  font-size: 14px; color: rgba(255,255,255,0.6);
-  margin-top: 0.9rem; font-weight: 400; max-width: 480px; line-height: 1.7;
+  font-size: 17px; color: rgba(255,255,255,0.6);
+  margin-top: 0.9rem; font-weight: 400; max-width: 38ch; line-height: 1.6;
 }
 .header-hero-grid {
   display: grid;
@@ -300,10 +300,14 @@ header h1 {
   box-shadow: none;
   padding: 0;
 }
+.header-search-col .filterbar { gap: 0.3rem; }
 .header-search-col .keyword-input {
   background: transparent;
   border: 2px solid rgba(255,255,255,0.3);
   color: #fff;
+  padding: 8px 14px;
+  margin-bottom: 7px;
+  font-size: 14px;
 }
 .header-search-col .keyword-input:focus { border-color: rgba(255,255,255,0.75); }
 .header-search-col .keyword-input::placeholder { color: rgba(255,255,255,0.38); }
@@ -311,6 +315,9 @@ header h1 {
   background: transparent;
   border-color: rgba(255,255,255,0.28);
   color: rgba(255,255,255,0.75);
+  padding: 5px 10px 5px 12px;
+  min-height: 36px;
+  font-size: 12px;
 }
 .header-search-col .fd-btn:hover {
   background: rgba(255,255,255,0.08);
@@ -327,6 +334,9 @@ header h1 {
   background: transparent;
   border-color: rgba(255,255,255,0.28);
   color: rgba(255,255,255,0.75);
+  padding: 5px 12px;
+  min-height: 36px;
+  font-size: 12px;
 }
 .header-search-col .toggle-pill:hover {
   background: rgba(255,255,255,0.08);
@@ -339,7 +349,7 @@ header h1 {
   color: var(--ink);
 }
 .header-search-col .view-toggle { border-color: rgba(255,255,255,0.28); }
-.header-search-col .vbtn { color: rgba(255,255,255,0.65); }
+.header-search-col .vbtn { color: rgba(255,255,255,0.65); padding: 5px 10px; min-height: 36px; font-size: 12px; }
 .header-search-col .vbtn + .vbtn { border-left-color: rgba(255,255,255,0.28); }
 .header-search-col .vbtn.active { background: rgba(255,255,255,0.18); color: #fff; }
 @media(max-width:860px) {
@@ -895,10 +905,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="header-inner">
     <div class="header-top">
       <a class="header-wordmark" href="https://aware.family" aria-label="Aware Family — home">
-        <svg class="header-logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="40 140 340 82" height="36">
+        <svg class="header-logo" xmlns="http://www.w3.org/2000/svg" viewBox="40 138 360 88" height="42" role="img" aria-label="aware.family">
           <path fill="#fff" d="M88.61,216.63h-21.09c-12.83,0-23.28-10.44-23.28-23.28v-21.09c0-12.83,10.44-23.27,23.28-23.27h18.38c.65,0,1.17.52,1.17,1.17s-.52,1.17-1.17,1.17h-18.38c-11.54,0-20.93,9.39-20.93,20.93v21.09c0,11.54,9.39,20.93,20.93,20.93h21.09c11.54,0,20.92-9.39,20.92-20.93v-17.22c0-.65.52-1.17,1.17-1.17s1.17.52,1.17,1.17v17.22c0,12.83-10.44,23.28-23.27,23.28Z"/>
           <circle fill="#f7b801" cx="104.02" cy="158.47" r="15.09"/>
-          <text fill="white" font-family="'Fraunces',Georgia,serif" font-size="34" font-weight="700" transform="translate(127.79 195.5)">aware.family</text>
+          <text fill="#ffffff" font-family="'Fraunces',Georgia,serif" font-size="40" font-weight="700" transform="translate(127.79 197)">aware.family</text>
         </svg>
       </a>
       <a class="header-cta" href="/coach">Let the coach plan your day →</a>

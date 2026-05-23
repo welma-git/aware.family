@@ -252,7 +252,7 @@ header {
 .header-logo { display: block; height: 36px; width: auto; }
 .header-cta {
   font-family: var(--body); font-weight: 700; font-size: 14px;
-  background: var(--orange); color: #fff;
+  background: var(--orange); color: var(--ink);
   text-decoration: none; padding: 10px 20px; border-radius: var(--r-md);
   box-shadow: 0 3px 0 var(--red); transition: transform .12s;
   white-space: nowrap;
@@ -261,7 +261,7 @@ header {
 .header-cta:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--red); }
 .header-eyebrow {
   font-family: ui-monospace,monospace; font-size: 10px;
-  letter-spacing: 0.18em; color: rgba(255,255,255,0.45);
+  letter-spacing: 0.18em; color: rgba(255,255,255,0.6);
   text-transform: uppercase; margin-bottom: 0.9rem;
   display: flex; align-items: center; gap: 0.75rem;
 }
@@ -316,7 +316,7 @@ header h1 {
   color: var(--ink); outline: none; transition: border-color 0.15s;
 }
 .keyword-input:focus { border-color: var(--indigo); background: var(--card); }
-.keyword-input::placeholder { color: var(--ink-faint); }
+.keyword-input::placeholder { color: var(--ink-soft); }
 .fd { position: relative; }
 .fd-btn {
   font-family: var(--body); font-size: 13px; font-weight: 600;
@@ -325,6 +325,7 @@ header h1 {
   background: var(--card); color: var(--ink-soft);
   cursor: pointer; transition: all 0.15s;
   display: flex; align-items: center; gap: 4px; white-space: nowrap; user-select: none;
+  min-height: 44px;
 }
 .fd-btn:hover { border-color: var(--indigo); color: var(--ink); }
 .fd-btn.open { border-color: var(--ink); background: var(--ink); color: #fff; }
@@ -390,7 +391,7 @@ header h1 {
 .vbtn svg { width: 13px; height: 13px; }
 .search-btn {
   font-family: var(--body); font-size: 14px; font-weight: 700;
-  padding: 8px 20px; background: var(--orange); color: #fff;
+  padding: 8px 20px; background: var(--orange); color: var(--ink);
   border: none; border-radius: var(--r-pill);
   box-shadow: 0 3px 0 var(--red);
   cursor: pointer; transition: transform .12s;
@@ -456,7 +457,7 @@ header h1 {
   padding: 6px 14px; border-radius: 100px; cursor: pointer;
   transition: all 0.15s; border: none;
 }
-.sel-btn-primary { background: var(--gold); color: var(--ink); }
+.sel-btn-primary { background: var(--amber); color: var(--ink); }
 .sel-btn-primary:hover { background: var(--gold-light); }
 .sel-btn-ghost { background: transparent; color: var(--parchment-dark); border: 1px solid rgba(247,243,236,0.15); }
 .sel-btn-ghost:hover { border-color: rgba(247,243,236,0.3); color: var(--parchment); }
@@ -486,7 +487,7 @@ main { max-width: 980px; margin: 0 auto; padding: 1.75rem 2rem; }
 }
 .status-count {
   font-family: ui-monospace,monospace; font-size: 11px;
-  background: var(--ink); color: var(--gold);
+  background: var(--ink); color: var(--amber);
   padding: 3px 10px; border-radius: 100px;
 }
 .loading-state {
@@ -573,9 +574,9 @@ main { max-width: 980px; margin: 0 auto; padding: 1.75rem 2rem; }
 .category-badge {
   font-size: 11px; font-family: var(--body); font-weight: 800;
   letter-spacing: 0.06em; text-transform: uppercase;
-  color: var(--orange);
+  color: var(--coral);
 }
-.badge-event { color: var(--orange); }
+.badge-event { color: var(--coral); }
 .badge-program { color: var(--blue); }
 .badge-camp { color: var(--teal); }
 .badge-extracurricular { color: var(--purple); }
@@ -607,7 +608,7 @@ main { max-width: 980px; margin: 0 auto; padding: 1.75rem 2rem; }
 .card-actions { display: flex; align-items: center; gap: 6px; }
 .card-link-btn {
   font-size: 13px; font-weight: 700; font-family: var(--body);
-  padding: 7px 14px; border-radius: var(--r-md); min-height: 36px;
+  padding: 7px 14px; border-radius: var(--r-md); min-height: 44px;
   display: inline-flex; align-items: center;
   background: var(--indigo); color: #fff;
   border: none; text-decoration: none; border-bottom: 2px solid var(--amber);
@@ -623,7 +624,7 @@ main { max-width: 980px; margin: 0 auto; padding: 1.75rem 2rem; }
   border: 2px solid var(--line);
   background: transparent; color: var(--ink-soft);
   cursor: pointer; transition: all 0.15s;
-  display: flex; align-items: center; gap: 4px; white-space: nowrap; min-height: 36px;
+  display: flex; align-items: center; gap: 4px; white-space: nowrap; min-height: 44px;
 }
 .gcal-mini-btn:hover { border-color: var(--indigo); color: var(--indigo); }
 
@@ -638,6 +639,7 @@ main { max-width: 980px; margin: 0 auto; padding: 1.75rem 2rem; }
   background: transparent; border: 1.5px solid var(--parchment-dark);
   border-radius: var(--radius-sm); padding: 5px 12px;
   cursor: pointer; color: var(--ink-mid); font-size: 14px; transition: all 0.15s;
+  min-height: 44px; min-width: 44px;
 }
 .cal-arrow:hover { border-color: var(--gold); color: var(--gold-dim); }
 .cal-dow-row { display: grid; grid-template-columns: repeat(7, 1fr); }
@@ -663,7 +665,7 @@ main { max-width: 980px; margin: 0 auto; padding: 1.75rem 2rem; }
   margin-bottom: 3px; width: 22px; height: 22px;
   display: flex; align-items: center; justify-content: center; border-radius: 50%;
 }
-.cal-cell.today .cal-day-num { background: var(--gold); color: var(--ink); }
+.cal-cell.today .cal-day-num { background: var(--amber); color: var(--ink); }
 .cal-ev-chip {
   font-size: 9px; padding: 2px 5px; border-radius: 3px;
   white-space: normal; overflow: hidden;
@@ -761,7 +763,7 @@ main { max-width: 980px; margin: 0 auto; padding: 1.75rem 2rem; }
 }
 .panel-close {
   background: var(--parchment); border: none; border-radius: var(--radius-sm);
-  width: 30px; height: 30px; cursor: pointer; font-size: 16px;
+  width: 44px; height: 44px; cursor: pointer; font-size: 16px;
   display: flex; align-items: center; justify-content: center;
   color: var(--smoke); flex-shrink: 0; transition: background 0.15s;
 }
@@ -837,9 +839,7 @@ main { max-width: 980px; margin: 0 auto; padding: 1.75rem 2rem; }
   .filterbar { gap: 0.35rem; }
 }
 
-
-
-
+*:focus-visible { outline: 2px solid var(--indigo); outline-offset: 2px; }
 </style>
 </head>
 <body>
@@ -853,7 +853,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header>
   <div class="header-inner">
     <div class="header-top">
-      <a class="header-wordmark" href="https://aware.family">
+      <a class="header-wordmark" href="https://aware.family" aria-label="Aware Family — home">
         <svg class="header-logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="40 140 318 82" height="36">
           <path fill="#fff" d="M88.61,216.63h-21.09c-12.83,0-23.28-10.44-23.28-23.28v-21.09c0-12.83,10.44-23.27,23.28-23.27h18.38c.65,0,1.17.52,1.17,1.17s-.52,1.17-1.17,1.17h-18.38c-11.54,0-20.93,9.39-20.93,20.93v21.09c0,11.54,9.39,20.93,20.93,20.93h21.09c11.54,0,20.92-9.39,20.92-20.93v-17.22c0-.65.52-1.17,1.17-1.17s1.17.52,1.17,1.17v17.22c0,12.83-10.44,23.28-23.27,23.28Z"/>
           <circle fill="#f7b801" cx="104.02" cy="158.47" r="15.09"/>
@@ -870,7 +870,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="controls">
   <div class="filterbar">
-    <input type="text" class="keyword-input" id="keyword" placeholder="Search activities, interests...">
+    <input type="text" class="keyword-input" id="keyword" placeholder="Search activities, interests..." aria-label="Search activities">
 
     <!-- Category -->
     <div class="fd" id="fd-cat">
@@ -1101,14 +1101,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </main>
 
 <div class="overlay" id="overlay" onclick="closePanel()"></div>
-<div class="detail-panel" id="detailPanel">
+<div class="detail-panel" id="detailPanel" role="dialog" aria-modal="true" aria-labelledby="panelName">
   <div class="panel-header">
     <div style="flex:1;min-width:0">
       <span class="panel-badge" id="panelBadge"></span>
       <div class="panel-name" id="panelName"></div>
       <div class="panel-org" id="panelOrg"></div>
     </div>
-    <button class="panel-close" onclick="closePanel()">✕</button>
+    <button class="panel-close" onclick="closePanel()" aria-label="Close details">✕</button>
   </div>
   <div class="panel-body">
     <div class="panel-desc" id="panelDesc"></div>
@@ -1968,23 +1968,23 @@ document.addEventListener('DOMContentLoaded', () => {
       </a>
       <div style="display:flex;gap:1.25rem;align-items:center;">
         <a href="/coach" style="font-family:var(--body);font-size:13px;font-weight:700;color:rgba(255,255,255,0.7);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#f7b801'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">The planning coach →</a>
-        <a href="https://ideaalchemist.com" target="_blank" style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#f7b801'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">By Idea Alchemist</a>
+        <a href="https://ideaalchemist.com" target="_blank" style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#f7b801'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">By Idea Alchemist</a>
       </div>
     </div>
 
     <!-- Disclaimer -->
     <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:var(--r-md);padding:0.85rem 1.1rem;margin-bottom:1.25rem;">
-      <p style="font-family:var(--body);font-size:12px;color:rgba(255,255,255,0.45);line-height:1.65;">
+      <p style="font-family:var(--body);font-size:12px;color:rgba(255,255,255,0.6);line-height:1.65;">
         <strong style="font-weight:600;color:rgba(255,255,255,0.6);">Disclaimer:</strong> Event and program details on this site are sourced automatically from the web and may not reflect the most current information. Always confirm dates, times, costs, and availability directly with the organizer before attending. Aware Family and WELMA Inc. are not responsible for inaccuracies, cancellations, or changes to listed events.
       </p>
     </div>
 
     <!-- Bottom: copyright + legal links -->
     <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
-      <p style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:0.1em;color:rgba(255,255,255,0.3);">© 2026 WELMA Inc. · All rights reserved</p>
+      <p style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:0.1em;color:rgba(255,255,255,0.6);">© 2026 WELMA Inc. · All rights reserved</p>
       <div style="display:flex;gap:1.25rem;">
-        <a href="/terms.html" style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:0.1em;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#f7b801'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Terms of Use</a>
-        <a href="/privacy.html" style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:0.1em;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#f7b801'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Privacy Policy</a>
+        <a href="/terms.html" style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:0.1em;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#f7b801'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">Terms of Use</a>
+        <a href="/privacy.html" style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:0.1em;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#f7b801'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">Privacy Policy</a>
       </div>
     </div>
 
@@ -1992,9 +1992,9 @@ document.addEventListener('DOMContentLoaded', () => {
 </footer>
 
 <!-- Cookie notice -->
-<div id="cookieNotice" style="display:none;position:fixed;bottom:0;left:0;right:0;background:var(--ink);border-top:1px solid rgba(61,52,139,0.2);padding:0.85rem 2rem;z-index:1000;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;">
-  <p style="font-family:var(--body);font-size:12px;font-weight:300;color:rgba(247,243,236,0.6);margin:0;max-width:680px;line-height:1.5;">This site uses cookies and analytics (Google Analytics, Meta Pixel) to understand how families use Aware Family. No personal information is sold. <a href="/privacy.html" style="color:var(--gold);text-decoration:none;">Privacy Policy</a></p>
-  <button onclick="document.getElementById('cookieNotice').style.display='none';localStorage.setItem('af_cookie_ok','1')" style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:0.08em;padding:7px 18px;background:var(--gold);color:var(--ink);border:none;border-radius:100px;cursor:pointer;white-space:nowrap;flex-shrink:0;">Got it</button>
+<div id="cookieNotice" role="region" aria-live="polite" aria-label="Cookie notice" style="display:none;position:fixed;bottom:0;left:0;right:0;background:var(--ink);border-top:1px solid rgba(61,52,139,0.2);padding:0.85rem 2rem;z-index:1000;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;">
+  <p style="font-family:var(--body);font-size:12px;font-weight:300;color:rgba(247,243,236,0.6);margin:0;max-width:680px;line-height:1.5;">This site uses cookies and analytics (Google Analytics, Meta Pixel) to understand how families use Aware Family. No personal information is sold. <a href="/privacy.html" style="color:var(--amber);text-decoration:none;">Privacy Policy</a></p>
+  <button onclick="document.getElementById('cookieNotice').style.display='none';localStorage.setItem('af_cookie_ok','1')" aria-label="Accept cookies and dismiss notice" style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:0.08em;padding:7px 18px;min-height:44px;background:var(--amber);color:var(--ink);border:none;border-radius:100px;cursor:pointer;white-space:nowrap;flex-shrink:0;">Got it</button>
 </div>
 <script>
   if (!localStorage.getItem('af_cookie_ok')) {

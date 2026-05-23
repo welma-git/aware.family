@@ -233,11 +233,13 @@ body { font-family: var(--body); font-size: 17px; background: var(--bg); color: 
   background: linear-gradient(90deg,var(--indigo) 0 32%,var(--slate) 32% 50%,var(--amber) 50% 68%,var(--orange) 68% 84%,var(--red) 84% 100%);
 }
 
-/* ── Header — deep indigo ── */
+/* ── Header — deep indigo, sticky ── */
 header {
   background: var(--indigo-deep);
-  padding: 1.5rem 2rem 1.75rem;
-  position: relative;
+  padding: 1.25rem 2rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 .header-inner { max-width: 980px; margin: 0 auto; }
 .header-top {
@@ -268,7 +270,7 @@ header {
 .header-eyebrow::before { content: ''; width: 1.5rem; height: 1px; background: rgba(255,255,255,0.25); }
 header h1 {
   font-family: var(--display);
-  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-size: clamp(1.85rem, 3.5vw, 2.9rem);
   font-weight: 600; line-height: 1.05;
   letter-spacing: -0.025em;
 }
@@ -278,15 +280,28 @@ header h1 {
   font-size: 14px; color: rgba(255,255,255,0.6);
   margin-top: 0.9rem; font-weight: 400; max-width: 480px; line-height: 1.7;
 }
-.controls {
-  background: var(--bg);
-  padding: 0.75rem 2rem; position: sticky; top: 0; z-index: 100;
+.header-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 0.82fr;
+  gap: 36px;
+  align-items: start;
+  padding-top: 1.25rem;
+  padding-bottom: 0.25rem;
 }
 .search-card {
   max-width: 980px; margin: 0 auto;
   background: var(--card); border: 1px solid var(--line);
   border-radius: var(--r-lg); padding: 14px 18px;
   box-shadow: var(--shadow-card);
+}
+.header-search-col .search-card {
+  max-width: none;
+  margin: 0;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.22);
+}
+@media(max-width:860px) {
+  .header-hero-grid { grid-template-columns: 1fr; gap: 18px; }
+  .header-text-col { order: -1; }
 }
 .filterbar {
   display: flex; align-items: center; gap: 0.45rem; flex-wrap: wrap;
@@ -815,8 +830,7 @@ main { max-width: 980px; margin: 0 auto; padding: 1.75rem 2rem; }
 .venue-tag.outdoor { background: var(--teal-light); color: var(--teal); }
 
 @media (max-width: 640px) {
-  header { padding: 1.5rem 1.25rem; }
-  .controls { padding: 0.5rem 1rem; }
+  header { padding: 1rem 1.25rem; }
   .search-card { padding: 10px 14px; }
   main { padding: 1.25rem; }
   .results-grid { grid-template-columns: 1fr; }
@@ -839,168 +853,169 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="header-inner">
     <div class="header-top">
       <a class="header-wordmark" href="https://aware.family" aria-label="Aware Family — home">
-        <svg class="header-logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="40 140 318 82" height="36">
+        <svg class="header-logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="40 140 340 82" height="36">
           <path fill="#fff" d="M88.61,216.63h-21.09c-12.83,0-23.28-10.44-23.28-23.28v-21.09c0-12.83,10.44-23.27,23.28-23.27h18.38c.65,0,1.17.52,1.17,1.17s-.52,1.17-1.17,1.17h-18.38c-11.54,0-20.93,9.39-20.93,20.93v21.09c0,11.54,9.39,20.93,20.93,20.93h21.09c11.54,0,20.92-9.39,20.92-20.93v-17.22c0-.65.52-1.17,1.17-1.17s1.17.52,1.17,1.17v17.22c0,12.83-10.44,23.28-23.27,23.28Z"/>
           <circle fill="#f7b801" cx="104.02" cy="158.47" r="15.09"/>
-          <text fill="white" font-family="'Plus Jakarta Sans',system-ui,sans-serif" font-size="34" font-weight="700" transform="translate(127.79 195.5)">aware.family</text>
+          <text fill="white" font-family="'Fraunces',Georgia,serif" font-size="34" font-weight="700" transform="translate(127.79 195.5)">aware.family</text>
         </svg>
       </a>
       <a class="header-cta" href="/coach">Let the coach plan your day →</a>
     </div>
-    <div class="header-eyebrow">Ontario · Kids &amp; Family</div>
-    <h1><span class="h1-plain">Aware families</span><br><span class="h1-plain">have </span><span class="h1-gold">more fun.</span></h1>
-    <p class="header-sub">Find camps, classes, events, and experiences for kids across Ontario — updated weekly.</p>
+    <div class="header-hero-grid">
+      <div class="header-search-col">
+        <div class="search-card">
+          <input type="text" class="keyword-input" id="keyword" placeholder="Search activities, interests..." aria-label="Search activities">
+          <div class="filterbar">
+          <!-- Category -->
+          <div class="fd" id="fd-cat">
+            <button class="fd-btn" id="fd-cat-btn" onclick="openFd('cat')">
+              Category
+              <svg class="fd-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 4 6 8 10 4"/></svg>
+            </button>
+            <div class="fd-panel" id="fd-cat-panel">
+              <span class="fd-sublabel">Category</span>
+              <button class="fd-option active" data-key="category" data-val="all" onclick="setFilter('category','all',this)">All types</button>
+              <button class="fd-option" data-key="category" data-val="events" onclick="setFilter('category','events',this)">Events & Festivals</button>
+              <button class="fd-option" data-key="category" data-val="camps" onclick="setFilter('category','camps',this)">Camps</button>
+              <button class="fd-option" data-key="category" data-val="programs" onclick="setFilter('category','programs',this)">City Programs</button>
+              <button class="fd-option" data-key="category" data-val="extracurriculars" onclick="setFilter('category','extracurriculars',this)">Extracurriculars</button>
+              <button class="fd-option" data-key="category" data-val="experiences" onclick="setFilter('category','experiences',this)">Experiences & Places</button>
+            </div>
+          </div>
+
+          <!-- City -->
+          <div class="fd" id="fd-city">
+            <button class="fd-btn" id="fd-city-btn" onclick="openFd('city')">
+              City
+              <svg class="fd-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 4 6 8 10 4"/></svg>
+            </button>
+            <div class="fd-panel" id="fd-city-panel">
+              <span class="fd-sublabel">City / Region</span>
+              <button class="fd-option active" onclick="setFilter('city','all',this)">Everywhere</button>
+              <button class="fd-option" onclick="setFilter('city','Toronto',this)">Toronto</button>
+              <button class="fd-option" onclick="setFilter('city','Vaughan',this)">Vaughan</button>
+              <button class="fd-option" onclick="setFilter('city','Mississauga',this)">Mississauga</button>
+              <button class="fd-option" onclick="setFilter('city','Markham',this)">Markham</button>
+              <button class="fd-option" onclick="setFilter('city','Richmond Hill',this)">Richmond Hill</button>
+              <button class="fd-option" onclick="setFilter('city','Newmarket',this)">Newmarket</button>
+              <button class="fd-option" onclick="setFilter('city','Durham Region',this)">Durham Region</button>
+              <button class="fd-option" onclick="setFilter('city','Whitby',this)">Whitby</button>
+              <button class="fd-option" onclick="setFilter('city','Hamilton',this)">Hamilton</button>
+              <button class="fd-option" onclick="setFilter('city','Niagara',this)">Niagara</button>
+              <button class="fd-option" onclick="setFilter('city','London',this)">London</button>
+              <button class="fd-option" onclick="setFilter('city','Barrie',this)">Barrie</button>
+            </div>
+          </div>
+
+          <!-- Age -->
+          <div class="fd" id="fd-age">
+            <button class="fd-btn" id="fd-age-btn" onclick="openFd('age')">
+              Age
+              <svg class="fd-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 4 6 8 10 4"/></svg>
+            </button>
+            <div class="fd-panel" id="fd-age-panel">
+              <span class="fd-sublabel">Age range</span>
+              <button class="fd-option active" onclick="setFilter('age','all',this)">All ages</button>
+              <button class="fd-option" onclick="setFilter('age','0-2',this)">0–2 yrs</button>
+              <button class="fd-option" onclick="setFilter('age','3-5',this)">3–5 yrs</button>
+              <button class="fd-option" onclick="setFilter('age','6-9',this)">6–9 yrs</button>
+              <button class="fd-option" onclick="setFilter('age','10-12',this)">10–12 yrs</button>
+              <button class="fd-option" onclick="setFilter('age','13+',this)">13+ yrs</button>
+            </div>
+          </div>
+
+          <!-- Language -->
+          <div class="fd" id="fd-lang">
+            <button class="fd-btn" id="fd-lang-btn" onclick="openFd('lang')">
+              Language
+              <svg class="fd-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 4 6 8 10 4"/></svg>
+            </button>
+            <div class="fd-panel" id="fd-lang-panel">
+              <span class="fd-sublabel">Language</span>
+              <button class="fd-option active" onclick="setFilter('lang','all',this)">All</button>
+              <button class="fd-option" onclick="setFilter('lang','en',this)">English</button>
+              <button class="fd-option" onclick="setFilter('lang','fr',this)">Français</button>
+            </div>
+          </div>
+
+          <!-- Dates -->
+          <div class="fd" id="fd-dates">
+            <button class="fd-btn" id="fd-dates-btn" onclick="openFd('dates')">
+              Dates
+              <svg class="fd-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 4 6 8 10 4"/></svg>
+            </button>
+            <div class="fd-panel right" id="fd-dates-panel" style="min-width:220px">
+              <span class="fd-sublabel">Quick</span>
+              <div class="date-quick">
+                <button class="fd-option" onclick="setDatePreset('today')">Today</button>
+                <button class="fd-option" onclick="setDatePreset('weekend')">This weekend</button>
+                <button class="fd-option" onclick="setDatePreset('week')">This week</button>
+                <button class="fd-option" onclick="setDatePreset('month')">Next 30 days</button>
+              </div>
+              <div class="fd-sep"></div>
+              <span class="fd-sublabel">Custom range</span>
+              <div class="date-manual">
+                <div class="date-row">
+                  <span class="date-lbl">From</span>
+                  <input type="date" class="date-input" id="dateFrom" onchange="updateDateLabel()">
+                </div>
+                <div class="date-row">
+                  <span class="date-lbl">To</span>
+                  <input type="date" class="date-input" id="dateTo" onchange="updateDateLabel()">
+                </div>
+                <button class="date-clear-btn" onclick="clearDates()">Clear dates</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Venue -->
+          <div class="fd" id="fd-venue">
+            <button class="fd-btn" id="fd-venue-btn" onclick="openFd('venue')">
+              Venue
+              <svg class="fd-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 4 6 8 10 4"/></svg>
+            </button>
+            <div class="fd-panel" id="fd-venue-panel">
+              <span class="fd-sublabel">Indoor / Outdoor</span>
+              <button class="fd-option active" onclick="setFilter('venue','all',this)">Any venue</button>
+              <button class="fd-option" onclick="setFilter('venue','indoor',this)">Indoors</button>
+              <button class="fd-option" onclick="setFilter('venue','outdoor',this)">Outdoors</button>
+            </div>
+          </div>
+
+          <!-- Free toggle pill -->
+          <button class="toggle-pill" id="freeToggle" onclick="toggleFree()">Free</button>
+
+          <div class="view-toggle">
+            <button class="vbtn active" data-view="grid" onclick="setView('grid')">
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="1" y="1" width="5" height="5" rx="1"/><rect x="8" y="1" width="5" height="5" rx="1"/>
+                <rect x="1" y="8" width="5" height="5" rx="1"/><rect x="8" y="8" width="5" height="5" rx="1"/>
+              </svg>Grid
+            </button>
+            <button class="vbtn" data-view="day" onclick="setView('day')">Day</button>
+            <button class="vbtn" data-view="week" onclick="setView('week')">Week</button>
+            <button class="vbtn" data-view="cal" onclick="setView('cal')">
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="1" y="2.5" width="12" height="10" rx="1.5"/>
+                <line x1="1" y1="5.5" x2="13" y2="5.5"/>
+                <line x1="4.5" y1="1" x2="4.5" y2="4"/>
+                <line x1="9.5" y1="1" x2="9.5" y2="4"/>
+              </svg>Month
+            </button>
+          </div>
+
+          </div>
+        </div>
+        <span id="lastUpdated" style="display:block;padding-top:0.4rem;font-family:ui-monospace,monospace;font-size:10px;letter-spacing:0.06em;color:rgba(255,255,255,0.4);"></span>
+      </div>
+      <div class="header-text-col">
+        <div class="header-eyebrow">Ontario · Kids &amp; Family</div>
+        <h1><span class="h1-plain">Aware families</span><br><span class="h1-plain">have </span><span class="h1-gold">more fun.</span></h1>
+        <p class="header-sub">Find camps, classes, events, and experiences for kids across Ontario — updated weekly.</p>
+      </div>
+    </div>
   </div>
 </header>
-
-<div class="controls">
-  <div class="search-card">
-    <input type="text" class="keyword-input" id="keyword" placeholder="Search activities, interests..." aria-label="Search activities">
-    <div class="filterbar">
-    <!-- Category -->
-    <div class="fd" id="fd-cat">
-      <button class="fd-btn" id="fd-cat-btn" onclick="openFd('cat')">
-        Category
-        <svg class="fd-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 4 6 8 10 4"/></svg>
-      </button>
-      <div class="fd-panel" id="fd-cat-panel">
-        <span class="fd-sublabel">Category</span>
-        <button class="fd-option active" data-key="category" data-val="all" onclick="setFilter('category','all',this)">All types</button>
-        <button class="fd-option" data-key="category" data-val="events" onclick="setFilter('category','events',this)">Events & Festivals</button>
-        <button class="fd-option" data-key="category" data-val="camps" onclick="setFilter('category','camps',this)">Camps</button>
-        <button class="fd-option" data-key="category" data-val="programs" onclick="setFilter('category','programs',this)">City Programs</button>
-        <button class="fd-option" data-key="category" data-val="extracurriculars" onclick="setFilter('category','extracurriculars',this)">Extracurriculars</button>
-        <button class="fd-option" data-key="category" data-val="experiences" onclick="setFilter('category','experiences',this)">Experiences & Places</button>
-      </div>
-    </div>
-
-    <!-- City -->
-    <div class="fd" id="fd-city">
-      <button class="fd-btn" id="fd-city-btn" onclick="openFd('city')">
-        City
-        <svg class="fd-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 4 6 8 10 4"/></svg>
-      </button>
-      <div class="fd-panel" id="fd-city-panel">
-        <span class="fd-sublabel">City / Region</span>
-        <button class="fd-option active" onclick="setFilter('city','all',this)">Everywhere</button>
-        <button class="fd-option" onclick="setFilter('city','Toronto',this)">Toronto</button>
-        <button class="fd-option" onclick="setFilter('city','Vaughan',this)">Vaughan</button>
-        <button class="fd-option" onclick="setFilter('city','Mississauga',this)">Mississauga</button>
-        <button class="fd-option" onclick="setFilter('city','Markham',this)">Markham</button>
-        <button class="fd-option" onclick="setFilter('city','Richmond Hill',this)">Richmond Hill</button>
-        <button class="fd-option" onclick="setFilter('city','Newmarket',this)">Newmarket</button>
-        <button class="fd-option" onclick="setFilter('city','Durham Region',this)">Durham Region</button>
-        <button class="fd-option" onclick="setFilter('city','Whitby',this)">Whitby</button>
-        <button class="fd-option" onclick="setFilter('city','Hamilton',this)">Hamilton</button>
-        <button class="fd-option" onclick="setFilter('city','Niagara',this)">Niagara</button>
-        <button class="fd-option" onclick="setFilter('city','London',this)">London</button>
-        <button class="fd-option" onclick="setFilter('city','Barrie',this)">Barrie</button>
-      </div>
-    </div>
-
-    <!-- Age -->
-    <div class="fd" id="fd-age">
-      <button class="fd-btn" id="fd-age-btn" onclick="openFd('age')">
-        Age
-        <svg class="fd-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 4 6 8 10 4"/></svg>
-      </button>
-      <div class="fd-panel" id="fd-age-panel">
-        <span class="fd-sublabel">Age range</span>
-        <button class="fd-option active" onclick="setFilter('age','all',this)">All ages</button>
-        <button class="fd-option" onclick="setFilter('age','0-2',this)">0–2 yrs</button>
-        <button class="fd-option" onclick="setFilter('age','3-5',this)">3–5 yrs</button>
-        <button class="fd-option" onclick="setFilter('age','6-9',this)">6–9 yrs</button>
-        <button class="fd-option" onclick="setFilter('age','10-12',this)">10–12 yrs</button>
-        <button class="fd-option" onclick="setFilter('age','13+',this)">13+ yrs</button>
-      </div>
-    </div>
-
-    <!-- Language -->
-    <div class="fd" id="fd-lang">
-      <button class="fd-btn" id="fd-lang-btn" onclick="openFd('lang')">
-        Language
-        <svg class="fd-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 4 6 8 10 4"/></svg>
-      </button>
-      <div class="fd-panel" id="fd-lang-panel">
-        <span class="fd-sublabel">Language</span>
-        <button class="fd-option active" onclick="setFilter('lang','all',this)">All</button>
-        <button class="fd-option" onclick="setFilter('lang','en',this)">English</button>
-        <button class="fd-option" onclick="setFilter('lang','fr',this)">Français</button>
-      </div>
-    </div>
-
-    <!-- Dates -->
-    <div class="fd" id="fd-dates">
-      <button class="fd-btn" id="fd-dates-btn" onclick="openFd('dates')">
-        Dates
-        <svg class="fd-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 4 6 8 10 4"/></svg>
-      </button>
-      <div class="fd-panel right" id="fd-dates-panel" style="min-width:220px">
-        <span class="fd-sublabel">Quick</span>
-        <div class="date-quick">
-          <button class="fd-option" onclick="setDatePreset('today')">Today</button>
-          <button class="fd-option" onclick="setDatePreset('weekend')">This weekend</button>
-          <button class="fd-option" onclick="setDatePreset('week')">This week</button>
-          <button class="fd-option" onclick="setDatePreset('month')">Next 30 days</button>
-        </div>
-        <div class="fd-sep"></div>
-        <span class="fd-sublabel">Custom range</span>
-        <div class="date-manual">
-          <div class="date-row">
-            <span class="date-lbl">From</span>
-            <input type="date" class="date-input" id="dateFrom" onchange="updateDateLabel()">
-          </div>
-          <div class="date-row">
-            <span class="date-lbl">To</span>
-            <input type="date" class="date-input" id="dateTo" onchange="updateDateLabel()">
-          </div>
-          <button class="date-clear-btn" onclick="clearDates()">Clear dates</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Venue -->
-    <div class="fd" id="fd-venue">
-      <button class="fd-btn" id="fd-venue-btn" onclick="openFd('venue')">
-        Venue
-        <svg class="fd-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 4 6 8 10 4"/></svg>
-      </button>
-      <div class="fd-panel" id="fd-venue-panel">
-        <span class="fd-sublabel">Indoor / Outdoor</span>
-        <button class="fd-option active" onclick="setFilter('venue','all',this)">Any venue</button>
-        <button class="fd-option" onclick="setFilter('venue','indoor',this)">Indoors</button>
-        <button class="fd-option" onclick="setFilter('venue','outdoor',this)">Outdoors</button>
-      </div>
-    </div>
-
-    <!-- Free toggle pill -->
-    <button class="toggle-pill" id="freeToggle" onclick="toggleFree()">Free</button>
-
-    <div class="view-toggle">
-      <button class="vbtn active" data-view="grid" onclick="setView('grid')">
-        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
-          <rect x="1" y="1" width="5" height="5" rx="1"/><rect x="8" y="1" width="5" height="5" rx="1"/>
-          <rect x="1" y="8" width="5" height="5" rx="1"/><rect x="8" y="8" width="5" height="5" rx="1"/>
-        </svg>Grid
-      </button>
-      <button class="vbtn" data-view="day" onclick="setView('day')">Day</button>
-      <button class="vbtn" data-view="week" onclick="setView('week')">Week</button>
-      <button class="vbtn" data-view="cal" onclick="setView('cal')">
-        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
-          <rect x="1" y="2.5" width="12" height="10" rx="1.5"/>
-          <line x1="1" y1="5.5" x2="13" y2="5.5"/>
-          <line x1="4.5" y1="1" x2="4.5" y2="4"/>
-          <line x1="9.5" y1="1" x2="9.5" y2="4"/>
-        </svg>Month
-      </button>
-    </div>
-
-    </div>
-  </div>
-</div>
-<div style="max-width:980px;margin:0.4rem auto 0;padding:0.3rem 2rem 0;display:flex;align-items:center;">
-  <span id="lastUpdated" style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:0.06em;color:var(--ink-faint);"></span>
-</div>
 
 <main>
   <!-- SEO copy — visible to crawlers and AI, hidden from users -->

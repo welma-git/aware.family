@@ -291,13 +291,15 @@
     remainingEl.textContent=Math.min(3,Math.ceil(messagesLeft/4));
   }
 
-  // light formatter: **bold**, paragraph + line breaks, HTML-escaped (safe)
+  // light formatter: **bold**, URLs → links, paragraph + line breaks, HTML-escaped (safe)
   function renderRich(container, text){
     const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    // linkify: replace https://... URLs with <a> tags (after escaping, so we re-escape just the href)
+    const linkify=s=>s.replace(/(https?:\/\/[^\s<>"]+)/g,(_,u)=>`<a href="${u}" target="_blank" rel="noopener" style="color:var(--amber);word-break:break-all;">${u}</a>`);
     let t=text.replace(/\s*\*\*(.+?):\*\*/g,'\n\n**$1:**').replace(/\n{3,}/g,'\n\n').trim();
     t.split(/\n\n+/).forEach(par=>{
       const p=document.createElement('p');
-      p.innerHTML=esc(par).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+      p.innerHTML=linkify(esc(par)).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
       container.appendChild(p);
     });
   }

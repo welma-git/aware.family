@@ -40,16 +40,11 @@
   .tag{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;letter-spacing:0.03em;text-transform:uppercase;background:var(--amber);color:var(--ink);padding:7px 16px;border-radius:999px;}
 
   /* hero band — deep indigo header matching the main site */
-  .hero-band{background:var(--indigo-deep);border-radius:0 0 28px 28px;padding-bottom:20px;}
+  /* hero band — light/airy (no indigo background); indigo is an accent only */
+  .hero-band{background:transparent;padding-bottom:0;}
   .hero-band .brand .logo{height:42px;}
-  .hero-band h1{color:#fff;}
-  .hero-band h1 em{color:var(--amber);}
-  .hero-band .lede{color:#d8d3f5;}
-  .hero-band .micro{color:#a59fd8;}
-  .hero-band .btn-accent{background:var(--orange);color:#fff;box-shadow:0 4px 0 var(--red);}
-  .hero-band .btn-accent:active{transform:translateY(3px);box-shadow:0 1px 0 var(--red);}
-  .btn-ghost-light{background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.5);box-shadow:0 4px 0 rgba(0,0,0,0.25);}
-  .btn-ghost-light:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,0.25);}
+  .btn-ghost-light{background:#fff;color:var(--ink);border:2px solid var(--ink);box-shadow:0 4px 0 var(--ink);}
+  .btn-ghost-light:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink);}
 
   /* hero — asymmetric: big text left, floating sample card right on desktop */
   .hero{padding:46px 0 30px;}
@@ -161,9 +156,14 @@
     <div class="nav-in">
       <a href="https://aware.family" class="brand" aria-label="aware.family">
         <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="40 138 360 88" height="42" role="img" aria-label="aware.family">
-          <path fill="#ffffff" d="M88.61,216.63h-21.09c-12.83,0-23.28-10.44-23.28-23.28v-21.09c0-12.83,10.44-23.27,23.28-23.27h18.38c.65,0,1.17.52,1.17,1.17s-.52,1.17-1.17,1.17h-18.38c-11.54,0-20.93,9.39-20.93,20.93v21.09c0,11.54,9.39,20.93,20.93,20.93h21.09c11.54,0,20.92-9.39,20.92-20.93v-17.22c0-.65.52-1.17,1.17-1.17s1.17.52,1.17,1.17v17.22c0,12.83-10.44,23.28-23.27,23.28Z"/>
+          <defs>
+            <linearGradient id="lg1" x1="44.25" y1="182.81" x2="111.88" y2="182.81" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#3d348b"/><stop offset="1" stop-color="#7678ed"/>
+            </linearGradient>
+          </defs>
+          <path fill="url(#lg1)" d="M88.61,216.63h-21.09c-12.83,0-23.28-10.44-23.28-23.28v-21.09c0-12.83,10.44-23.27,23.28-23.27h18.38c.65,0,1.17.52,1.17,1.17s-.52,1.17-1.17,1.17h-18.38c-11.54,0-20.93,9.39-20.93,20.93v21.09c0,11.54,9.39,20.93,20.93,20.93h21.09c11.54,0,20.92-9.39,20.92-20.93v-17.22c0-.65.52-1.17,1.17-1.17s1.17.52,1.17,1.17v17.22c0,12.83-10.44,23.28-23.27,23.28Z"/>
           <circle fill="#f7b801" cx="104.02" cy="158.47" r="15.09"/>
-          <text fill="#ffffff" font-family="'Fraunces',Georgia,serif" font-size="40" font-weight="700" transform="translate(127.79 197)">aware.family</text>
+          <text fill="#1c1733" font-family="'Fraunces','Playfair Display',Georgia,serif" font-size="40" font-weight="700" transform="translate(127.79 197)">aware.family</text>
         </svg>
       </a>
       <a href="#" data-demo class="nav-cta">Try the coach</a>
@@ -173,12 +173,12 @@
   <header class="hero">
     <div class="wrap hero-grid">
       <div>
-        <span class="tag">planning coach</span>
+        <span class="tag">aware.family planning coach</span>
         <h1>What should we <em>actually</em> do today?</h1>
         <p class="lede">Tell it your crew and the hours you've got. It reads the energy in the house, then hands you a plan that actually fits today — one thing to do, one backup, no list of twenty.</p>
         <div class="cta-row">
-          <a href="#" data-demo class="btn btn-accent">Try the coach <span class="ar">→</span></a>
-          <a href="#how" class="btn btn-ghost-light">How it works</a>
+          <a href="#" data-demo class="btn btn-fill">Try the coach <span class="ar">→</span></a>
+          <a href="#how" class="btn btn-ghost">How it works</a>
         </div>
         <p class="micro">Free · grounded in real Ontario events, camps, and programs</p>
       </div>

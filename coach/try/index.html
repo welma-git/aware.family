@@ -24,14 +24,13 @@
   body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;}
   body.pre-chat{display:block;}
 
-  .topbar{height:8px;background:linear-gradient(90deg,var(--indigo) 0 32%,var(--slate) 32% 50%,var(--amber) 50% 68%,var(--orange) 68% 84%,var(--red) 84% 100%);}
-  nav{background:var(--indigo-deep);border-bottom:1px solid rgba(255,255,255,0.08);}
+  nav{background:var(--bg);border-bottom:1px solid var(--line);}
   .nav-in{max-width:760px;margin:0 auto;padding:14px 22px;display:flex;justify-content:space-between;align-items:center;}
-  .brand{font-family:var(--display);font-weight:600;font-size:19px;color:#fff;text-decoration:none;display:flex;align-items:center;gap:9px;}
+  .brand{font-family:var(--display);font-weight:600;font-size:19px;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:9px;}
   .brand .mark{display:block;flex-shrink:0;}
-  .brand .wordmark{font-family:var(--display);font-weight:600;font-size:19px;color:#fff;}
+  .brand .wordmark{font-family:var(--display);font-weight:600;font-size:19px;color:var(--ink);}
   .brand .coach-label{font-family:var(--body);font-weight:700;font-size:12px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink);background:var(--amber);padding:4px 10px;border-radius:6px;margin-left:9px;}
-  .budget{font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:rgba(255,255,255,0.45);}
+  .budget{font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink-faint);}
 
   main{flex:1;overflow-y:auto;} body.pre-chat main{flex:none;}
   .chat{max-width:760px;margin:0 auto;padding:26px 22px 14px;display:flex;flex-direction:column;gap:18px;}
@@ -54,6 +53,11 @@
   .chip:hover{border-color:var(--indigo);}
   .chip.sel{background:var(--indigo);color:#fff;border-color:var(--indigo);}
 
+  /* age range */
+  .age-range{display:flex;align-items:flex-end;gap:12px;}
+  .age-pick{display:flex;flex-direction:column;gap:5px;flex:1;}
+  .age-pick label{font-size:13px;font-weight:700;color:var(--ink-soft);}
+  .age-dash{font-size:14px;color:var(--ink-faint);padding-bottom:12px;}
   .select{font-family:var(--body);font-size:15px;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:10px;padding:11px 12px;cursor:pointer;width:100%;}
   .select:focus{outline:none;border-color:var(--indigo);}
   .field .lbl .opt{font-weight:500;color:var(--ink-faint);font-size:13px;}
@@ -99,13 +103,12 @@
 </style>
 </head>
 <body class="pre-chat">
-  <div class="topbar"></div>
   <nav>
     <div class="nav-in">
       <a href="https://aware.family" class="brand" aria-label="aware.family coach">
         <svg class="mark" width="26" height="26" viewBox="40 140 80 82" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path fill="#ffffff" d="M88.61,216.63h-21.09c-12.83,0-23.28-10.44-23.28-23.28v-21.09c0-12.83,10.44-23.27,23.28-23.27h18.38c.65,0,1.17.52,1.17,1.17s-.52,1.17-1.17,1.17h-18.38c-11.54,0-20.93,9.39-20.93,20.93v21.09c0,11.54,9.39,20.93,20.93,20.93h21.09c11.54,0,20.92-9.39,20.92-20.93v-17.22c0-.65.52-1.17,1.17-1.17s1.17.52,1.17,1.17v17.22c0,12.83-10.44,23.28-23.27,23.28Z"/>
-          <circle fill="#f7b801" cx="104.02" cy="158.47" r="15.09"/>
+          <path fill="#3d348b" d="M88.61,216.63h-21.09c-12.83,0-23.28-10.44-23.28-23.28v-21.09c0-12.83,10.44-23.27,23.28-23.27h18.38c.65,0,1.17.52,1.17,1.17s-.52,1.17-1.17,1.17h-18.38c-11.54,0-20.93,9.39-20.93,20.93v21.09c0,11.54,9.39,20.93,20.93,20.93h21.09c11.54,0,20.92-9.39,20.92-20.93v-17.22c0-.65.52-1.17,1.17-1.17s1.17.52,1.17,1.17v17.22c0,12.83-10.44,23.28-23.27,23.28Z"/>
+          <circle fill="#7678ed" cx="104.02" cy="158.47" r="15.09"/>
         </svg>
         <span class="wordmark">aware.family</span><span class="coach-label">planning coach</span>
       </a>
@@ -122,14 +125,17 @@
 
         <form class="intake" id="intake" novalidate>
           <div class="field">
-            <span class="lbl">How old are your kids? <span class="opt">tap all that apply</span></span>
-            <div class="chips multi" id="f-ages" role="group" aria-label="Kids age groups">
-              <button type="button" class="chip" data-min="0" data-max="0">Under 1</button>
-              <button type="button" class="chip" data-min="1" data-max="2">1–2</button>
-              <button type="button" class="chip" data-min="3" data-max="5">3–5</button>
-              <button type="button" class="chip" data-min="6" data-max="9">6–9</button>
-              <button type="button" class="chip" data-min="10" data-max="12">10–12</button>
-              <button type="button" class="chip" data-min="13" data-max="99">13+</button>
+            <span class="lbl">How old are your kids? <span>one kid? set both the same</span></span>
+            <div class="age-range">
+              <div class="age-pick">
+                <label for="f-youngest">Youngest</label>
+                <select id="f-youngest" class="select"></select>
+              </div>
+              <span class="age-dash">to</span>
+              <div class="age-pick">
+                <label for="f-oldest">Oldest</label>
+                <select id="f-oldest" class="select"></select>
+              </div>
             </div>
           </div>
 
@@ -220,32 +226,43 @@
   }
   wireChips('f-when'); wireChips('f-budget');
 
-  // ---- multi-select chips: interests + age groups ----
-  document.querySelectorAll('#f-interests .chip, #f-ages .chip').forEach(c=>{
+  // ---- multi-select chips: interests ----
+  document.querySelectorAll('#f-interests .chip').forEach(c=>{
     c.addEventListener('click',()=>c.classList.toggle('sel'));
+  });
+
+  // ---- age-range dropdowns (youngest / oldest) ----
+  const ageOpts=['under 1','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17'];
+  function fillAges(sel){
+    sel.innerHTML='<option value="">age</option>'+ageOpts.map((a,i)=>'<option value="'+a+'" data-i="'+i+'">'+a+(a==='under 1'||isNaN(a)?'':' yrs')+'</option>').join('');
+  }
+  const youngest=document.getElementById('f-youngest'), oldest=document.getElementById('f-oldest');
+  fillAges(youngest); fillAges(oldest);
+  // keep oldest >= youngest: if youngest exceeds oldest, bump oldest to match
+  youngest.addEventListener('change',()=>{
+    if(oldest.value && ageOpts.indexOf(oldest.value)<ageOpts.indexOf(youngest.value)) oldest.value=youngest.value;
+  });
+  oldest.addEventListener('change',()=>{
+    if(youngest.value && ageOpts.indexOf(youngest.value)>ageOpts.indexOf(oldest.value)) youngest.value=oldest.value;
   });
 
   const intakeForm=document.getElementById('intake'), intakeNote=document.getElementById('intake-note');
   intakeForm.addEventListener('submit',(e)=>{
     e.preventDefault();
-    const ageChips=[...document.querySelectorAll('#f-ages .chip.sel')];
+    const yng=youngest.value, old=oldest.value;
     const city=document.getElementById('f-city').value;
     const interests=[...document.querySelectorAll('#f-interests .chip.sel')].map(c=>c.dataset.val);
     const when=(document.querySelector('#f-when .chip.sel')||{}).dataset?.val;
     const budget=(document.querySelector('#f-budget .chip.sel')||{}).dataset?.val;
 
-    if(!ageChips.length){ intakeNote.textContent="Pick at least one age group — it changes everything about the right day."; return; }
+    if(!yng||!old){ intakeNote.textContent="Set your kids' age range — it changes everything about the right day."; return; }
     if(!city){ intakeNote.textContent="Pick your city so my picks are real and reachable."; return; }
     intakeNote.textContent="";
 
-    // derive age range from selected chips
-    const ageMin=Math.min(...ageChips.map(c=>+c.dataset.min));
-    const ageMax=Math.max(...ageChips.map(c=>+c.dataset.max));
-    const teenMax=ageMax>=99;
+    // describe the age range naturally
     let ageDesc;
-    if(ageMin===0&&ageMax===0) ageDesc="a baby under 1";
-    else if(ageMin===0) ageDesc="kids aged under 1 to "+(teenMax?"13+":ageMax);
-    else ageDesc="kids aged "+ageMin+" to "+(teenMax?"13+":ageMax);
+    if(yng===old) ageDesc = yng==='under 1' ? "a baby under 1" : ("one kid aged "+yng);
+    else ageDesc = "kids aged "+yng+" to "+old;
 
     let msg="Here's my family: "+ageDesc+", in "+city+".";
     if(interests.length) msg+=" We're into "+interests.join(', ')+".";
@@ -272,15 +289,13 @@
     remainingEl.textContent=Math.min(3,Math.ceil(messagesLeft/4));
   }
 
-  // light formatter: **bold**, URLs → links, paragraph + line breaks, HTML-escaped (safe)
+  // light formatter: **bold**, paragraph + line breaks, HTML-escaped (safe)
   function renderRich(container, text){
     const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    // linkify: replace https://... URLs with <a> tags (after escaping, so we re-escape just the href)
-    const linkify=s=>s.replace(/(https?:\/\/[^\s<>"]+)/g,(_,u)=>`<a href="${u}" target="_blank" rel="noopener" style="color:var(--amber);word-break:break-all;">${u}</a>`);
     let t=text.replace(/\s*\*\*(.+?):\*\*/g,'\n\n**$1:**').replace(/\n{3,}/g,'\n\n').trim();
     t.split(/\n\n+/).forEach(par=>{
       const p=document.createElement('p');
-      p.innerHTML=linkify(esc(par)).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+      p.innerHTML=esc(par).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
       container.appendChild(p);
     });
   }

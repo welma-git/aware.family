@@ -210,6 +210,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
 
           <div class="field">
+            <span class="lbl">How long do you have? <span class="opt">optional</span></span>
+            <div class="chips" id="f-duration" role="group" aria-label="Time available">
+              <button type="button" data-val="a couple of hours" class="chip">A couple of hours</button>
+              <button type="button" data-val="half a day" class="chip">Half a day</button>
+              <button type="button" data-val="a full day" class="chip">Full day</button>
+            </div>
+          </div>
+
+          <div class="field">
             <span class="lbl">Budget</span>
             <div class="chips" id="f-budget" role="group" aria-label="Budget comfort">
               <button type="button" data-val="free only" class="chip">Free only</button>
@@ -257,7 +266,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       });
     });
   }
-  wireChips('f-when'); wireChips('f-budget');
+  wireChips('f-when'); wireChips('f-duration'); wireChips('f-budget');
 
   // ---- multi-select chips: interests ----
   document.querySelectorAll('#f-interests .chip').forEach(c=>{
@@ -276,6 +285,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const city=document.getElementById('f-city').value;
     const interests=[...document.querySelectorAll('#f-interests .chip.sel')].map(c=>c.dataset.val);
     const when=(document.querySelector('#f-when .chip.sel')||{}).dataset?.val;
+    const duration=(document.querySelector('#f-duration .chip.sel')||{}).dataset?.val;
     const budget=(document.querySelector('#f-budget .chip.sel')||{}).dataset?.val;
 
     if(!ageChips.length){ intakeNote.textContent="Pick at least one age group — it changes everything about the right day."; return; }
@@ -293,6 +303,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     let msg="Here's my family: "+ageDesc+", in "+city+".";
     if(interests.length) msg+=" We're into "+interests.join(', ')+".";
     if(when) msg+=" Time window: "+when+".";
+    if(duration) msg+=" We have "+duration+".";
     if(budget) msg+=" Budget: "+budget+".";
     startConversation(msg);
   });
